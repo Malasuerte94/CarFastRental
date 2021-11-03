@@ -12,7 +12,6 @@ import StarRating from "./shared/components/StarRating";
 import Success from "./shared/components/Success";
 import ValidationErrors from "./shared/components/ValidationErrors";
 import storeDefinition from "./store";
-import axios from 'axios';
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -52,11 +51,6 @@ const app = new Vue({
     },
     async beforeCreate() {
         this.$store.dispatch("loadStoredState");
-
-        // await axios.get('/sanctum/csrf-cookie');
-        // await axios.post('/login', {
-        //     email: 'zschuppe@example.org',
-        //     password: 'password'
-        // });
+        this.$store.dispatch("loadUser");
     },
 });
