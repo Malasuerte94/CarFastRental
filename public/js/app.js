@@ -62763,7 +62763,7 @@ var render = function () {
             staticClass: "navbar-brand mr-auto",
             attrs: { to: { name: "home" } },
           },
-          [_vm._v("CarBook")]
+          [_vm._v("Rental Cars")]
         ),
         _vm._v(" "),
         _c(
