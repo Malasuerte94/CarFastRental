@@ -11,6 +11,7 @@
           <div v-else>Loading ...</div>
         </div>
       </div>
+      <adjective-list :bookable-id="this.$route.params.id"></adjective-list>
       <review-list :bookable-id="this.$route.params.id"></review-list>
     </div>
     <div class="col-md-4 pb-4">
@@ -59,6 +60,8 @@
 import Stock from "./Stock";
 import ReviewList from "./ReviewList";
 import PriceBreakdown from "./PriceBreakdown";
+import AdjectiveList from "./AdjectiveList";
+
 import { mapState } from "vuex";
 
 export default {
@@ -66,6 +69,7 @@ export default {
     Stock,
     ReviewList,
     PriceBreakdown,
+    AdjectiveList,
   },
   data() {
     return {

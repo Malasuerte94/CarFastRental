@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BookableAdjectiveController;
 use App\Http\Controllers\Api\BookableController;
 use App\Http\Controllers\Api\BookablePriceController;
 use App\Http\Controllers\Api\BookableReviewController;
@@ -29,6 +30,7 @@ Route::apiResource('bookables', BookableController::class)->only(['index', 'show
 Route::get('bookables/{bookable}/stock', BookableStockController::class)
     ->name('bookables.stock.show');
 Route::get('bookables/{bookable}/reviews', BookableReviewController::class)->name('bookable.reviews.index');
+Route::get('bookables/{bookable}/adjectives', BookableAdjectiveController::class)->name('bookable.adjectives.index');
 Route::get('bookables/{bookable}/price', BookablePriceController::class)->name('bookables.price.show');
 
 Route::get('/booking-by-review/{reviewKey}', BookingByReviewController::class)->name('booking.by.review.show');

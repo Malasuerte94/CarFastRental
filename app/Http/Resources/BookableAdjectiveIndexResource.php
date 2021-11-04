@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Adjective;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookableIndexResource extends JsonResource
+class BookableAdjectiveIndexResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +16,8 @@ class BookableIndexResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'          => $this->id,
-            'title'       => $this->title,
-            'description' => $this->description,
-            'main_image' => $this->main_image,
+            'value' => $this->value,
+            'adjective' => new AdjectiveShowResource(Adjective::findOrFail($this->adjective_id))
         ];
     }
 }

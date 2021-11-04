@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             BookingsTableSeeder::class,
             ReviewsTableSeeder::class,
             AdjectivesTableSeeder::class,
+            BookableAdjectivesSeeder::class
         ]);
     }
 }

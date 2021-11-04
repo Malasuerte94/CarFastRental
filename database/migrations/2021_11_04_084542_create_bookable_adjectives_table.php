@@ -13,9 +13,16 @@ class CreateBookableAdjectivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookable_adjective', function (Blueprint $table) {
+        Schema::create('bookable_adjectives', function (Blueprint $table) {
+
+            $table->id();
+
+            $table->string('value');
+
             $table->unsignedBigInteger('bookable_id');
             $table->unsignedBigInteger('adjective_id');
+
+            $table->timestamps();
 
             $table->foreign('bookable_id')
                 ->references('id')
@@ -36,6 +43,6 @@ class CreateBookableAdjectivesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookable_adjective');
+        Schema::dropIfExists('bookable_adjectives');
     }
 }

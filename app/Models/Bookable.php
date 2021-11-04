@@ -20,9 +20,9 @@ class Bookable extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function adjectives()
+    public function bookableAdjective()
     {
-        return $this->belongsToMany(Adjective::class, 'bookable_adjective');
+        return $this->hasMany(BookableAdjective::class);
     }
 
     public function stockFor($from, $to): bool

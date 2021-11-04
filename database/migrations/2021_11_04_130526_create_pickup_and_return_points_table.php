@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookablesTable extends Migration
+class CreatePickupAndReturnPointsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateBookablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookables', function (Blueprint $table) {
+        Schema::create('pickup_and_return_points', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
-            $table->string('title');
-            $table->text('description');
-            $table->string('main_image');
         });
     }
 
@@ -30,6 +26,6 @@ class CreateBookablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookables');
+        Schema::dropIfExists('pickup_and_return_points');
     }
 }

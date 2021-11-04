@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Adjective;
 use App\Models\Bookable;
 use Illuminate\Database\Seeder;
 
