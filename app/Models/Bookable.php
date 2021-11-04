@@ -20,6 +20,11 @@ class Bookable extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function adjectives()
+    {
+        return $this->belongsToMany(Adjective::class, 'bookable_adjective');
+    }
+
     public function stockFor($from, $to): bool
     {
         return 0 === $this->bookings()->betweenDates($from, $to)->count();
