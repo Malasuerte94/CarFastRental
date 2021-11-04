@@ -16139,7 +16139,7 @@ readers do not read off random characters that represent icons */
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 4s;
+  transition: opacity 0.4s;
 }
 
 .v-enter,

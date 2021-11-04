@@ -15,6 +15,11 @@ class CreatePickupAndReturnPointsTable extends Migration
     {
         Schema::create('pickup_and_return_points', function (Blueprint $table) {
             $table->id();
+
+            $table->string('address');
+            $table->string('name');
+            $table->string('coordinates');
+
             $table->timestamps();
         });
     }
