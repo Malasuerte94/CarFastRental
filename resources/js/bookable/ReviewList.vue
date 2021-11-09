@@ -49,10 +49,5 @@ export default {
       .then((response) => (this.reviews = response.data.data))
       .then(() => (this.loading = false));
   },
-  // filters: {
-  //     fromNow(value) {
-  //         return moment(value).fromNow();
-  //     }
-  // }
 };
 </script>

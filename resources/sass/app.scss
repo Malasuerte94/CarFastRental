@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 
 // Variables
 @import 'variables';
@@ -13,6 +13,7 @@
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 
+body {}
 
 .fade-enter-active,
 .fade-leave-active {
@@ -38,4 +39,108 @@
 /* .fade-leave-active below version 2.1.8 */
     {
     opacity: 0;
+}
+
+.data_pickup {
+    color: $blue;
+}
+
+.booking_selector {
+    z-index: 1;
+    margin-top: 1rem;
+    background-color: $white;
+    align-items: center;
+    box-shadow: #00000052 0 0 10px 0px;
+    border-radius: $selectors-radius;
+
+    .row {
+        width: 100%;
+        margin: auto;
+    }
+}
+
+.booking_label {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    display: flex;
+
+    .booking_icon_actions {
+        padding: 0.45rem;
+    }
+}
+
+.booking_form_dropdown {
+    z-index: 1;
+}
+
+.button_collapse {
+    z-index: 2;
+    background-color: $primary;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem;
+    border-radius: $selectors-radius;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    line-height: 30px;
+    color: $white;
+    box-shadow: #00000052 0 0 10px 0px;
+    transition: 0.5s;
+
+    i {
+        transition: 0.5s;
+    }
+}
+
+.arrow-down {
+
+    transform: translateY(50%);
+
+    i {
+        transform: rotateZ(180deg);
+    }
+}
+
+
+.mx-datepicker-popup {
+    left: 0 !important;
+    right: 0;
+    padding: 0.5rem;
+}
+
+.mx-calendar-header {
+    border-bottom: 1 px solid $secconday_muted;
+    margin-bottom: 10 px;
+    padding-bottom: 40 px;
+}
+
+.mx-calendar-content {
+    .cell.disabled {
+        background-color: #ffe0e0;
+    }
+}
+
+.mx-calendar.mx-calendar-panel-date {
+    width: 100%;
+}
+
+.icon_collapse {
+    background-color: #ffffff;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem;
+    border-radius: $selectors-radius;
+    height: 35px;
+    width: 35px;
+    font-size: 15px;
+    line-height: 15px;
+    color: #696969;
+    box-shadow: #00000052 0 0 10px 0px;
+}
+
+.custom-date-time-picker {
+    width: 100% !important;
 }

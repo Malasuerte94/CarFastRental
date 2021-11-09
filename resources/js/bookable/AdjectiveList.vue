@@ -4,7 +4,8 @@
     <div v-else class="row">
       <div
         class="
-          col-md-12 col-lg-4
+          col-md-4
+          w-50
           d-flex
           justify-content-center
           text-center
@@ -41,12 +42,7 @@ export default {
     this.loading = true;
     axios
       .get(`/api/bookables/${this.bookableId}/adjectives`)
-      .then(
-        (response) => (
-          (this.adjectives = response.data.data),
-          console.log(response.data.data)
-        )
-      )
+      .then((response) => (this.adjectives = response.data.data))
       .then(() => (this.loading = false));
   },
 };
