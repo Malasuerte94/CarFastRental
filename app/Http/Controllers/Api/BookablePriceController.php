@@ -18,9 +18,10 @@ class BookablePriceController extends Controller
     {
         $bookable = Bookable::findOrFail($id);
 
+
         $data = $request->validate([
-            'from' => 'required|date_format:Y-m-d',
-            'to' => 'required|date_format:Y-m-d|after_or_equal:from'
+            'from' => 'required|date_format:Y-m-d H:i:s',
+            'to' => 'required|date_format:Y-m-d H:i:s|after_or_equal:from'
         ]);
 
         return response()->json([

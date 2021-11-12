@@ -2,18 +2,29 @@
   <div class="row">
     <div class="row">
       <div class="col-md-8 pb-4">
-        <div class="card">
-          <div class="card-body">
+        <div class="card main-car">
+          <div class="card-body text-center">
             <div v-if="!loading">
               <img :src="bookable.main_image" class="card-img" />
               <h2>{{ bookable.title }}</h2>
               <hr />
               <article>{{ bookable.description }}</article>
+              <adjective-list
+                :class="[{ 'adjectives-row-active': collapseAdjectives }]"
+                :bookable-id="this.$route.params.id"
+              ></adjective-list>
+              <div class="btn_parent_collapse_adjectives">
+                <span
+                  @click="collapseAdjectives = !collapseAdjectives"
+                  :class="[{ 'arrow-down': collapseAdjectives }]"
+                  class="button_collapse_adjectives"
+                  ><i class="fa fa-arrow-down"></i
+                ></span>
+              </div>
             </div>
             <div v-else>Loading ...</div>
           </div>
         </div>
-        <adjective-list :bookable-id="this.$route.params.id"></adjective-list>
       </div>
       <div class="col-md-4 pb-4">
         <stock
@@ -79,6 +90,7 @@ export default {
       bookable: null,
       loading: false,
       price: null,
+      collapseAdjectives: false,
     };
   },
   created() {

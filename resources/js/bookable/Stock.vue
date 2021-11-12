@@ -1,15 +1,8 @@
 <template>
   <div>
-    <h6 class="text-uppercase text-secondary font-weigh-bolder">
-      Check Stock
-      <transition>
-        <span v-if="noStock" class="text-danger">[Not in stock!]</span>
-      </transition>
-      <transition>
-        <span v-if="hasStock" class="text-success">[Available]</span>
-      </transition>
+    <h6 class="text-uppercase text-secondary font-weigh-bolder pt-6">
+      Perioadă închiriere
     </h6>
-
     <div class="booking_selector booking_label">
       <div class="booking_icon_actions">
         <span class="icon_collapse"><i class="fa fa-calendar-alt"></i></span>
@@ -32,7 +25,7 @@
       </div>
     </div>
 
-    <transition name="fade">
+    <transition name="fadeHeight">
       <div
         v-if="collapseDateSelector.booking_date"
         class="row booking_selector m-2 p-2"
@@ -87,14 +80,17 @@
       </div>
     </transition>
 
+    <h6 class="text-uppercase text-secondary font-weigh-bolder pt-3">
+      Ridicare & Returnare
+    </h6>
     <div class="booking_selector booking_label">
       <div class="booking_icon_actions">
         <span class="icon_collapse"><i class="fa fa-map-pin"></i></span>
       </div>
       <div class="booking_form_actions">
-        Pick up:
+        De la:
         <span class="data_pickup">{{ pickupAndReturnText(pickup) }}</span>
-        Returnare:
+        la:
         <span class="data_pickup">{{ pickupAndReturnText(retour) }}</span>
       </div>
       <div class="booking_form_dropdown">
@@ -110,7 +106,7 @@
       </div>
     </div>
 
-    <transition name="fade">
+    <transition name="fadeHeight">
       <div
         v-if="collapseDateSelector.booking_address"
         class="row booking_selector m-2 p-2"
@@ -127,13 +123,12 @@
                 {{ option.name }}
               </option>
             </select>
-            <v-errors :errors="errorFor('from')"></v-errors>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-12">
-            <label for="return">Returnare la Data și Ora</label>
-            <select name="return" class="form-control" v-model="retour">
+            <label for="retour">Returnare la Data și Ora</label>
+            <select name="retour" class="form-control" v-model="retour">
               <option
                 v-for="option in pickupAndReturnPoints"
                 v-bind:value="option.id"
@@ -142,7 +137,6 @@
                 {{ option.name }}
               </option>
             </select>
-            <v-errors :errors="errorFor('to')"></v-errors>
           </div>
         </div>
       </div>
@@ -160,6 +154,14 @@
         >
       </button>
     </div>
+    <h6 class="text-uppercase text-secondary font-weigh-bolder">
+      <transition>
+        <span v-if="noStock" class="text-danger">[Not in stock!]</span>
+      </transition>
+      <transition>
+        <span v-if="hasStock" class="text-success">[Available]</span>
+      </transition>
+    </h6>
   </div>
 </template>
 
@@ -189,7 +191,7 @@ export default {
       from: this.$store.state.lastSearch.from || null,
       to: this.$store.state.lastSearch.to || null,
       pickup: this.$store.state.lastSearch.pickup || null,
-      retour: this.$store.state.lastSearch.return || null,
+      retour: this.$store.state.lastSearch.retour || null,
       loading: false,
       status: null,
       collapseDateSelector: {
@@ -208,6 +210,8 @@ export default {
   },
   methods: {
     async check() {
+      this.collapseDateSelector.booking_date = false;
+      this.collapseDateSelector.booking_address = false;
       this.loading = true;
       this.errors = null;
 
@@ -215,7 +219,7 @@ export default {
         from: this.from,
         to: this.to,
         pickup: this.pickup,
-        return: this.retour,
+        retour: this.retour,
       });
 
       try {
@@ -242,7 +246,7 @@ export default {
       return date < new Date(this.from);
     },
     pickupAndReturnText(id) {
-      if (this.pickup) {
+      if (this.pickup && !this.loading) {
         return this.pickupAndReturnPoints.find((item) => item.id == id).name;
       }
     },

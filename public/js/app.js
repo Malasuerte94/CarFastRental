@@ -6029,9 +6029,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     bookableId: [String, Number]
@@ -6147,6 +6144,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6163,7 +6171,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       bookable: null,
       loading: false,
-      price: null
+      price: null,
+      collapseAdjectives: false
     };
   },
   created: function created() {
@@ -6546,6 +6555,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6558,7 +6569,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       from: this.$store.state.lastSearch.from || null,
       to: this.$store.state.lastSearch.to || null,
       pickup: this.$store.state.lastSearch.pickup || null,
-      retour: this.$store.state.lastSearch["return"] || null,
+      retour: this.$store.state.lastSearch.retour || null,
       loading: false,
       status: null,
       collapseDateSelector: {
@@ -6587,6 +6598,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this2.collapseDateSelector.booking_date = false;
+                _this2.collapseDateSelector.booking_address = false;
                 _this2.loading = true;
                 _this2.errors = null;
 
@@ -6594,24 +6607,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   from: _this2.from,
                   to: _this2.to,
                   pickup: _this2.pickup,
-                  "return": _this2.retour
+                  retour: _this2.retour
                 });
 
-                _context.prev = 3;
-                _context.next = 6;
+                _context.prev = 5;
+                _context.next = 8;
                 return axios.get("/api/bookables/".concat(_this2.bookableId, "/stock?from=").concat(_this2.from, "&to=").concat(_this2.to));
 
-              case 6:
+              case 8:
                 _this2.status = _context.sent.status;
 
                 _this2.$emit("stock", _this2.hasStock);
 
-                _context.next = 15;
+                _context.next = 17;
                 break;
 
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](3);
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](5);
 
                 if ((0,_shared_utils_response__WEBPACK_IMPORTED_MODULE_1__.is422)(_context.t0)) {
                   _this2.errors = _context.t0.response.data.errors;
@@ -6621,15 +6634,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.$emit("stock", _this2.hasStock);
 
-              case 15:
+              case 17:
                 _this2.loading = false;
 
-              case 16:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 10]]);
+        }, _callee, null, [[5, 12]]);
       }))();
     },
     notBeforeToday: function notBeforeToday(date) {
@@ -6639,7 +6652,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return date < new Date(this.from);
     },
     pickupAndReturnText: function pickupAndReturnText(id) {
-      if (this.pickup) {
+      if (this.pickup && !this.loading) {
         return this.pickupAndReturnPoints.find(function (item) {
           return item.id == id;
         }).name;
@@ -7041,6 +7054,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["errors"],
   methods: {
@@ -7356,7 +7375,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   state: {
     lastSearch: {
       from: null,
-      to: null
+      to: null,
+      pickup: null,
+      retour: null
     },
     basket: {
       items: []
@@ -12014,7 +12035,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.form-control.is-invalid ~ div > .invalid-feedback[data-v-4356abde] {\r\n    display:block;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.invalid-feedback[data-v-4356abde] {\r\n  display: block;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -68649,43 +68670,41 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticStyle: { padding: "1.25rem" } }, [
-    _vm.loading
-      ? _c("div", [_vm._v("Loading...")])
-      : _c(
-          "div",
-          { staticClass: "row" },
-          _vm._l(_vm.adjectives, function (adjective, index) {
-            return _c(
-              "div",
-              {
-                key: index,
-                staticClass:
-                  "\n        col-md-4\n        w-50\n        d-flex\n        justify-content-center\n        text-center\n        flex-column\n        p-2\n      ",
-              },
-              [
-                _c("img", {
-                  staticClass: "rounded-circle m-auto",
-                  attrs: {
-                    width: "50px",
-                    height: "50px",
-                    src: adjective.adjective.icon,
-                  },
-                }),
-                _vm._v(" "),
-                _c("span", [
-                  _vm._v(
-                    _vm._s(adjective.adjective.name) +
-                      " : " +
-                      _vm._s(adjective.value)
-                  ),
-                ]),
-              ]
-            )
-          }),
-          0
-        ),
-  ])
+  return _vm.loading
+    ? _c("div", [_vm._v("Loading...")])
+    : _c(
+        "div",
+        { staticClass: "row adjectives-row" },
+        _vm._l(_vm.adjectives, function (adjective, index) {
+          return _c(
+            "div",
+            {
+              key: index,
+              staticClass:
+                "\n      adjective-single\n      col-md-4\n      justify-content-center\n      text-center\n      flex-column\n      p-2\n    ",
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-circle m-auto",
+                attrs: {
+                  width: "50px",
+                  height: "50px",
+                  src: adjective.adjective.icon,
+                },
+              }),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(
+                  _vm._s(adjective.adjective.name) +
+                    " : " +
+                    _vm._s(adjective.value)
+                ),
+              ]),
+            ]
+          )
+        }),
+        0
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -68715,14 +68734,13 @@ var render = function () {
     { staticClass: "row" },
     [
       _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-8 pb-4" },
-          [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                !_vm.loading
-                  ? _c("div", [
+        _c("div", { staticClass: "col-md-8 pb-4" }, [
+          _c("div", { staticClass: "card main-car" }, [
+            _c("div", { staticClass: "card-body text-center" }, [
+              !_vm.loading
+                ? _c(
+                    "div",
+                    [
                       _c("img", {
                         staticClass: "card-img",
                         attrs: { src: _vm.bookable.main_image },
@@ -68733,17 +68751,41 @@ var render = function () {
                       _c("hr"),
                       _vm._v(" "),
                       _c("article", [_vm._v(_vm._s(_vm.bookable.description))]),
-                    ])
-                  : _c("div", [_vm._v("Loading ...")]),
-              ]),
+                      _vm._v(" "),
+                      _c("adjective-list", {
+                        class: [
+                          { "adjectives-row-active": _vm.collapseAdjectives },
+                        ],
+                        attrs: { "bookable-id": this.$route.params.id },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "btn_parent_collapse_adjectives" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "button_collapse_adjectives",
+                              class: [{ "arrow-down": _vm.collapseAdjectives }],
+                              on: {
+                                click: function ($event) {
+                                  _vm.collapseAdjectives =
+                                    !_vm.collapseAdjectives
+                                },
+                              },
+                            },
+                            [_c("i", { staticClass: "fa fa-arrow-down" })]
+                          ),
+                        ]
+                      ),
+                    ],
+                    1
+                  )
+                : _c("div", [_vm._v("Loading ...")]),
             ]),
-            _vm._v(" "),
-            _c("adjective-list", {
-              attrs: { "bookable-id": this.$route.params.id },
-            }),
-          ],
-          1
-        ),
+          ]),
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -68987,26 +69029,8 @@ var render = function () {
     [
       _c(
         "h6",
-        { staticClass: "text-uppercase text-secondary font-weigh-bolder" },
-        [
-          _vm._v("\n    Check Stock\n    "),
-          _c("transition", [
-            _vm.noStock
-              ? _c("span", { staticClass: "text-danger" }, [
-                  _vm._v("[Not in stock!]"),
-                ])
-              : _vm._e(),
-          ]),
-          _vm._v(" "),
-          _c("transition", [
-            _vm.hasStock
-              ? _c("span", { staticClass: "text-success" }, [
-                  _vm._v("[Available]"),
-                ])
-              : _vm._e(),
-          ]),
-        ],
-        1
+        { staticClass: "text-uppercase text-secondary font-weigh-bolder pt-6" },
+        [_vm._v("\n    Perioadă închiriere\n  ")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "booking_selector booking_label" }, [
@@ -69041,7 +69065,7 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("transition", { attrs: { name: "fade" } }, [
+      _c("transition", { attrs: { name: "fadeHeight" } }, [
         _vm.collapseDateSelector.booking_date
           ? _c("div", { staticClass: "row booking_selector m-2 p-2" }, [
               _c("div", { staticClass: "row" }, [
@@ -69162,15 +69186,21 @@ var render = function () {
           : _vm._e(),
       ]),
       _vm._v(" "),
+      _c(
+        "h6",
+        { staticClass: "text-uppercase text-secondary font-weigh-bolder pt-3" },
+        [_vm._v("\n    Ridicare & Returnare\n  ")]
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "booking_selector booking_label" }, [
         _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "booking_form_actions" }, [
-          _vm._v("\n      Pick up:\n      "),
+          _vm._v("\n      De la:\n      "),
           _c("span", { staticClass: "data_pickup" }, [
             _vm._v(_vm._s(_vm.pickupAndReturnText(_vm.pickup))),
           ]),
-          _vm._v("\n      Returnare:\n      "),
+          _vm._v("\n      la:\n      "),
           _c("span", { staticClass: "data_pickup" }, [
             _vm._v(_vm._s(_vm.pickupAndReturnText(_vm.retour))),
           ]),
@@ -69196,127 +69226,113 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("transition", { attrs: { name: "fade" } }, [
+      _c("transition", { attrs: { name: "fadeHeight" } }, [
         _vm.collapseDateSelector.booking_address
           ? _c("div", { staticClass: "row booking_selector m-2 p-2" }, [
               _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group col-md-12" },
-                  [
-                    _c("label", { attrs: { for: "pickup" } }, [
-                      _vm._v("Ridicare la Data și Ora"),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.pickup,
-                            expression: "pickup",
-                          },
-                        ],
-                        staticClass: "form-control",
-                        attrs: { name: "pickup" },
-                        on: {
-                          change: function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.pickup = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
+                _c("div", { staticClass: "form-group col-md-12" }, [
+                  _c("label", { attrs: { for: "pickup" } }, [
+                    _vm._v("Ridicare la Data și Ora"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.pickup,
+                          expression: "pickup",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "pickup" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.pickup = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
                         },
                       },
-                      _vm._l(_vm.pickupAndReturnPoints, function (option) {
-                        return _c(
-                          "option",
-                          { key: option.id, domProps: { value: option.id } },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(option.name) +
-                                "\n            "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _c("v-errors", { attrs: { errors: _vm.errorFor("from") } }),
-                  ],
-                  1
-                ),
+                    },
+                    _vm._l(_vm.pickupAndReturnPoints, function (option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option.id } },
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(option.name) +
+                              "\n            "
+                          ),
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                ]),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group col-md-12" },
-                  [
-                    _c("label", { attrs: { for: "return" } }, [
-                      _vm._v("Returnare la Data și Ora"),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.retour,
-                            expression: "retour",
-                          },
-                        ],
-                        staticClass: "form-control",
-                        attrs: { name: "return" },
-                        on: {
-                          change: function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.retour = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
+                _c("div", { staticClass: "form-group col-md-12" }, [
+                  _c("label", { attrs: { for: "retour" } }, [
+                    _vm._v("Returnare la Data și Ora"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.retour,
+                          expression: "retour",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "retour" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.retour = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
                         },
                       },
-                      _vm._l(_vm.pickupAndReturnPoints, function (option) {
-                        return _c(
-                          "option",
-                          { key: option.id, domProps: { value: option.id } },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(option.name) +
-                                "\n            "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _c("v-errors", { attrs: { errors: _vm.errorFor("to") } }),
-                  ],
-                  1
-                ),
+                    },
+                    _vm._l(_vm.pickupAndReturnPoints, function (option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option.id } },
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(option.name) +
+                              "\n            "
+                          ),
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                ]),
               ]),
             ])
           : _vm._e(),
@@ -69342,6 +69358,29 @@ var render = function () {
           ]
         ),
       ]),
+      _vm._v(" "),
+      _c(
+        "h6",
+        { staticClass: "text-uppercase text-secondary font-weigh-bolder" },
+        [
+          _c("transition", [
+            _vm.noStock
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v("[Not in stock!]"),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("transition", [
+            _vm.hasStock
+              ? _c("span", { staticClass: "text-success" }, [
+                  _vm._v("[Available]"),
+                ])
+              : _vm._e(),
+          ]),
+        ],
+        1
+      ),
     ],
     1
   )
@@ -69853,7 +69892,7 @@ var render = function () {
       return _c(
         "div",
         { key: _vm.key(index), staticClass: "invalid-feedback" },
-        [_vm._v(_vm._s(error))]
+        [_vm._v("\n    " + _vm._s(error) + "\n  ")]
       )
     }),
     0

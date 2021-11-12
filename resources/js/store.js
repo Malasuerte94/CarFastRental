@@ -4,7 +4,9 @@ export default {
     state: {
         lastSearch: {
             from: null,
-            to: null
+            to: null,
+            pickup: null,
+            retour: null
         },
         basket: {
             items: []

@@ -16,7 +16,7 @@ class PickupAndReturnPointFactory extends Factory
         return [
 
             'address' => $this->faker->address(),
-            'name' => $this->faker->city() . ', ' . $this->faker->state(),
+            'name' => $this->faker->city(),
             'coordinates' => $this->faker->latitude() . ', ' . $this->faker->longitude(),
         ];
     }

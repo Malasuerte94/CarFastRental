@@ -1,28 +1,25 @@
 <template>
-  <div style="padding: 1.25rem">
-    <div v-if="loading">Loading...</div>
-    <div v-else class="row">
-      <div
-        class="
-          col-md-4
-          w-50
-          d-flex
-          justify-content-center
-          text-center
-          flex-column
-          p-2
-        "
-        v-for="(adjective, index) in adjectives"
-        :key="index"
-      >
-        <img
-          class="rounded-circle m-auto"
-          width="50px"
-          height="50px"
-          :src="adjective.adjective.icon"
-        />
-        <span>{{ adjective.adjective.name }} : {{ adjective.value }}</span>
-      </div>
+  <div v-if="loading">Loading...</div>
+  <div v-else class="row adjectives-row">
+    <div
+      class="
+        adjective-single
+        col-md-4
+        justify-content-center
+        text-center
+        flex-column
+        p-2
+      "
+      v-for="(adjective, index) in adjectives"
+      :key="index"
+    >
+      <img
+        class="rounded-circle m-auto"
+        width="50px"
+        height="50px"
+        :src="adjective.adjective.icon"
+      />
+      <span>{{ adjective.adjective.name }} : {{ adjective.value }}</span>
     </div>
   </div>
 </template>
