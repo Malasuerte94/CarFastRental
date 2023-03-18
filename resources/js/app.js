@@ -4,6 +4,7 @@ import Vue from 'vue';
 import moment from "moment";
 import VueRouter from "vue-router";
 import Vuex from 'vuex';
+import Alpine from 'alpinejs';
 import Index from "./Index";
 import router from "./routes";
 import FatalError from "./shared/components/FatalError";
@@ -11,12 +12,19 @@ import StarRating from "./shared/components/StarRating";
 import Success from "./shared/components/Success";
 import ValidationErrors from "./shared/components/ValidationErrors";
 import storeDefinition from "./store";
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
+
+window.Alpine = Alpine;
+Alpine.start();
 
 window.Vue = require("vue");
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(DatePicker);
 
 Vue.filter("fromNow", value => moment(value).fromNow());
+Vue.filter("dateformating", value => moment(value).format("DD-MM-YYYY"));
 
 Vue.component("star-rating", StarRating);
 Vue.component("fatal-error", FatalError);
@@ -47,5 +55,6 @@ const app = new Vue({
     },
     async beforeCreate() {
         this.$store.dispatch("loadStoredState");
+        this.$store.dispatch("loadUser");
     },
 });

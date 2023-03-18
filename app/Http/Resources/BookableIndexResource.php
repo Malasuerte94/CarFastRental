@@ -18,6 +18,7 @@ class BookableIndexResource extends JsonResource
             'id'          => $this->id,
             'title'       => $this->title,
             'description' => $this->description,
+            'main_image' => $this->main_image,
         ];
     }
 }
