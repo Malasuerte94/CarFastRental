@@ -145,7 +145,6 @@
     <div class="form-row mt-4">
       <button
         class="btn btn-secondary btn-block"
-        @click="check"
         :disabled="loading"
       >
         <span v-if="!loading">Check</span>
@@ -260,6 +259,20 @@ export default {
     },
     noStock() {
       return 404 === this.status;
+    },
+    },
+  watch: {
+    from() {
+      this.check();
+    },
+    to() {
+      this.check();
+    },
+    pickup() {
+      this.check();
+    },
+    retour() {
+      this.check();
     },
   },
 };

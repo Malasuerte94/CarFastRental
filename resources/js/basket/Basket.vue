@@ -145,6 +145,15 @@
               <span class="font-weight-bold"> ${{ item.price.total }} </span>
             </div>
 
+            <div
+                v-for="(extra, index) in item.price.extra[0]"
+                :key="index"
+                class="pt-2 pb-2 border-top border-bottom d-flex justify-content-between text-secondary"
+                >
+                <span>{{ extra.multiplier }} {{ extra.label }} x ${{ extra.value }}</span>
+                <span>{{ extra.operation }} {{ extra.value_type }}{{ extra.total }}</span>
+            </div>
+
             <div class="pt-2 pb-2 d-flex justify-content-between">
               <span>From {{ item.dates.from }}</span>
               <span>To {{ item.dates.to }}</span>

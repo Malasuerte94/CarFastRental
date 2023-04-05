@@ -28,16 +28,10 @@ class BookingResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('bookable_id')
-                    ->required(),
-                TextInput::make('address_id'),
                 DateTimePicker::make('from')
                     ->required(),
                 DateTimePicker::make('to')
                     ->required(),
-                TextInput::make('review_key')
-                    ->required()
-                    ->maxLength(36),
                 TextInput::make('price')
                     ->required(),
             ]);
