@@ -17,7 +17,9 @@ class AddressResource extends Resource
 {
     protected static ?string $model = Address::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-location-marker';
+
+    protected static ?string $navigationGroup = 'Resources';
 
     public static function form(Form $form): Form
     {
@@ -83,14 +85,14 @@ class AddressResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -98,5 +100,5 @@ class AddressResource extends Resource
             'create' => Pages\CreateAddress::route('/create'),
             'edit' => Pages\EditAddress::route('/{record}/edit'),
         ];
-    }    
+    }
 }

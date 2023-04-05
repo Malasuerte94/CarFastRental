@@ -18,6 +18,7 @@ class PickupAndReturnPointResource extends Resource
     protected static ?string $model = PickupAndReturnPoint::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Resources';
 
     public static function form(Form $form): Form
     {
@@ -57,14 +58,14 @@ class PickupAndReturnPointResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -72,5 +73,5 @@ class PickupAndReturnPointResource extends Resource
             'create' => Pages\CreatePickupAndReturnPoint::route('/create'),
             'edit' => Pages\EditPickupAndReturnPoint::route('/{record}/edit'),
         ];
-    }    
+    }
 }

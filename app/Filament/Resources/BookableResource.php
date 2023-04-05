@@ -22,6 +22,7 @@ class BookableResource extends Resource
     protected static ?string $model = Bookable::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Resources';
 
     public static function form(Form $form): Form
     {
@@ -62,14 +63,14 @@ class BookableResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -77,5 +78,5 @@ class BookableResource extends Resource
             'create' => Pages\CreateBookable::route('/create'),
             'edit' => Pages\EditBookable::route('/{record}/edit'),
         ];
-    }    
+    }
 }

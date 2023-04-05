@@ -36,7 +36,7 @@
             v-if="price"
             :price="price"
             class="mb-4 mt-4"
-          ></price-breakdown>
+          />
         </transition>
 
         <transition name="fade">

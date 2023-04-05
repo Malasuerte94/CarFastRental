@@ -18,6 +18,7 @@ class AdjectiveResource extends Resource
     protected static ?string $model = Adjective::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'Resources';
 
     public static function form(Form $form): Form
     {
@@ -53,14 +54,14 @@ class AdjectiveResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -68,5 +69,5 @@ class AdjectiveResource extends Resource
             'create' => Pages\CreateAdjective::route('/create'),
             'edit' => Pages\EditAdjective::route('/{record}/edit'),
         ];
-    }    
+    }
 }
