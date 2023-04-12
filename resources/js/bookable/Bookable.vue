@@ -2,7 +2,7 @@
   <div class="row">
     <div class="row">
       <div class="col-md-8 pb-4">
-        <div class="card main-car">
+        <div class="card main-car shadow p-3 mb-5 bg-white rounded">
           <div class="card-body text-center">
             <div v-if="!loading">
               <img :src="bookable.main_image" class="card-img" />
