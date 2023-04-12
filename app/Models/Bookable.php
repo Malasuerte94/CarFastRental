@@ -10,6 +10,10 @@ class Bookable extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id',
+    ];
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);
@@ -30,16 +34,14 @@ class Bookable extends Model
         return 0 === $this->bookings()->betweenDates($from, $to)->count();
     }
 
-    public function priceFor($from, $to)
+    public function priceRules()
     {
-        $days = (new Carbon($from))->diffInDays(new Carbon($to)) + 1;
-        $price = $days * $this->price;
-
-        return [
-            'total' => $price,
-            'breakdown' => [
-                $this->price => $days,
-            ]
-        ];
+        return $this->hasMany(PriceRule::class)->orWhere('global', true);
     }
+
+    public function seasons()
+    {
+        return $this->hasMany(Season::class);
+    }
+
 }

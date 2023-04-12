@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class BookableShowResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class BookableShowResource extends JsonResource
             'id'          => $this->id,
             'title'       => $this->title,
             'description' => $this->description,
-            'main_image' => $this->main_image,
+            'main_image' => Storage::url($this->main_image),
         ];
     }
 }

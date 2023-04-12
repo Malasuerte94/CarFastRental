@@ -14,6 +14,9 @@
 @import "~@fortawesome/fontawesome-free/scss/solid";
 
 
+@import "desktop";
+@import "mobile";
+
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.5s;
@@ -45,6 +48,9 @@
 }
 
 .booking_selector {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 0.5rem;
     z-index: 1;
     margin-top: 1rem;
     background-color: $white;
@@ -142,73 +148,6 @@
 
 .custom-date-time-picker {
     width: 100% !important;
-}
-
-
-
-@media (max-width: $breakpoint-mobile) {
-    .main-car {
-        margin-top: 100px;
-        border-radius: 10px;
-        box-shadow: #00000052 0 0 10px 0px;
-
-        .card-img {
-            position: absolute;
-            top: -100px;
-            left: 5%;
-            right: 5%;
-            width: 90%;
-        }
-
-        .card-body {
-            h2 {
-                padding-top: 110px;
-            }
-        }
-    }
-
-    .adjectives-row {
-        overflow: hidden;
-        transition: 0.5s;
-        max-height: 0;
-
-        // div:nth-of-type(1n+4) {
-        //     transition: 0.5s;
-        //     display: none;
-        // }
-    }
-
-    .adjectives-row-active {
-        transition: 0.5s;
-        max-height: 1000px;
-        // div:nth-of-type(1n+4) {
-        //     transition: 0.5s;
-        //     display: flex;
-        // }
-    }
-
-
-    .adjective-single {
-        width: 33.33%;
-        display: flex;
-    }
-
-    .navbar-nav {
-        flex-direction: row;
-    }
-
-    #app:after {
-        content: " ";
-        height: 300px;
-        position: absolute;
-        width: 100%;
-        top: 0;
-        z-index: -1;
-        border-bottom-right-radius: 25%;
-        border-bottom-left-radius: 25%;
-        overflow: hidden;
-        background-image: linear-gradient(to right, #4451ff, #00a1ff);
-    }
 }
 
 .btn_parent_collapse_adjectives {

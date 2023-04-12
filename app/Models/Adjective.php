@@ -9,8 +9,9 @@ class Adjective extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
     public function bookableAdjective()
     {
-        return $this->hasMany(BookableAdjective::class);
+        return $this->belongsToMany(BookableAdjective::class);
     }
 }
