@@ -1,0 +1,5 @@
+@media (min-width: $breakpoint-mobile) {
+    .adjectives-row {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

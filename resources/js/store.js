@@ -3,8 +3,10 @@ import { isLoggedIn, logOut } from "./shared/utils/auth";
 export default {
     state: {
         lastSearch: {
-            from: null,
-            to: null,
+            fromDate: null,
+            fromTime: null,
+            toDate: null,
+            toTime: null,
             pickup: null,
             retour: null
         },

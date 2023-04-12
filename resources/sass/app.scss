@@ -48,6 +48,7 @@
 }
 
 .booking_selector {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 0.5rem;
@@ -56,7 +57,6 @@
     background-color: $white;
     align-items: center;
     box-shadow: #00000052 0 0 10px 0px;
-    border-radius: $selectors-radius;
 
     .row {
         width: 100%;
@@ -195,4 +195,25 @@
 .fadeHeight-leave-to {
     opacity: 0;
     max-height: 0px;
+}
+.adjectives-row {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+.adjective-single {
+    display: flex;
+    flex-direction: column;
+}
+
+.stock-simple {
+    .booking_icon_actions {
+        position: absolute;
+        top: -15px;
+        right: -10px;
+    }
+    .booking_details {
+        text-align: center;
+    }
 }

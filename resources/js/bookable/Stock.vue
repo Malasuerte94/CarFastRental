@@ -111,7 +111,7 @@
                 <span v-if="loading"><i class="fas fa-circle-notch fa-spin"></i> Checking...</span>
             </button>
         </div>
-        <h6 class="text-uppercase text-secondary font-weigh-bolder">
+        <h6 class="text-uppercase text-secondary font-weigh-bolder text-center">
             <transition>
                 <span v-if="noStock" class="text-danger">[Not in stock!]</span>
             </transition>
@@ -178,8 +178,10 @@ export default {
             this.errors = null;
 
             this.$store.dispatch("setLastSearch", {
-                from: this.from,
-                to: this.to,
+                fromDate: this.fromDate,
+                fromTime: this.fromTime,
+                toDate: this.toDate,
+                toTime: this.toTime,
                 pickup: this.pickup,
                 retour: this.retour,
             });
