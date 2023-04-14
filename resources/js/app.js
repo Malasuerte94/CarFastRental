@@ -14,6 +14,7 @@ import ValidationErrors from "./shared/components/ValidationErrors";
 import storeDefinition from "./store";
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
+import VueMobileDetection from "vue-mobile-detection";
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -22,6 +23,7 @@ window.Vue = require("vue");
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(DatePicker);
+Vue.use(VueMobileDetection);
 
 Vue.filter("fromNow", value => moment(value).fromNow());
 Vue.filter("dateformating", value => moment(value).format("DD-MM-YYYY"));
@@ -41,7 +43,6 @@ window.axios.interceptors.response.use(
         if (401 === error.response.status) {
             store.dispatch("logout");
         }
-
         return Promise.reject(error);
     }
 );

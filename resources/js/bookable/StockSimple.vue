@@ -10,7 +10,7 @@
             </div>
             <div>
                 <label for="fromDate">Ridicare la Data și Ora</label>
-                <date-picker name="fromDate" class="custom-date-time-picker mb-2" v-model="fromDate" type="date"
+                <date-picker name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model="fromDate" type="date"
                     valueType="format" time-title-format="DD-MM-YYYY" @keyup.enter="check"
                     :class="[{ 'is-invalid': errorFor('fromDate') }]" :disabled-date="notBeforeToday"></date-picker>
                 <date-picker name="fromTime" class="custom-date-time-picker" v-model="fromTime" type="time"

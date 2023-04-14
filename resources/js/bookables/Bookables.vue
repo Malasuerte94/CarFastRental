@@ -1,21 +1,16 @@
 <template>
-    <div>
+    <div class="bookables-page">
         <div v-if="loading">
             <h1>Data is loading ... </h1>
         </div>
-        <div v-else>
-            <div class="row" v-for="row in rows" :key="'row' + row">
-                <div class="col d-flex align-items-stretch p-1" v-for="(bookable, column) in bookablesInRow(row)" :key="'row' + row + column">
-                    <bookable-list-item v-bind="bookable"></bookable-list-item>
-                </div>
-                <div class="col p-1" v-for="p in placehodersInRow(row)" :key="'placeholder' + p + row"></div>
+        <div v-else class="bookables-grid" v-for="row in rows" :key="'row' + row">
+            <div class="bookable-card" v-for="(bookable, column) in bookablesInRow(row)" :key="'row' + row + column">
+                <bookable-list-item v-bind="bookable"></bookable-list-item>
             </div>
+            <div class="col p-1" v-for="p in placehodersInRow(row)" :key="'placeholder' + p + row"></div>
         </div>
     </div>
 </template>
-
-
-
 
 <script>
 import BookableListItem  from './BookableListItem'

@@ -33,20 +33,193 @@
         max-height: 1000px;
     }
 
-    .navbar-nav {
-        flex-direction: row;
-    }
-
     #app:after {
         content: " ";
-        height: 300px;
+        height: 180px;
         position: absolute;
         width: 100%;
         top: 0;
         z-index: -1;
-        border-bottom-right-radius: 25%;
-        border-bottom-left-radius: 25%;
+        border-bottom-right-radius: 24%;
+        border-bottom-left-radius: 141%;
         overflow: hidden;
-        background-image: linear-gradient(to right, #4451ff, #00a1ff);
+        background-image: linear-gradient(to right, #ff44f9, #6200ff);
     }
+    //navbar
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .navbar-mobile {
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        z-index: 999;
+        width: 100%;
+        .navbar {
+            display: block;
+            padding: 0;
+            .navbar-nav {
+                display: grid;
+                grid-auto-columns: 1fr;
+                grid-gap: 10px;
+                padding: 5px 20px;
+                height: 56px;
+                background: $white;
+                border-radius: 30px;
+                box-shadow: 2px 2px 5px #ebebeb, -2px -2px 5px #ececec;
+                .nav-item {
+                    grid-area: 1;
+                    justify-content: center;
+                    display: flex;
+                    position: relative;
+                    .nav-link {
+                        .nav-icon {
+                            width: 20px;
+                            height: 20px;
+                            font-size: 20px;
+                            transition: all 0.5s;
+                        }
+                    }
+                    &:has(> .router-link-exact-active) {
+                        transition-duration: 500ms;
+                        ::before {
+                                content: "";
+                                position: absolute;
+                                bottom: -10px;
+                                left: 0;
+                                right: 0;
+                                margin: auto;
+                                width: 50%;
+                                height: 5px;
+                                border-radius: 5px;
+                                background-color: #6f00ff;
+                                opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //hero
+    .hero-banner {
+        .hero-container {
+            height: 30vh;
+            position: relative;
+            img {
+                animation: float 6s ease-in-out infinite;
+            }
+            .hero-title {
+                font-size: 3rem;
+                position: absolute;
+                top: 57%;
+                left: 30px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                color: black;
+                width: 100vw;
+                font-weight: bold;
+            }
+            .hero-price {
+                color: $accent;
+                font-size: 1rem;
+                position: absolute;
+                top: 57%;
+                left: 42px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                width: 100vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    //bookables page
+    .bookables-page {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+        .bookables-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 20px;
+            .bookable-card {
+                .card-img {
+                    height: 200px;
+                }
+            }
+        }
+
+    }
+
+    //feature cards
+    .feature-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        padding: 10px;
+        .feature-card {
+            background-size: 150%;
+            box-shadow: 0px 25px 15px -25px $secondary;
+            animation: border 6s ease-in-out infinite;
+            align-items: center;
+            background: linear-gradient(337deg, $secondary 0%, $primary 70%);
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+            .feature-card-header {
+                display: flex;
+                align-items: center;
+                i {
+                    margin-right: 10px;
+                }
+                h3 {
+                    font-size: 1.2rem;
+                    margin-bottom: 0px;
+                }
+            }
+            .feature-card-content {
+                margin-top: 10px;
+                .feature-card-description {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+
+    //animations
+    @keyframes float {
+        0% {
+            transform: translatey(0px);
+        }
+        50% {
+            transform: translatey(-10px);
+        }
+        100% {
+            transform: translatey(0px);
+        }
+    }
+
+    @keyframes border {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
 }
+
+
+

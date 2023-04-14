@@ -3,15 +3,21 @@ import Basket from './basket/Basket';
 import Bookables from "./bookables/Bookables";
 import Bookable from "./bookable/Bookable";
 import Review from "./review/Review";
+import Homepage from "./layout/Homepage";
 
 const routes = [
     {
         path: "/",
-        component: Bookables,
+        component: Homepage,
         name: "home",
     },
     {
-        path: "/bookable/:id",
+        path: "/cars",
+        component: Bookables,
+        name: "bookables",
+    },
+    {
+        path: "/car/:id",
         component: Bookable,
         name: "bookable",
     },

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BookableReviewController;
 use App\Http\Controllers\Api\BookableStockController;
 use App\Http\Controllers\Api\BookingByReviewController;
 use App\Http\Controllers\Api\CheckoutController;
+use App\Http\Controllers\Api\HeroProductController;
 use App\Http\Controllers\Api\PickupAndReturnPointController;
 use App\Http\Controllers\Api\ReviewController;
 use Illuminate\Http\Request;
@@ -40,3 +41,6 @@ Route::apiResource('reviews', ReviewController::class)->only(['show', 'store']);
 Route::apiResource('pickup-and-return-points', PickupAndReturnPointController::class)->only(['index', 'show']);
 
 Route::post('checkout', CheckoutController::class)->name('checkout');
+
+//hero
+Route::get('hero-products', HeroProductController::class)->name('hero-product.show');

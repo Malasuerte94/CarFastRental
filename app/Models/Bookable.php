@@ -44,4 +44,9 @@ class Bookable extends Model
         return $this->hasMany(Season::class);
     }
 
+    public function heroProduct()
+    {
+        return $this->hasOne(HeroProduct::class);
+    }
+
 }
