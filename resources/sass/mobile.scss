@@ -193,6 +193,35 @@
         }
     }
 
+    //stock simple
+    .stock-simple {
+        .booking_selector {
+            box-shadow: 0px 25px 15px -25px #000000;
+            &.search-only {
+                border: 1px solid #8c2491;
+            }
+        }
+        .search-button {
+            position: relative;
+            transform: translateY(-30px);
+            transition: all 0.5s;
+            z-index: 0;
+            margin-bottom: 10px;
+            &.active {
+                transform: translateY(10px);
+                z-index: 1;
+                button {
+                    box-shadow: 0px 11px 15px -10px #000000;
+                }
+            }
+        }
+    }
+
+
+    //search form
+    .search-form {
+
+    }
 
     //animations
     @keyframes float {

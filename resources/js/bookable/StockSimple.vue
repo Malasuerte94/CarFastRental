@@ -4,102 +4,114 @@
             Perioadă închiriere
         </h6>
         <transition name="fadeHeight">
-        <div class="booking_selector rounded p-2">
-            <div class="booking_icon_actions">
-                <span class="icon_collapse"><i class="fa fa-calendar-alt"></i></span>
+            <div class="booking_selector rounded p-2" :class="[{'search-only' : searchOnly}]">
+                <div v-if="!searchOnly" class="booking_icon_actions">
+                    <span class="icon_collapse"><i class="fa fa-calendar-alt"></i></span>
+                </div>
+                <div>
+                    <label for="fromDate">Ridicare la Data și Ora</label>
+                    <date-picker placeholder="..." name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model="fromDate"
+                        type="date" valueType="format" time-title-format="DD-MM-YYYY" @keyup.enter="check"
+                        :class="[{ 'is-invalid': errorFor('fromDate') }]" :disabled-date="notBeforeToday"></date-picker>
+                    <date-picker placeholder="..." name="fromTime" class="custom-date-time-picker" v-model="fromTime" type="time"
+                        valueType="format" :time-picker-options="{
+                            start: '00:00',
+                            step: '00:30',
+                            end: '23:30',
+                            format: 'HH:mm',
+                        }" time-title-format="HH:mm" @keyup.enter="check" :class="[{ 'is-invalid': errorFor('fromTime') }]"
+                        :disabled-date="notBeforeToday"></date-picker>
+                </div>
+                <div>
+                    <label for="to">Returnare la Data și Ora</label>
+                    <date-picker placeholder="..." name="to" class="custom-date-time-picker mb-2" v-model="toDate" type="date"
+                        valueType="format" time-title-format="DD-MM-YYYY" :disabled-date="notBeforeDayBooked"
+                        holder="End Date" @keyup.enter="check"
+                        :class="[{ 'is-invalid': errorFor('toDate') }]"></date-picker>
+                    <date-picker placeholder="..." name="to" class="custom-date-time-picker" v-model="toTime" type="time" valueType="format"
+                        :time-picker-options="{
+                            start: '00:00',
+                            step: '00:30',
+                            end: '23:30',
+                            format: 'HH:mm',
+                        }" time-title-format="HH:mm" :disabled-date="notBeforeDayBooked" holder="End Date"
+                        @keyup.enter="check" :class="[{ 'is-invalid': errorFor('toTime') }]"></date-picker>
+                </div>
             </div>
-            <div>
-                <label for="fromDate">Ridicare la Data și Ora</label>
-                <date-picker name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model="fromDate" type="date"
-                    valueType="format" time-title-format="DD-MM-YYYY" @keyup.enter="check"
-                    :class="[{ 'is-invalid': errorFor('fromDate') }]" :disabled-date="notBeforeToday"></date-picker>
-                <date-picker name="fromTime" class="custom-date-time-picker" v-model="fromTime" type="time"
-                    valueType="format" :time-picker-options="{
-                        start: '00:00',
-                        step: '00:30',
-                        end: '23:30',
-                        format: 'HH:mm',
-                    }" time-title-format="HH:mm" @keyup.enter="check" :class="[{ 'is-invalid': errorFor('fromTime') }]"
-                    :disabled-date="notBeforeToday"></date-picker>
-            </div>
-            <div>
-                <label for="to">Returnare la Data și Ora</label>
-                <date-picker name="to" class="custom-date-time-picker mb-2" v-model="toDate" type="date" valueType="format"
-                    time-title-format="DD-MM-YYYY" :disabled-date="notBeforeDayBooked" holder="End Date"
-                    @keyup.enter="check" :class="[{ 'is-invalid': errorFor('toDate') }]"></date-picker>
-                <date-picker name="to" class="custom-date-time-picker" v-model="toTime" type="time" valueType="format"
-                    :time-picker-options="{
-                        start: '00:00',
-                        step: '00:30',
-                        end: '23:30',
-                        format: 'HH:mm',
-                    }" time-title-format="HH:mm" :disabled-date="notBeforeDayBooked" holder="End Date"
-                    @keyup.enter="check" :class="[{ 'is-invalid': errorFor('toTime') }]"></date-picker>
-            </div>
-        </div>
         </transition>
         <v-errors class="text-center" :errors="errorFor('fromDate')" />
         <v-errors class="text-center" :errors="errorFor('fromTime')" />
         <v-errors class="text-center" :errors="errorFor('toDate')" />
         <v-errors class="text-center" :errors="errorFor('toTime')" />
 
-        <h6 class="text-uppercase text-secondary font-weigh-bolder pt-3">
-            Ridicare & Returnare
-        </h6>
+        <template v-if="!searchOnly">
 
-        <transition name="fadeHeight">
-            <div class="booking_selector rounded p-2">
-                <div class="booking_icon_actions">
-                    <span class="icon_collapse"><i class="fa fa-map-pin"></i></span>
+            <h6 class="text-uppercase text-secondary font-weigh-bolder pt-3">
+                Ridicare & Returnare
+            </h6>
+
+            <transition name="fadeHeight">
+                <div class="booking_selector rounded p-2">
+                    <div class="booking_icon_actions">
+                        <span class="icon_collapse"><i class="fa fa-map-pin"></i></span>
+                    </div>
+                    <div>
+                        <label for="pickup">Ridicare la Data și Ora</label>
+                        <select name="pickup" class="form-control" v-model="pickup">
+                            <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
+                                {{ option.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="retour">Returnare la Data și Ora</label>
+                        <select name="retour" class="form-control" v-model="retour">
+                            <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
+                                {{ option.name }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <label for="pickup">Ridicare la Data și Ora</label>
-                    <select name="pickup" class="form-control" v-model="pickup">
-                        <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
-                            {{ option.name }}
-                        </option>
-                    </select>
-                </div>
-                <div>
-                    <label for="retour">Returnare la Data și Ora</label>
-                    <select name="retour" class="form-control" v-model="retour">
-                        <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
-                            {{ option.name }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-        </transition>
-
-        <div class="booking_details mt-2">
-            <div class="">
-                De la <span class="data_pickup">{{ from | dateformating }}</span> până
-                la
-                <span class="data_pickup">{{ to | dateformating }}</span>
-            </div>
-            <div class="booking_form_actions">
-                De la:
-                <span class="data_pickup">{{ pickupAndReturnText(pickup) }}</span>
-                la:
-                <span class="data_pickup">{{ pickupAndReturnText(retour) }}</span>
-            </div>
-        </div>
-
-        <div class="form-row mt-4">
-            <button @click="check" class="btn btn-secondary btn-block" :disabled="loading">
-                <span v-if="!loading">Check</span>
-                <span v-if="loading"><i class="fas fa-circle-notch fa-spin"></i> Checking...</span>
-            </button>
-        </div>
-
-        <h6 class="text-uppercase text-secondary font-weigh-bolder text-center mt-2">
-            <transition>
-                <span v-if="noStock" class="text-danger">[Not in stock!]</span>
             </transition>
-            <transition>
-                <span v-if="hasStock" class="text-success">[Available]</span>
-            </transition>
-        </h6>
+
+            <div class="booking_details mt-2">
+                <div class="">
+                    De la <span class="data_pickup">{{ from | dateformating }}</span> până
+                    la
+                    <span class="data_pickup">{{ to | dateformating }}</span>
+                </div>
+                <div class="booking_form_actions">
+                    De la:
+                    <span class="data_pickup">{{ pickupAndReturnText(pickup) }}</span>
+                    la:
+                    <span class="data_pickup">{{ pickupAndReturnText(retour) }}</span>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button @click="check" class="btn btn-secondary btn-block" :disabled="loading">
+                    <span v-if="!loading">Check</span>
+                    <span v-if="loading"><i class="fas fa-circle-notch fa-spin"></i> Checking...</span>
+                </button>
+            </div>
+
+            <h6 class="text-uppercase text-secondary font-weigh-bolder text-center mt-2">
+                <transition>
+                    <span v-if="noStock" class="text-danger">[Not in stock!]</span>
+                </transition>
+                <transition>
+                    <span v-if="hasStock" class="text-success">[Available]</span>
+                </transition>
+            </h6>
+        </template>
+        <template v-else>
+            <div class="search-button" :class="[{ 'active': showSearchButton }]">
+                <button @click="check" class="btn btn-secondary btn-block" :disabled="loading">
+                    <span v-if="!loading">Cauta...</span>
+                    <span v-if="loading"><i class="fas fa-circle-notch fa-spin"></i> Checking...</span>
+                </button>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -125,6 +137,10 @@ export default {
     mixins: [validationErrors],
     props: {
         bookableId: [String, Number],
+        searchOnly: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -182,6 +198,11 @@ export default {
             if (this.pickup) {
                 return this.pickupAndReturnPoints.find((item) => item.id == id).name;
             }
+        },
+        searchOrCheck () {
+            if (!this.searchOnly) {
+                this.check()
+            }
         }
     },
     computed: {
@@ -200,25 +221,28 @@ export default {
         from() {
             return this.fromDate + ' ' + this.fromTime;
         },
+        showSearchButton() {
+            return this.fromDate && this.fromTime && this.toDate && this.toTime;
+        },
     },
     watch: {
         fromDate() {
-            this.check();
+            this.searchOrCheck()
         },
         fromTime() {
-            this.check();
+            this.searchOrCheck()
         },
         toTime() {
-            this.check();
+            this.searchOrCheck()
         },
         toDate() {
-            this.check();
+            this.searchOrCheck()
         },
         pickup() {
-            this.check();
+            this.searchOrCheck()
         },
         retour() {
-            this.check();
+            this.searchOrCheck()
         },
     },
 };
