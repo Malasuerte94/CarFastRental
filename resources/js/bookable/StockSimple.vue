@@ -1,10 +1,13 @@
 <template>
     <div class="stock-simple" v-if="!loadingData">
-        <h6 class="text-uppercase text-secondary font-weigh-bolder pt-6">
+        <h6 v-if="searchOnly" class="title-search pt-6">
+            Când vrei să închiriezi?
+        </h6>
+        <h6 v-else class="font-weigh-bolder pt-6">
             Perioadă închiriere
         </h6>
         <transition name="fadeHeight">
-            <div class="booking_selector rounded p-2" :class="[{'search-only' : searchOnly}]">
+            <div class="booking_selector" :class="[{'search-only' : searchOnly}]">
                 <div v-if="!searchOnly" class="booking_icon_actions">
                     <span class="icon_collapse"><i class="fa fa-calendar-alt"></i></span>
                 </div>
@@ -106,9 +109,9 @@
         </template>
         <template v-else>
             <div class="search-button" :class="[{ 'active': showSearchButton }]">
-                <button @click="check" class="btn btn-secondary btn-block" :disabled="loading">
-                    <span v-if="!loading">Cauta...</span>
-                    <span v-if="loading"><i class="fas fa-circle-notch fa-spin"></i> Checking...</span>
+                <button @click="check" class="btn btn-secondary btn-block" :disabled="loading || !showSearchButton">
+                    <span v-if="!loading">Caută...</span>
+                    <span v-if="loading"><i class="fas fa-circle-notch fa-spin"></i> Verificăm...</span>
                 </button>
             </div>
         </template>
@@ -162,6 +165,11 @@ export default {
     },
     methods: {
         async check() {
+            if (this.searchOnly && this.showSearchButton) {
+                this.$router.push({ path: 'cars', query: { fromDate: this.fromDate, fromTime: this.fromTime, toDate: this.toDate, toTime: this.toTime }})
+                return;
+            }
+
             this.loading = true;
             this.errors = null;
 

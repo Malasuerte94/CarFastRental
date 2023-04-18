@@ -17,9 +17,7 @@ export default {
         }
     },
     mounted() {
-        window.onload = () => {
-            this.loading = false;
-        };
+        this.loading = false;
     },
 }
 </script>

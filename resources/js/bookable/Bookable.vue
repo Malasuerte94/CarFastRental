@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="product-page container">
         <div class="col-lg-12 p-0">
             <div class="row">
             <div class="col-md-8 pb-2">

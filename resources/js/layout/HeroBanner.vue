@@ -1,6 +1,6 @@
 <template>
     <Splide class="hero-banner" v-if="!loading"
-        :options="{ rewind: false, arrows: false, pagination: false, type: 'loop', padding: 10 }" aria-label="Hero Header">
+        :options="{ rewind: false, arrows: false, pagination: false, type: 'loop' }" aria-label="Hero Header">
         <SplideSlide v-for="product in products" :key="product.id">
             <div class="hero-container">
                 <img :src="product.image" class="card-img mb-2" />

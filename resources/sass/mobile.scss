@@ -2,6 +2,11 @@
     ::-webkit-scrollbar {
         -webkit-appearance: none;
     }
+
+    .page {
+        padding-bottom: 100px;
+    }
+
     .main-car {
         margin-top: 100px;
         border-radius: 10px;
@@ -40,10 +45,8 @@
         width: 100%;
         top: 0;
         z-index: -1;
-        border-bottom-right-radius: 24%;
-        border-bottom-left-radius: 141%;
         overflow: hidden;
-        background-image: linear-gradient(to right, #ff44f9, #6200ff);
+        background-image: $primary;
     }
     //navbar
 
@@ -85,17 +88,17 @@
                     &:has(> .router-link-exact-active) {
                         transition-duration: 500ms;
                         ::before {
-                                content: "";
-                                position: absolute;
-                                bottom: -10px;
-                                left: 0;
-                                right: 0;
-                                margin: auto;
-                                width: 50%;
-                                height: 5px;
-                                border-radius: 5px;
-                                background-color: #6f00ff;
-                                opacity: 1;
+                            content: "";
+                            position: absolute;
+                            bottom: -10px;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            width: 50%;
+                            height: 5px;
+                            border-radius: 5px;
+                            background-color: #6f00ff;
+                            opacity: 1;
                         }
                     }
                 }
@@ -148,16 +151,96 @@
             grid-template-columns: repeat(1, 1fr);
             grid-gap: 20px;
             .bookable-card {
-                padding: 1rem;
-                .card-body {
-                    padding: 0.5rem;
-                }
-                .card-img {
-                    height: 200px;
+                .card {
+                    border: unset;
+                    padding-top: 80px;
+                    margin-top: 40px;
+                    border-radius: 10px;
+                    box-shadow: 0px 20px 17px -20px,
+                        0px -15px 20px 0px #0000000f;
+                    .card-body {
+                        padding: 0;
+                        .car-details {
+                            .img-box {
+                                position: absolute;
+                                top: -55px;
+                                left: -20px;
+                                .card-img {
+                                    height: 140px;
+                                    width: auto;
+                                }
+                            }
+                            .car-title {
+                                font-size: 2rem;
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                margin: 20px;
+                                .car-name {
+                                    font-weight: bold;
+                                    font-size: 1.5rem;
+                                    margin-bottom: 0;
+                                }
+                                .car-year {
+                                    font-size: 1rem;
+                                    color: $gray-600;
+                                    text-align: right;
+                                }
+                            }
+                        }
+                        .car-features {
+                            display: flex;
+                            justify-content: space-around;
+                            border-top: 1px solid #e6e6e6;
+                            border-bottom: 1px solid #e6e6e6;
+                        }
+                        .car-cta {
+                            display: flex;
+                            justify-content: space-between;
+                            .car-price {
+                                font-size: 1.5rem;
+                                color: $accent;
+                                margin-left: 20px;
+                                margin-top: 20px;
+                                span {
+                                    color: grey;
+                                    font-size: 1rem;
+                                    margin-left: 5px;
+                                }
+                            }
+                            .car-button {
+                                width: 40%;
+                                text-align: center;
+                                margin-top: 20px;
+                                border-top-right-radius: 0;
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px;
+                                border-bottom-left-radius: 0px;
+                                background: $primary;
+                                padding: 10px;
+                                color: $white;
+                                font-size: 1rem;
+                            }
+                        }
+                    }
                 }
             }
         }
-
+        .filters {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            div {
+                width: 30%;
+                background-color: white;
+                padding: 5px;
+                border-radius: 3px;
+                margin-left: 10px;
+                box-shadow: 0px 20px 17px -20px,
+                    0px -15px 20px 0px rgba(0, 0, 0, 0.0588235294);
+                text-align: center;
+            }
+        }
     }
 
     //feature cards
@@ -199,21 +282,30 @@
 
     //stock simple
     .stock-simple {
+        .title-search {
+            font-size: 1.2rem;
+            text-align: left;
+            color: $secondary;
+            margin-left: 10px;
+        }
         .booking_selector {
+            border-radius: $radius;
             box-shadow: 0px 25px 15px -25px #000000;
-            &.search-only {
-                border: 1px solid #8c2491;
-            }
+            padding: $padding-box;
         }
         .search-button {
             position: relative;
-            transform: translateY(-30px);
+            transform: translateY(-50px);
             transition: all 0.5s;
             z-index: 0;
             margin-bottom: 10px;
+            button {
+                padding-top: 30px;
+                padding-bottom: 10px;
+                border-radius: 0px 0px $radius $radius;
+            }
             &.active {
-                transform: translateY(10px);
-                z-index: 1;
+                transform: translateY(-20px);
                 button {
                     box-shadow: 0px 11px 15px -10px #000000;
                 }
@@ -221,10 +313,37 @@
         }
     }
 
+    //feature icon title
+    .feature-icon-title {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        margin-bottom: 40px;
+        .feature-card {
+            border-radius: 7px;
+            box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171B;
+            padding: 5px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            i {
+                position: absolute;
+                right: 0;
+                font-size: 60px;
+                opacity: 0.3;
+                bottom: 0;
+            }
+        }
+        h3 {
+            font-size: 1rem;
+            margin-bottom: 0px;
+        }
+    }
 
     //search form
     .search-form {
-
     }
 
     //animations
@@ -251,8 +370,4 @@
             background-position: 0% 50%;
         }
     }
-
 }
-
-
-

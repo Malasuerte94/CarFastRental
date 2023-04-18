@@ -1,5 +1,11 @@
 <template>
-    <div class="bookables-page" v-if="!loading">
+    <div class="container bookables-page" v-if="!loading">
+        <div class="filters">
+            <div>SUV</div>
+            <div>Truck</div>
+            <div>Van</div>
+            <div>Car</div>
+        </div>
         <div class="bookables-grid" v-for="row in rows" :key="'row' + row">
             <div class="bookable-card" v-for="(bookable, column) in bookablesInRow(row)" :key="'row' + row + column">
                 <bookable-list-item v-bind="bookable"></bookable-list-item>
@@ -36,9 +42,15 @@ export default {
             return this.columns - this.bookablesInRow(row).length;
         }
     },
-    created(){
+    created() {
+        let url = "/api/bookables"
+
+        if (this.$route.query) {
+            url = "/api/bookables/search"
+        }
+
         axios
-        .get("/api/bookables")
+        .get(url, this.$route.query)
         .then(response => {
             this.bookables = response.data.data;
             this.loading = false;

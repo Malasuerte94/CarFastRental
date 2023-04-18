@@ -28,7 +28,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::get('bookables/search', [BookableController::class, 'search']);
 Route::apiResource('bookables', BookableController::class)->only(['index', 'show']);
+
 Route::get('bookables/{bookable}/stock', BookableStockController::class)
     ->name('bookables.stock.show');
 Route::get('bookables/{bookable}/reviews', BookableReviewController::class)->name('bookable.reviews.index');

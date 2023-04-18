@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <NavMobile :itemsInBasket="itemsInBasket" :isLoggedIn="isLoggedIn" v-if="$isMobile()" />
     <NavDesktop v-else />
     <router-view></router-view>
