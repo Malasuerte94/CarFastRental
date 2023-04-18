@@ -9,6 +9,7 @@ import Index from "./Index";
 import router from "./routes";
 import FatalError from "./shared/components/FatalError";
 import StarRating from "./shared/components/StarRating";
+import Loader from "./shared/components/Loader";
 import Success from "./shared/components/Success";
 import ValidationErrors from "./shared/components/ValidationErrors";
 import storeDefinition from "./store";
@@ -29,6 +30,7 @@ Vue.filter("fromNow", value => moment(value).fromNow());
 Vue.filter("dateformating", value => moment(value).format("DD-MM-YYYY"));
 
 Vue.component("star-rating", StarRating);
+Vue.component("loader", Loader);
 Vue.component("fatal-error", FatalError);
 Vue.component("success", Success);
 Vue.component("v-errors", ValidationErrors);

@@ -1,9 +1,6 @@
 <template>
-    <div class="bookables-page">
-        <div v-if="loading">
-            <h1>Data is loading ... </h1>
-        </div>
-        <div v-else class="bookables-grid" v-for="row in rows" :key="'row' + row">
+    <div class="bookables-page" v-if="!loading">
+        <div class="bookables-grid" v-for="row in rows" :key="'row' + row">
             <div class="bookable-card" v-for="(bookable, column) in bookablesInRow(row)" :key="'row' + row + column">
                 <bookable-list-item v-bind="bookable"></bookable-list-item>
             </div>
@@ -22,7 +19,7 @@ export default {
     data() {
         return {
             bookables: null,
-            loading: false,
+            loading: true,
             columns: 3,
         };
     },
@@ -40,8 +37,7 @@ export default {
         }
     },
     created(){
-        this.loading = true;
-        const request = axios
+        axios
         .get("/api/bookables")
         .then(response => {
             this.bookables = response.data.data;

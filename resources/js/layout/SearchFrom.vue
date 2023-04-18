@@ -1,8 +1,7 @@
 <template>
-    <div class="container search-form" v-if="!loading">
+    <div class="container search-form">
         <StockSimple :search-only="true" />
     </div>
-    <span v-else>Loading</span>
 </template>
 
 <script>
@@ -12,14 +11,5 @@ export default {
     components: {
         StockSimple,
     },
-    data() {
-        return {
-            loading: false,
-            products: null,
-        }
-    },
-    methods: {
-
-    }
 }
 </script>

@@ -1,18 +1,17 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url("https://fonts.googleapis.com/css?family=Oswald");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
+@import "~bootstrap/scss/bootstrap";
 
 // Font awesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
-@import '@splidejs/splide/dist/css/splide.min.css';
+@import "@splidejs/splide/dist/css/splide.min.css";
 
 @import "desktop";
 @import "mobile";
@@ -25,8 +24,7 @@
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active below version 2.1.8 */
-    {
+/* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
 }
 
@@ -38,8 +36,7 @@
 .v-enter,
 .v-leave-to
 
-/* .fade-leave-active below version 2.1.8 */
-    {
+/* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
 }
 
@@ -100,14 +97,12 @@
 }
 
 .arrow-down {
-
     transform: translateY(50%);
 
     i {
         transform: rotateZ(180deg);
     }
 }
-
 
 .icon_collapse {
     background-color: #ffffff;
@@ -129,7 +124,6 @@
 }
 
 .btn_parent_collapse_adjectives {
-
     position: relative;
     width: 100%;
     display: flex;
@@ -162,7 +156,6 @@
     }
 }
 
-
 .fadeHeight-enter-active,
 .fadeHeight-leave-active {
     transition: all 0.5s;
@@ -194,4 +187,33 @@
     .booking_details {
         text-align: center;
     }
+}
+
+
+//loader
+.loader {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    background-color: #ff00ff3d;
+    .spinner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50vw;
+        margin: auto;
+    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

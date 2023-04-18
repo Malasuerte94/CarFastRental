@@ -9,7 +9,7 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'bookables' }">
+                    <router-link class="nav-link" :to="{ name: 'products' }">
                     <img class="nav-icon"
                                 src="https://cdns.iconmonstr.com/wp-content/releases/preview/2016/240/iconmonstr-car-2.png" />
                     </router-link>

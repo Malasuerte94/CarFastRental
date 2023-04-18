@@ -95,17 +95,17 @@ class BookingPriceService extends BookingService
         $multiplier = $priceRule->multiplier;
 
         if($type === 'fixed') {
-            $pricemodifier = $this->customFixedCalculator($weekendDays, $value, $operation, $multiplier);
+            $priceModifier = $this->customFixedCalculator($weekendDays, $value, $operation, $multiplier);
         } else {
-            $pricemodifier = $this->customPercentageCalculator($weekendDays, $value, $operation, $multiplier);
+            $priceModifier = $this->customPercentageCalculator($weekendDays, $value, $operation, $multiplier);
         }
 
 
-        return $pricemodifier;
+        return $priceModifier;
     }
 
-    public function customPercentageCalculator($days, $value, $operation, $multipler) {
-        if($multipler == 'once') {
+    public function customPercentageCalculator($days, $value, $operation, $multiplier) {
+        if($multiplier == 'once') {
             if($operation === 'add') {
                 $this->priceTotal += $this->priceTotal * ($value / 100);
             } elseif($operation === 'subtract') {
@@ -113,7 +113,7 @@ class BookingPriceService extends BookingService
             }
             return $this->priceTotal * ($value / 100);
         }
-        if($multipler == 'per_day') {
+        if($multiplier == 'per_day') {
             if($operation === 'add') {
                 $this->priceTotal += $this->priceTotal * ($value / 100) * $days;
             } elseif($operation === 'subtract') {
@@ -124,8 +124,8 @@ class BookingPriceService extends BookingService
         return 0;
     }
 
-    public function customFixedCalculator($days, $value, $operation, $multipler) {
-        if ($multipler == 'once') {
+    public function customFixedCalculator($days, $value, $operation, $multiplier) {
+        if ($multiplier == 'once') {
             if ($operation === 'add') {
                 $this->priceTotal += $value;
             } elseif ($operation === 'subtract') {
@@ -134,7 +134,7 @@ class BookingPriceService extends BookingService
             return $value;
         }
 
-        if ($multipler == 'per_day') {
+        if ($multiplier == 'per_day') {
             if ($operation === 'add') {
                 $this->priceTotal += $value * $days;
             } elseif ($operation === 'subtract') {

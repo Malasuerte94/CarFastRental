@@ -11,7 +11,6 @@
             </div>
         </SplideSlide>
     </Splide>
-    <span v-else>Loading</span>
 </template>
 
 <script>
@@ -26,13 +25,15 @@ export default {
             products: null,
         }
     },
-    async created() {
+    async mounted() {
         let productsExtracted = await SettingsService.getHeroProducts();
         this.products = productsExtracted.data.data;
         this.loading = false;
     },
-    methods: {
-
+    watch: {
+        products: function (newVal, oldVal) {
+            this.$emit('loaded');
+        }
     }
 }
 </script>

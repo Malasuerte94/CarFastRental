@@ -1,5 +1,5 @@
 <template>
-    <div class="feature-cards" v-if="!loading">
+    <div class="feature-cards">
         <div class="feature-card">
             <div class="feature-card-header">
                 <i class="fas fa-utensils"></i>
@@ -37,21 +37,11 @@
             </div>
         </div>
     </div>
-    <span v-else>Loading</span>
 </template>
 
 <script>
 
 export default {
     name: 'FeatureCards',
-    data() {
-        return {
-            loading: false,
-            products: null,
-        }
-    },
-    methods: {
-
-    }
 }
 </script>
