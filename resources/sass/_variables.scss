@@ -2,8 +2,9 @@
 $body-bg: #F3F5F7;
 
 // Typography
-$font-family-sans-serif: 'Oswald',
-sans-serif;
+$font-family-base: 'Source Sans Pro', sans-serif;
+$font-family-sans-serif: 'Oswald', sans-serif;
+
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
@@ -12,10 +13,17 @@ $primary: #F4B755;
 $secondary: #16171B;
 $accent: #F4B755;
 $secconday_muted: #696969;
+
 $radius: 18px;
+$radius-small: 5px;
+
 $padding: 10px;
+$padding-small: 10px;
 $padding-box: 20px;
+
 $selectors-radius: 0.7rem;
+
+$box-shadow-complex: -1px 1px 4px 0px rgba(0, 0, 0, 0.1019607843), 0px 25px 15px -22px #16171b;
 
 
 $blue: #3490dc;

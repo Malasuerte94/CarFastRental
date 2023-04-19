@@ -3,6 +3,20 @@
         -webkit-appearance: none;
     }
 
+    h4 {
+        font-size: 1.2rem;
+        text-align: left;
+        color: $secondary;
+        margin-left: 10px;
+    }
+
+    .title-no-container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
     .page {
         padding-bottom: 100px;
     }
@@ -97,7 +111,7 @@
                             width: 50%;
                             height: 5px;
                             border-radius: 5px;
-                            background-color: #6f00ff;
+                            background-color: $primary;
                             opacity: 1;
                         }
                     }
@@ -292,6 +306,15 @@
             border-radius: $radius;
             box-shadow: 0px 25px 15px -25px #000000;
             padding: $padding-box;
+            input {
+                box-shadow: unset;
+                border: 1px #c5c5c5 solid;
+                color: $secondary;
+                font-family: $font-family-sans-serif;
+            }
+            .mx-icon-calendar {
+                color: $secondary;
+            }
         }
         .search-button {
             position: relative;
@@ -320,10 +343,9 @@
         grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 10px;
         grid-row-gap: 10px;
-        margin-bottom: 40px;
         .feature-card {
             border-radius: 7px;
-            box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171B;
+            box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171b;
             padding: 5px;
             background: white;
             position: relative;
@@ -331,14 +353,111 @@
             i {
                 position: absolute;
                 right: 0;
-                font-size: 60px;
+                font-size: 3rem;
+                color: $primary;
                 opacity: 0.3;
                 bottom: 0;
             }
         }
         h3 {
-            font-size: 1rem;
+            font-size: 0.8rem;
             margin-bottom: 0px;
+        }
+    }
+
+    //calendar
+    .mx-datepicker-popup {
+        width: 90%;
+        padding: 10px;
+        margin: auto;
+        right: 0;
+        left: 0;
+        border-radius: $radius;
+        box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171b;
+        .mx-calendar {
+            width: 100%;
+            padding: 0;
+            .mx-calendar-content {
+                .cell {
+                    &.active {
+                        background: $primary;
+                        color: white;
+                        border-radius: $radius-small;
+                        font-weight: bold;
+                        &:hover {
+                            background: $primary;
+                            color: white;
+                        }
+                    }
+                    &.today {
+                        color: $primary;
+                    }
+                }
+
+                thead {
+                    font-family: $font-family-sans-serif;
+                    font-weight: bold;
+                }
+            }
+        }
+        .mx-time {
+            width: 100%;
+            .mx-time-option {
+                &.active {
+                    color: $primary;
+                }
+            }
+        }
+    }
+
+    //faq box
+    .faq-box {
+        section {
+            padding: 0 !important;
+            .faq-wrapper {
+                .faq__nav {
+                    background: $white;
+                    border: unset;
+                    border-radius: $radius;
+                    box-shadow: $box-shadow-complex;
+                    .faq__nav-item {
+                        padding: calc($padding-small / 4);
+                        height: auto;
+                        border: unset;
+                        margin: $radius-small;
+                        border-radius: $radius;
+                        font-weight: bold;
+                        color: $secondary;
+                        text-transform: uppercase;
+                        &.faq__nav-item_active {
+                            background: $primary;
+                        }
+                    }
+                }
+                .accordion {
+                    border: unset;
+                    padding: 0 $padding-box;
+                    background-color: $white;
+                    box-shadow: $box-shadow-complex;
+                    border-radius: $radius;
+                    .accordion__item {
+                        border-bottom: 1px solid #e2e2e2;
+                        .accordion__title {
+                            font-weight: bold;
+                            padding: $padding-box;
+                            color: $secondary;
+                            &.accordion__title_active {
+                                color: $primary;
+                                .accordion__toggle-button_active {
+                                    &::after,&::before {
+                                        background: $primary;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

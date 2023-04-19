@@ -1,8 +1,8 @@
 <template>
     <div class="stock-simple" v-if="!loadingData">
-        <h6 v-if="searchOnly" class="title-search pt-6">
+        <h4 v-if="searchOnly" class="pt-6">
             Când vrei să închiriezi?
-        </h6>
+        </h4>
         <h6 v-else class="font-weigh-bolder pt-6">
             Perioadă închiriere
         </h6>
@@ -16,13 +16,13 @@
                     <date-picker placeholder="..." name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model="fromDate"
                         type="date" valueType="format" time-title-format="DD-MM-YYYY" @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('fromDate') }]" :disabled-date="notBeforeToday"></date-picker>
-                    <date-picker placeholder="..." name="fromTime" class="custom-date-time-picker" v-model="fromTime" type="time"
-                        valueType="format" :time-picker-options="{
+                    <date-picker :show-second="false" placeholder="..." name="fromTime" class="custom-date-time-picker" v-model="fromTime" type="time"
+                        valueType="HH:mm:ss" :time-picker-options="{
                             start: '00:00',
                             step: '00:30',
                             end: '23:30',
                             format: 'HH:mm',
-                        }" time-title-format="HH:mm" @keyup.enter="check" :class="[{ 'is-invalid': errorFor('fromTime') }]"
+                        }" format="HH:mm" time-title-format="HH:mm" @keyup.enter="check" :class="[{ 'is-invalid': errorFor('fromTime') }]"
                         :disabled-date="notBeforeToday"></date-picker>
                 </div>
                 <div>
@@ -31,13 +31,13 @@
                         valueType="format" time-title-format="DD-MM-YYYY" :disabled-date="notBeforeDayBooked"
                         holder="End Date" @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('toDate') }]"></date-picker>
-                    <date-picker placeholder="..." name="to" class="custom-date-time-picker" v-model="toTime" type="time" valueType="format"
+                    <date-picker valueType="HH:mm:ss" placeholder="..." name="to" class="custom-date-time-picker" v-model="toTime" type="time"
                         :time-picker-options="{
                             start: '00:00',
                             step: '00:30',
                             end: '23:30',
                             format: 'HH:mm',
-                        }" time-title-format="HH:mm" :disabled-date="notBeforeDayBooked" holder="End Date"
+                        }" format="HH:mm" time-title-format="HH:mm" :disabled-date="notBeforeDayBooked" holder="End Date"
                         @keyup.enter="check" :class="[{ 'is-invalid': errorFor('toTime') }]"></date-picker>
                 </div>
             </div>
@@ -165,13 +165,6 @@ export default {
     },
     methods: {
         async check() {
-            if (this.searchOnly && this.showSearchButton) {
-                this.$router.push({ path: 'cars', query: { fromDate: this.fromDate, fromTime: this.fromTime, toDate: this.toDate, toTime: this.toTime }})
-                return;
-            }
-
-            this.loading = true;
-            this.errors = null;
 
             this.$store.dispatch("setLastSearch", {
                 fromDate: this.fromDate,
@@ -181,6 +174,14 @@ export default {
                 pickup: this.pickup,
                 retour: this.retour,
             });
+
+            if (this.searchOnly && this.showSearchButton) {
+                this.$router.push({ path: 'cars', query: { fromDate: this.fromDate, fromTime: this.fromTime, toDate: this.toDate, toTime: this.toTime }})
+                return;
+            }
+
+            this.loading = true;
+            this.errors = null;
 
             try {
                 let checker = await BookableService.getStockStatus(this.bookableId, this.fromDate, this.fromTime, this.toDate, this.toTime);

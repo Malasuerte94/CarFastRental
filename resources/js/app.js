@@ -14,8 +14,8 @@ import Success from "./shared/components/Success";
 import ValidationErrors from "./shared/components/ValidationErrors";
 import storeDefinition from "./store";
 import DatePicker from 'vue2-datepicker';
-import 'vue2-datepicker/index.css';
 import VueMobileDetection from "vue-mobile-detection";
+import Spacer from "./shared/components/Spacer";
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -34,6 +34,7 @@ Vue.component("loader", Loader);
 Vue.component("fatal-error", FatalError);
 Vue.component("success", Success);
 Vue.component("v-errors", ValidationErrors);
+Vue.component("Spacer", Spacer);
 
 const store = new Vuex.Store(storeDefinition);
 

@@ -1,6 +1,5 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Oswald");
-
+@import url("https://fonts.googleapis.com/css?family=Oswald&family=Source+Sans+Pro");
 // Variables
 @import "variables";
 
@@ -12,9 +11,19 @@
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "@splidejs/splide/dist/css/splide.min.css";
+@import 'vue2-datepicker/index.css';
 
 @import "desktop";
 @import "mobile";
+
+
+h2, h6, h4 {
+    font-family: $font-family-sans-serif;
+}
+
+.spacer {
+    height: 40px;
+}
 
 .fade-enter-active,
 .fade-leave-active {
@@ -50,7 +59,6 @@
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 0.5rem;
     z-index: 1;
-    margin-top: 1rem;
     background-color: $white;
     align-items: center;
     box-shadow: #00000052 0 0 10px 0px;
