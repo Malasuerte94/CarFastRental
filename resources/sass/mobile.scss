@@ -339,10 +339,10 @@
             background: white;
             position: relative;
             overflow: hidden;
-            i {
+            img {
+                max-height: 120%;
                 position: absolute;
-                right: 0;
-                font-size: 3rem;
+                right: -10px;
                 color: $primary;
                 opacity: 0.3;
                 bottom: 0;

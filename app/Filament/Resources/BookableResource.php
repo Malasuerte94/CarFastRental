@@ -35,7 +35,6 @@ class BookableResource extends Resource
                 RichEditor::make('description')
                     ->required()
                     ->maxLength(65535)->columnSpanFull(),
-                //TextInput::make('main_image'),
                 FileUpload::make('main_image')
                 ->preserveFilenames()
                 ->image()
