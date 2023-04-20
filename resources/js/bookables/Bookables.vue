@@ -1,11 +1,6 @@
 <template>
     <div class="container bookables-page" v-if="!loading">
-        <div class="filters">
-            <div>SUV</div>
-            <div>Truck</div>
-            <div>Van</div>
-            <div>Car</div>
-        </div>
+        <Filters />
         <div class="bookables-grid" v-for="row in rows" :key="'row' + row">
             <div class="bookable-card" v-for="(bookable, column) in bookablesInRow(row)" :key="'row' + row + column">
                 <bookable-list-item v-bind="bookable"></bookable-list-item>
@@ -17,10 +12,12 @@
 
 <script>
 import BookableListItem  from './BookableListItem'
+import Filters from './Filters'
 
 export default {
     components: {
-        BookableListItem
+        BookableListItem,
+        Filters,
     },
     data() {
         return {

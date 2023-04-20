@@ -19,7 +19,7 @@
                 <div> X 90cp </div>
             </div>
             <div class="car-cta">
-                <div class="car-price">50 lei<span>/zi</span></div>
+                <div class="car-price">{{ price }} lei<span>/zi</span></div>
                 <div class="car-button">Detalii</div>
             </div>
         </div>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    props: { title: String, description: String, id: Number, main_image: String },
+    props: { title: String, description: String, id: Number, main_image: String, price: Number },
 };
 </script>
 

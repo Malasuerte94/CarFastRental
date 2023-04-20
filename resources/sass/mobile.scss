@@ -191,6 +191,7 @@
                                 right: 0;
                                 margin: 20px;
                                 .car-name {
+                                    font-family: $font-family-sans-serif;
                                     font-weight: bold;
                                     font-size: 1.5rem;
                                     margin-bottom: 0;
@@ -212,6 +213,7 @@
                             display: flex;
                             justify-content: space-between;
                             .car-price {
+                                font-family: $font-family-sans-serif;
                                 font-size: 1.5rem;
                                 color: $accent;
                                 margin-left: 20px;
@@ -223,6 +225,8 @@
                                 }
                             }
                             .car-button {
+                                font-weight: bold;
+                                text-transform: uppercase;
                                 width: 40%;
                                 text-align: center;
                                 margin-top: 20px;
@@ -238,21 +242,6 @@
                         }
                     }
                 }
-            }
-        }
-        .filters {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            div {
-                width: 30%;
-                background-color: white;
-                padding: 5px;
-                border-radius: 3px;
-                margin-left: 10px;
-                box-shadow: 0px 20px 17px -20px,
-                    0px -15px 20px 0px rgba(0, 0, 0, 0.0588235294);
-                text-align: center;
             }
         }
     }
@@ -459,6 +448,45 @@
                 }
             }
         }
+    }
+
+    //cta phone
+    .cta-phone {
+        background-color: $primary;
+        padding: $padding-box $padding;
+        .cta-phone-box {
+            .cta-phone-title {
+                text-align: center;
+                margin-bottom: $margin;
+            }
+            .cta-phone-buttons {
+                display: flex;
+                justify-content: space-evenly;
+                .cta-phone-element {
+                    background-color: $white;
+                    display: flex;
+                    padding: $padding-extra-small $padding-box;
+                    border-radius: $radius;
+                    text-align: center;
+                    font-weight: bold;
+                    color: $secondary;
+                    align-items: center;
+                    box-shadow: $box-shadow;
+                    i {
+                        margin-right: 5px;
+                        line-height: inherit;
+                    }
+                }
+            }
+        }
+    }
+
+    //filters-box
+    .filters-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 
     //search form

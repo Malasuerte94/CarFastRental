@@ -17,36 +17,26 @@ export default {
     return {
       myItems: [
           {
-            title: 'How many time zones are there in all?',
-            value: 'Given a 24-hour day and 360 degrees of longitude around the Earth',
-            category: 'Despre Mașini'
+            title: 'Care este vârstă minima pentru a putea închiria un autoturism?',
+            value: 'Trebuie sa aveti cel putin 21 de ani pentru a inchiria un autoturism si sa aveti permisul de conducere de cel putin un an.',
+            category: 'Generale'
           },
           {
-            title: 'How long is a day and year on Venus?',
-            value: 'Venus takes 224.7 Earth days to complete one orbit around the Sun.',
-            category: 'Despre Mașini'
+            title: 'Se poate adăuga un șofer adițional serviciului de închiriere?',
+            value: 'Autoturismul inchiriat este asigurat doar pentru persoana care este titulara contractului. Daca alta persoana intentioneaza sa conduca, acea persoana trebuie mentionata in contractul de inchiriere la momentul ridicării autoturismului.',
+            category: 'Generale'
           },
           {
-            title: 'What animal smells like popcorn?',
-            value: 'Binturongs smell like popcorn.',
-            category: 'Despre Cont'
+            title: 'Exista o limită de kilometri?',
+            value: 'NafiRent a Car nu impune o limita de kilometri, beneficiați gratuit de acest serviciu.',
+            category: 'Generale'
 
           },
           {
-            title: 'How many time zones are there in all?',
-            value: 'Given a 24-hour day and 360 degrees of longitude around the Earth',
-            category: 'Despre Mașini'
+            title: 'Ce documente sunt necesare pentru a putea închiria un autoturism?',
+            value: 'Aveți nevoie de un act de identitate sau pașaport si de permisul de conducere.',
+            category: 'Generale'
           },
-          {
-            title: 'How long is a day and year on Venus?',
-            value: 'Venus takes 224.7 Earth days to complete one orbit around the Sun.',
-            category: 'Despre Mașini'
-          },
-        {
-            title: 'What animal smells like popcorn?',
-            value: 'Binturongs smell like popcorn.',
-            category: 'Despre Cont'
-          }
         ]
     }
   }
