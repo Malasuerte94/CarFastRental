@@ -1,47 +1,34 @@
 <template>
-    <div class="container feature-icon-title">
-        <div class="feature-card">
+    <div v-if="!loading" class="container feature-icon-title">
+        <div class="feature-card" v-for="featureCard in featureCardIcons" :key="featureCard.id">
             <div class="feature-card-header">
-                <i class="fas fa-utensils"></i>
-                <h3 class="feature-card-title">Kilometri Fără Limită</h3>
-            </div>
-        </div>
-        <div class="feature-card">
-            <div class="feature-card-header">
-                <i class="fas fa-utensils"></i>
-                <h3 class="feature-card-title">Șofer Adițional Gratuit</h3>
-            </div>
-        </div>
-        <div class="feature-card">
-            <div class="feature-card-header">
-                <i class="fas fa-utensils"></i>
-                <h3 class="feature-card-title">Rovinietă Gratuită</h3>
-            </div>
-        </div>
-        <div class="feature-card">
-            <div class="feature-card-header">
-                <i class="fas fa-utensils"></i>
-                <h3 class="feature-card-title">Anulare Gratuită</h3>
-            </div>
-        </div>
-                <div class="feature-card">
-            <div class="feature-card-header">
-                <i class="fas fa-utensils"></i>
-                <h3 class="feature-card-title">Livrare Gratuită La Aeroport</h3>
-            </div>
-        </div>
-                <div class="feature-card">
-            <div class="feature-card-header">
-                <i class="fas fa-utensils"></i>
-                <h3 class="feature-card-title">Ridicare/Returnare Non-Stop</h3>
+                <img :src="featureCard.icon"/>
+                <h3 class="feature-card-title">{{ featureCard.title }}</h3>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import settingsService from '../services/settingsService';
 
 export default {
     name: 'FeatureIconTitle',
+    data() {
+        return {
+            loading: true,
+            featureCardIcons: null,
+        }
+    },
+    async mounted() {
+        let extracted = await settingsService.getFeatureCardIcons();
+        this.featureCardIcons = extracted.data.data;
+        this.loading = false;
+    },
+    watch: {
+        featureCardIcons: function (newVal, oldVal) {
+            this.$emit('loaded');
+        }
+    }
 }
 </script>

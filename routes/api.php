@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\HeroProductController;
 use App\Http\Controllers\Api\PickupAndReturnPointController;
 use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\FeatureCardIconController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,6 @@ Route::post('checkout', CheckoutController::class)->name('checkout');
 
 //hero
 Route::get('hero-products', HeroProductController::class)->name('hero-product.show');
+
+//feature card icon
+Route::get('feature-card-icons', [FeatureCardIconController::class, 'index'])->name('feature-card-icons.index');
