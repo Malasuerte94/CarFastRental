@@ -14,7 +14,8 @@ export default {
             items: []
         },
         isLoggedIn: false,
-        user: {}
+        user: {},
+        settings: {}
     },
     mutations: {
         setLastSearch(state, payload) {
@@ -34,9 +35,16 @@ export default {
         },
         setLoggedIn(state, payload) {
             state.isLoggedIn = payload;
+        },
+        setSettings(state, payload) {
+            state.settings = payload;
         }
     },
     actions: {
+        setSettings(context, payload) {
+            context.commit('setSettings', payload);
+            localStorage.setItem('settings', JSON.stringify(payload));
+        },
         setLastSearch(context, payload) {
             context.commit('setLastSearch', payload);
             localStorage.setItem('lastSearch', JSON.stringify(payload));
@@ -46,12 +54,14 @@ export default {
             if (lastSearch) {
                 context.commit('setLastSearch', JSON.parse(lastSearch));
             }
-
             const basket = localStorage.getItem('basket');
             if (basket) {
                 context.commit('setBasket', JSON.parse(basket));
             }
-
+            const settings = localStorage.getItem('settings');
+            if (settings) {
+                context.commit('setSettings', JSON.parse(settings));
+            }
             context.commit("setLoggedIn", isLoggedIn());
         },
         addToBasket({ commit, state }, payload) {

@@ -7,6 +7,12 @@ class SettingsService {
     async getFeatureCardIcons() {
         return ApiService.withoutAuth().get("/feature-card-icons");
     }
+    async getFaqs() {
+        return ApiService.withoutAuth().get("/faqs");
+    }
+    async getSettings() {
+        return ApiService.withoutAuth().get("/settings");
+    }
 }
 
 export default new SettingsService();

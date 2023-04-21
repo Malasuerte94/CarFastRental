@@ -3,14 +3,16 @@
         <loader v-if="loading" />
         <HeroBanner />
         <div class="title-no-container">
-            <h4>Rezervă acum și beneficiezi de</h4>
+            <h4>
+                {{ settings.settings.feature_icons_title.value }}
+            </h4>
         </div>
         <FeatureIconTitle />
         <Spacer/>
         <SearchFrom />
         <div class="title-no-container">
             <h4>
-                Întrebări frecvente
+                {{ settings.settings.home_faq_title.value }}
             </h4>
         </div>
         <Faq />
@@ -35,6 +37,7 @@ export default {
     data() {
         return {
             loading: true,
+            settings: this.$store.state.settings,
         };
     },
     mounted() {
