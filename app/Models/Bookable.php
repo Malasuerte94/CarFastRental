@@ -5,6 +5,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Bookable extends Model
 {
@@ -14,19 +16,31 @@ class Bookable extends Model
         'id',
     ];
 
-    public function bookings()
+    public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
     }
 
-    public function reviews()
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
 
-    public function bookableAdjective()
+    public function bookableAdjective(): HasMany
     {
         return $this->hasMany(BookableAdjective::class);
+    }
+
+    public function bookableFeatures(): HasMany
+    {
+        return $this->hasMany(BookableFeature::class);
+    }
+
+    public function bookableFeaturesDisplayed()
+    {
+        return $this->hasMany(BookableFeature::class)->whereHas('feature', function ($query) {
+            $query->where('display_as_feature', true);
+        });
     }
 
     public function stockFor($from, $to): bool
@@ -39,12 +53,12 @@ class Bookable extends Model
         return $this->hasMany(PriceRule::class)->orWhere('global', true);
     }
 
-    public function seasons()
+    public function seasons(): HasMany
     {
         return $this->hasMany(Season::class);
     }
 
-    public function heroProduct()
+    public function heroProduct(): HasOne
     {
         return $this->hasOne(HeroProduct::class);
     }

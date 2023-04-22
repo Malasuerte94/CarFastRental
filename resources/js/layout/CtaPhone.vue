@@ -1,18 +1,18 @@
 <template>
     <div class="cta-phone">
         <div class="cta-phone-box">
-            <h4 class="cta-phone-title">Ne puteți contacta telefonic la</h4>
+            <h4 class="cta-phone-title">{{ settings.settings.cta_phone_icon.value }}</h4>
             <div class="cta-phone-buttons">
                 <div class="cta-phone-element">
-                    <a href="tel:0747729446">
+                    <a :href="'tel:'+settings.settings.cta_phone_number.value">
                         <i class="fas fa-phone-alt"></i>
-                        <span>0747729446</span>
+                        <span>{{ settings.settings.cta_phone_number.value }}</span>
                     </a>
                 </div>
                 <div class="cta-phone-element">
-                    <a href="tel:0756245243">
+                    <a :href="'tel:'+settings.settings.cta_phone_number_2.value">
                         <i class="fas fa-phone-alt"></i>
-                        <span>0756245243</span>
+                        <span>{{ settings.settings.cta_phone_number_2.value }}</span>
                     </a>
                 </div>
             </div>
@@ -26,6 +26,7 @@ export default {
     name: 'CtaPhone',
     data() {
         return {
+            settings: this.$store.state.settings,
             contactData: [
                 {
                     icon: '',

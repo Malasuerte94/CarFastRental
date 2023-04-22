@@ -19,7 +19,9 @@ class HeroProductResource extends JsonResource
             'id'    => $this->id,
             'title' => $this->bookable->title,
             'price' => $this->bookable->price,
+            'year'  => $this->bookable->year,
             'image' => Storage::url($this->bookable->main_image),
+            'features' => BookableFeatureCollection::collection($this->bookable->bookableFeaturesDisplayed),
         ];
     }
 }

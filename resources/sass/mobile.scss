@@ -125,7 +125,25 @@
         .hero-container {
             height: 30vh;
             position: relative;
-            img {
+            .features {
+                top: 10%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                grid-column-gap: 15px;
+                position: absolute;
+                left: 10%;
+                transform: rotate3d(10, 30, 0, 45deg);
+                .car-feature-hero {
+                    .car-feature-icon-hero {
+                        height: 30px;
+                        width: auto;
+                    }
+                    .car-feature-value-hero {
+                    }
+                }
+            }
+            .card-img {
                 animation: float 6s ease-in-out infinite;
             }
             .hero-title {
@@ -208,6 +226,21 @@
                             justify-content: space-around;
                             border-top: 1px solid #e6e6e6;
                             border-bottom: 1px solid #e6e6e6;
+                            .car-feature {
+                                display: flex;
+                                align-items: center;
+                                .car-feature-icon {
+                                    max-height: 30px;
+                                    padding: 2px;
+                                    height: 30px;
+                                    width: auto;
+                                }
+                                .car-feature-value {
+                                    font-size: 1rem;
+                                    margin-left: 5px;
+                                    font-weight: bold;
+                                }
+                            }
                         }
                         .car-cta {
                             display: flex;
@@ -438,7 +471,8 @@
                             &.accordion__title_active {
                                 color: $primary;
                                 .accordion__toggle-button_active {
-                                    &::after,&::before {
+                                    &::after,
+                                    &::before {
                                         background: $primary;
                                     }
                                 }

@@ -43,7 +43,7 @@ class CreateSettingsTable extends Migration
                 'name'  => 'Număr de telefon 1 - Secțiune "Apel telefonic"',
                 'value' => '0747729446'
             ],
-            ['key' => 'cta_phone_number',
+            ['key' => 'cta_phone_number_2',
                 'name'  => 'Număr de telefon 2 - Secțiune "Apel telefonic"',
                 'value' => '0756245243'
             ]

@@ -8,15 +8,19 @@
                 <div class="car-title">
                     <router-link :to="{ name: 'bookable', params: { id } }">
                         <h5 class="car-name">{{ title }}</h5>
-                        <div class="car-year">2018</div>
+                        <div class="car-year">{{ year }}</div>
                     </router-link>
                 </div>
             </div>
             <div class="car-features">
-                <div> X automata </div>
-                <div> X benzina </div>
-                <div> X 5 locuri </div>
-                <div> X 90cp </div>
+                <div class="car-feature" v-for="(feature, key) in features" :key="key">
+                        <img
+                            class="car-feature-icon"
+                            :src="feature.feature_icon"
+                            alt=""
+                        />
+                        <span class="car-feature-value">{{ feature.value }}</span>
+                </div>
             </div>
             <div class="car-cta">
                 <div class="car-price">{{ price }} lei<span>/zi</span></div>
@@ -29,7 +33,15 @@
 
 <script>
 export default {
-    props: { title: String, description: String, id: Number, main_image: String, price: Number },
+    props: {
+        title: String,
+        description: String,
+        year: String,
+        id: Number,
+        main_image: String,
+        price: Number,
+        features: Array,
+    },
 };
 </script>
 

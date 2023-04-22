@@ -1,7 +1,7 @@
 <template>
     <div class="stock-simple" v-if="!loadingData">
         <h4 v-if="searchOnly" class="pt-6">
-            Când vrei să închiriezi?
+            {{ settings.settings.home_search_title.value }}
         </h4>
         <h6 v-else class="font-weigh-bolder pt-6">
             Perioadă închiriere
@@ -153,6 +153,7 @@ export default {
             toDate: this.$store.state.lastSearch.toDate || null,
             pickup: this.$store.state.lastSearch.pickup || null,
             retour: this.$store.state.lastSearch.retour || null,
+            settings: this.$store.state.settings,
             loading: false,
             loadingData: true,
             status: null,
