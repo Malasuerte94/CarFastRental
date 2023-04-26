@@ -434,28 +434,7 @@
 
     //faq box
     .faq-box {
-        section {
-            padding: 0 !important;
-            .faq-wrapper {
-                .faq__nav {
-                    background: $white;
-                    border: unset;
-                    border-radius: $radius;
-                    box-shadow: $box-shadow-complex;
-                    .faq__nav-item {
-                        padding: calc($padding-small / 4);
-                        height: auto;
-                        border: unset;
-                        margin: $radius-small;
-                        border-radius: $radius;
-                        font-weight: bold;
-                        color: $secondary;
-                        text-transform: uppercase;
-                        &.faq__nav-item_active {
-                            background: $primary;
-                        }
-                    }
-                }
+
                 .accordion {
                     border: unset;
                     padding: 0 $padding-box;
@@ -463,25 +442,21 @@
                     box-shadow: $box-shadow-complex;
                     border-radius: $radius;
                     .accordion__item {
+                        display: flex;
                         border-bottom: 1px solid #e2e2e2;
                         .accordion__title {
                             font-weight: bold;
                             padding: $padding-box;
                             color: $secondary;
-                            &.accordion__title_active {
+                            &.active {
                                 color: $primary;
-                                .accordion__toggle-button_active {
-                                    &::after,
-                                    &::before {
-                                        background: $primary;
-                                    }
-                                }
                             }
                         }
                     }
-                }
-            }
-        }
+
+
+
+    }
     }
 
     //cta phone

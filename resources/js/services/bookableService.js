@@ -13,6 +13,12 @@ class BookableService {
     async getBookables(payload) {
         return ApiService.withoutAuth().get("/bookables", {payload});
     }
+    async getBookable(bookableId) {
+        return ApiService.withoutAuth().get(`/bookables/${bookableId}`);
+    }
+    async getBookableAdjectives(bookableId) {
+        return ApiService.withoutAuth().get(`/bookables/${bookableId}/adjectives`);
+    }
 }
 
 export default new BookableService();

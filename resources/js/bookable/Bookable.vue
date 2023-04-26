@@ -81,12 +81,11 @@ export default {
             collapseAdjectives: false,
         };
     },
-    created() {
+    async created() {
         this.loading = true;
-        axios.get(`/api/bookables/${this.$route.params.id}`).then((response) => {
-            this.bookable = response.data.data;
-            this.loading = false;
-        });
+        let bookableExtracted = await BookableService.getBookable(this.$route.params.id)
+        this.bookable = bookableExtracted.data.data
+        this.loading = false
     },
     computed: {
         ...mapState({

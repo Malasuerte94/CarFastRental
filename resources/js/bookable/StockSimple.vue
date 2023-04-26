@@ -13,10 +13,10 @@
                 </div>
                 <div>
                     <label for="fromDate">Ridicare la Data și Ora</label>
-                    <date-picker placeholder="..." name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model="fromDate"
+                    <date-picker placeholder="..." name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model:value="fromDate"
                         type="date" valueType="format" time-title-format="DD-MM-YYYY" @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('fromDate') }]" :disabled-date="notBeforeToday"></date-picker>
-                    <date-picker :show-second="false" placeholder="..." name="fromTime" class="custom-date-time-picker" v-model="fromTime" type="time"
+                    <date-picker :show-second="false" placeholder="..." name="fromTime" class="custom-date-time-picker" v-model:value="fromTime" type="time"
                         valueType="HH:mm:ss" :time-picker-options="{
                             start: '00:00',
                             step: '00:30',
@@ -27,11 +27,11 @@
                 </div>
                 <div>
                     <label for="to">Returnare la Data și Ora</label>
-                    <date-picker placeholder="..." name="to" class="custom-date-time-picker mb-2" v-model="toDate" type="date"
+                    <date-picker placeholder="..." name="to" class="custom-date-time-picker mb-2" v-model:value="toDate" type="date"
                         valueType="format" time-title-format="DD-MM-YYYY" :disabled-date="notBeforeDayBooked"
                         holder="End Date" @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('toDate') }]"></date-picker>
-                    <date-picker valueType="HH:mm:ss" placeholder="..." name="to" class="custom-date-time-picker" v-model="toTime" type="time"
+                    <date-picker valueType="HH:mm:ss" placeholder="..." name="to" class="custom-date-time-picker" v-model:value="toTime" type="time"
                         :time-picker-options="{
                             start: '00:00',
                             step: '00:30',

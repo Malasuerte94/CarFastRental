@@ -15,7 +15,7 @@
                 {{ settings.settings.home_faq_title.value }}
             </h4>
         </div>
-
+        <Faq />
         <Spacer/>
         <CtaPhone />
     </div>
@@ -27,10 +27,11 @@ import HeroBanner from "./HeroBanner";
 import SearchFrom from "./SearchFrom";
 import FeatureIconTitle from "./FeatureIconTitle";
 import CtaPhone from "./CtaPhone";
+import Faq from "./Faq";
 
 export default {
     name: "Homepage",
-    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, CtaPhone},
+    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, CtaPhone, Faq},
     data() {
         return {
             loading: false,
