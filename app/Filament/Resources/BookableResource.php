@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BookableResource\Pages;
 use App\Filament\Resources\BookableResource\RelationManagers\BookingsRelationManager;
 use App\Models\Bookable;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -13,6 +14,7 @@ use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -30,9 +32,6 @@ class BookableResource extends Resource
     public static function form(Form $form): Form
     {
 
-        //0x3c16c0292761162a41341d487e81374b9cbf077a
-
-
         return $form
             ->schema([
                 Tabs::make('Heading')
@@ -40,22 +39,33 @@ class BookableResource extends Resource
                         Tab::make('General')
                             ->icon('heroicon-o-bell')
                             ->schema([
-                                TextInput::make('title')
-                                    ->required()
-                                    ->maxLength(191)->columnSpanFull(),
-                                RichEditor::make('description')
-                                    ->required()
-                                    ->maxLength(65535)->columnSpanFull(),
-                                FileUpload::make('main_image')
+
+                                Fieldset::make('General Information')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->required()
+                                            ->maxLength(191)->columns(3),
+
+                                        TextInput::make('price')
+                                            ->required()->columns(3),
+
+                                        Toggle::make('is_restricted_by_one')->columns(3),
+
+                                    ])->columns(3),
+
+
+                                            FileUpload::make('main_image')
                                     ->preserveFilenames()
                                     ->image()
                                     ->imagePreviewHeight('250')
                                     ->loadingIndicatorPosition('left')
                                     ->uploadButtonPosition('left')
                                     ->uploadProgressIndicatorPosition('left')
-                                    ->directory('uploads/product-images')->columns(2),
-                                TextInput::make('price')
-                                    ->required(),
+                                    ->directory('uploads/product-images'),
+                                RichEditor::make('description')
+                                    ->required()
+                                    ->maxLength(65535)->columnSpanFull(),
+
                                 TextInput::make('year')
                                     ->required(),
                             ]),

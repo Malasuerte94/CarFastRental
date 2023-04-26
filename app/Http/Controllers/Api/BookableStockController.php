@@ -30,8 +30,13 @@ class BookableStockController extends Controller
 
         $bookable = Bookable::findOrFail($id);
 
-        return $bookable->stockFor($from, $to)
+        if ($bookable->is_restricted_by_one) {
+            return $bookable->stockFor($from, $to)
             ? response()->json([])
             : response()->json([], 404);
+        }
+
+        return response()->json([]);
+
     }
 }

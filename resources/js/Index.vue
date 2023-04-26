@@ -1,15 +1,23 @@
 <template>
     <div class="page">
-        <NavMobile :itemsInBasket="itemsInBasket" :isLoggedIn="isLoggedIn" v-if="$isMobile()" />
+        <NavMobile
+            :itemsInBasket="itemsInBasket"
+            :isLoggedIn="isLoggedIn"
+            v-if="$isMobile()"
+        />
         <NavDesktop v-else />
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+            <transition name="slide" mode="out-in">
+                <component :is="Component" />
+            </transition>
+        </router-view>
     </div>
 </template>
 
 <script>
-import NavDesktop from './desktop/layout/navigation/NavDesktop.vue';
-import NavMobile from './mobile/layout/navigation/NavMobile.vue';
-import settingsService from './services/settingsService'
+import NavDesktop from "./desktop/layout/navigation/NavDesktop.vue";
+import NavMobile from "./mobile/layout/navigation/NavMobile.vue";
+import settingsService from "./services/settingsService";
 import { mapState, mapGetters } from "vuex";
 
 export default {

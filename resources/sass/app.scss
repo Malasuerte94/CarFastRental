@@ -216,6 +216,9 @@ h2, h6, h4 {
     }
 }
 
+
+//fade - animation router
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -224,4 +227,30 @@ h2, h6, h4 {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+//slide - animation router
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.75s ease-out;
+}
+
+.slide-enter-to {
+  position: absolute;
+  right: 0;
+}
+
+.slide-enter-from {
+  position: absolute;
+  right: -100%;
+}
+
+.slide-leave-to {
+  position: absolute;
+  left: -100%;
+}
+
+.slide-leave-from {
+  position: absolute;
+  left: 0;
 }

@@ -24,7 +24,7 @@
             </div>
             <div class="car-cta">
                 <div class="car-price">{{ price }} lei<span>/zi</span></div>
-                <div class="car-button">Detalii</div>
+                <div @click="$router.push({name:'bookable',params:{id}})" class="car-button">Detalii</div>
             </div>
         </div>
     </div>
