@@ -1,5 +1,5 @@
 <template>
-    <div class="stock-simple" v-if="!loadingData">
+    <div class="stock-simple">
         <h4 v-if="searchOnly" class="pt-6">
             {{ settings.settings.home_search_title.value }}
         </h4>
@@ -145,6 +145,13 @@ export default {
             default: false,
         },
     },
+    async setup(props) {
+        const { data } = await BookableService.getPickupAndReturnOptions();
+        const pickupAndReturnPoints = data.data;
+        return {
+            pickupAndReturnPoints,
+        };
+    },
     data() {
         return {
             fromDate: this.$store.state.lastSearch.fromDate || null,
@@ -159,10 +166,6 @@ export default {
             status: null,
             pickupAndReturnPoints: null,
         };
-    },
-    created() {
-        this.loadingData = true;
-        BookableService.getPickupAndReturnOptions().then((response) => (this.pickupAndReturnPoints = response.data.data)).then(() => (this.loadingData = false));
     },
     methods: {
         async check() {

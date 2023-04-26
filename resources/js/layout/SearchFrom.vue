@@ -1,15 +1,22 @@
 <template>
-    <div class="container search-form">
-        <StockSimple :search-only="true" />
-    </div>
+    <Suspense>
+        <div class="container search-form">
+            <StockSimple :search-only="true" />
+        </div>
+        <template #fallback>
+            <Fallback :height="240" />
+        </template>
+    </Suspense>
 </template>
 
 <script>
-import StockSimple from '../bookable/StockSimple.vue';
+import Fallback from "./Fallback/Fallback.vue";
+import StockSimple from "../bookable/StockSimple.vue";
 export default {
-    name: 'SearchFrom',
+    name: "SearchFrom",
     components: {
         StockSimple,
+        Fallback,
     },
-}
+};
 </script>

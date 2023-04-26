@@ -18,6 +18,11 @@
 @import "mobile";
 
 
+[v-cloak] > * {
+    background-color: red;
+    opacity: 0.5;
+}
+
 h2, h6, h4 {
     font-family: $font-family-sans-serif;
 }

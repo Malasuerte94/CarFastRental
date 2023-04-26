@@ -1,5 +1,5 @@
 <template>
-    <Splide class="hero-banner" v-if="!loading && products"
+    <Splide class="hero-banner" v-if="products"
         :options="{ rewind: false, arrows: false, pagination: false, type: 'loop' }" aria-label="Hero Header">
         <SplideSlide v-for="product in products" :key="product.id">
             <div class="hero-container">
@@ -30,21 +30,9 @@ import SettingsService from "./../services/settingsService";
 export default {
     name: 'HeroBanner',
     components: { Splide, SplideSlide },
-    data() {
-        return {
-            loading: true,
-            products: null,
-        }
-    },
-    async created() {
-        let productsExtracted = await SettingsService.getHeroProducts();
-        this.products = productsExtracted.data.data;
-        this.loading = false;
-    },
-    watch: {
-        products: function (newVal, oldVal) {
-            this.$emit('loaded');
-        }
+    async setup() {
+        let products = await SettingsService.getHeroProducts()
+        return { products: products.data.data }
     }
 }
 </script>

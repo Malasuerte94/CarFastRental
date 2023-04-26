@@ -27,8 +27,9 @@ const app = createApp({
 
 app.config.globalProperties.$filters = {
   fromNow: (value) => moment(value).fromNow(),
-  dateformating: (value) => moment(value).format('DD-MM-YYYY'),
 };
+
+app.config.globalProperties.$dateformating = (value) => moment(value).format('DD-MM-YYYY');
 
 app.use(router);
 app.use(DatePicker);
