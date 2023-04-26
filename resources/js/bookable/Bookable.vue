@@ -108,7 +108,6 @@ export default {
             try {
                 let priceExtracted = await BookableService.getPrice(this.bookable.id, this.lastSearch.fromDate, this.lastSearch.fromTime, this.lastSearch.toDate, this.lastSearch.toTime);
                 this.price = priceExtracted.data.data
-                console.log(priceExtracted)
             } catch (err) {
                 this.price = null;
             }

@@ -86,7 +86,7 @@
                     <div>
                        <label for="pickup">Ridicare la Data și Ora</label>
                         <select name="pickup" class="form-control" v-model="pickup">
-                            <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
+                            <option v-for="option in pickupAndReturnPoints" :value="option.id" :key="option.id">
                                 {{ option.name }}
                             </option>
                         </select>
@@ -96,7 +96,7 @@
                     <div>
                         <label for="retour">Returnare la Data și Ora</label>
                         <select name="retour" class="form-control" v-model="retour">
-                            <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
+                            <option v-for="option in pickupAndReturnPoints" :value="option.id" :key="option.id">
                                 {{ option.name }}
                             </option>
                         </select>

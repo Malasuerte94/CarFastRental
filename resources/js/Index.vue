@@ -7,7 +7,7 @@
         />
         <NavDesktop v-else />
         <router-view v-slot="{ Component }">
-            <transition name="slide" mode="out-in">
+            <transition name="fade" mode="out-in">
                 <component :is="Component" />
             </transition>
         </router-view>
@@ -19,8 +19,10 @@ import NavDesktop from "./desktop/layout/navigation/NavDesktop.vue";
 import NavMobile from "./mobile/layout/navigation/NavMobile.vue";
 import settingsService from "./services/settingsService";
 import { mapState, mapGetters } from "vuex";
+import axios from 'axios';
 
 export default {
+    name: "Index",
     components: { NavDesktop, NavMobile },
     data() {
         return {
@@ -35,7 +37,7 @@ export default {
             itemsInBasket: "itemsInBasket",
         }),
     },
-    mounted() {
+    created() {
         this.getSettings();
     },
     methods: {

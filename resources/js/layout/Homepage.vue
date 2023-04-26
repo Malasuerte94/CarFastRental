@@ -15,10 +15,9 @@
                 {{ settings.settings.home_faq_title.value }}
             </h4>
         </div>
-        <Faq />
+
         <Spacer/>
         <CtaPhone />
-        <vue-whatsapp-widget phoneNumber="+40746464272"/>
     </div>
 </template>
 
@@ -27,16 +26,14 @@ import FeatureCards from "./FeatureCards";
 import HeroBanner from "./HeroBanner";
 import SearchFrom from "./SearchFrom";
 import FeatureIconTitle from "./FeatureIconTitle";
-import VueWhatsappWidget from 'vue-whatsapp-widget'
 import CtaPhone from "./CtaPhone";
-import Faq from "./Faq";
 
 export default {
     name: "Homepage",
-    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, VueWhatsappWidget, Faq, CtaPhone},
+    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, CtaPhone},
     data() {
         return {
-            loading: true,
+            loading: false,
             settings: this.$store.state.settings,
         };
     },

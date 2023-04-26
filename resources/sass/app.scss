@@ -10,8 +10,9 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
-@import "@splidejs/splide/dist/css/splide.min.css";
-@import 'vue2-datepicker/index.css';
+//@import "@splidejs/vue-splide/css/core";
+@import '@splidejs/vue-splide/css';
+@import 'vue-datepicker-next/index.css';
 
 @import "desktop";
 @import "mobile";

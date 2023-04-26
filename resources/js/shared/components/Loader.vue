@@ -1,15 +1,17 @@
 <template>
     <Transition name="fade">
     <div class="loader">
-        <lottie-animation class="spinner" ref="anim" :loop="true"
+        <Vue3Lottie class="spinner" ref="anim" :loop="true"
             :animationData="require('/storage/uploads/car_loading.json')" />
     </div>
     </Transition>
 </template>
 <script>
-import LottieAnimation from 'lottie-web-vue'
+import { Vue3Lottie } from 'vue3-lottie'
+import 'vue3-lottie/dist/style.css'
+
 export default {
     name: 'Loader',
-    components: { LottieAnimation },
+    components: { Vue3Lottie },
 }
 </script>

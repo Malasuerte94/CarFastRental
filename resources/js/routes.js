@@ -1,4 +1,4 @@
-import VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Basket from './basket/Basket';
 import Products from "./layout/Products";
 import Bookable from "./bookable/Bookable";
@@ -41,12 +41,11 @@ const routes = [
         component: require("./auth/Register").default,
         name: "register",
     }
-
 ];
 
-const router = new VueRouter({
+const router = createRouter({
+    history: createWebHistory(),
     routes,
-    mode: "history",
 });
 
 export default router;

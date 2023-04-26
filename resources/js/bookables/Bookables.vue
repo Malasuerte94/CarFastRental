@@ -13,6 +13,7 @@
 <script>
 import BookableListItem  from './BookableListItem'
 import Filters from './Filters'
+import BookableService from "./../services/bookableService";
 
 export default {
     components: {
@@ -39,19 +40,16 @@ export default {
             return this.columns - this.bookablesInRow(row).length;
         }
     },
-    created() {
-        let url = "/api/bookables"
+    async created() {
 
+        let url = "/api/bookables"
         if (this.$route.query) {
             url = "/api/bookables/search"
         }
 
-        axios
-        .get(url, this.$route.query)
-        .then(response => {
-            this.bookables = response.data.data;
-            this.loading = false;
-        });
+        let bookablesExtracted = await BookableService.getBookables(url, this.$route.query);
+        this.bookables = bookablesExtracted.data.data
+        this.loading = false
 
     },
 
