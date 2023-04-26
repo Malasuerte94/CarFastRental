@@ -1,15 +1,8 @@
 <template>
   <div v-if="loading">Loading...</div>
-  <div v-else class="row adjectives-row">
+  <div v-else class="adjectives-row">
     <div
-      class="
-        adjective-single
-        col-md-4
-        justify-content-center
-        text-center
-        flex-column
-        p-2
-      "
+      class="adjective-single text-center"
       v-for="(adjective, index) in adjectives"
       :key="index"
     >

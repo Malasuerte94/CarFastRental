@@ -2,6 +2,25 @@
     ::-webkit-scrollbar {
         -webkit-appearance: none;
     }
+
+    h4 {
+        font-size: 1.2rem;
+        text-align: left;
+        color: $secondary;
+        margin-left: 10px;
+    }
+
+    .title-no-container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .page {
+        padding-bottom: 100px;
+    }
+
     .main-car {
         margin-top: 100px;
         border-radius: 10px;
@@ -25,42 +44,511 @@
         overflow: hidden;
         transition: 0.5s;
         max-height: 0;
-
-        // div:nth-of-type(1n+4) {
-        //     transition: 0.5s;
-        //     display: none;
-        // }
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .adjectives-row-active {
         transition: 0.5s;
         max-height: 1000px;
-        // div:nth-of-type(1n+4) {
-        //     transition: 0.5s;
-        //     display: flex;
-        // }
     }
 
-
-    .adjective-single {
-        width: 33.33%;
-        display: flex;
+    #app:after {
+        content: " ";
+        height: 180px;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        z-index: -1;
+        overflow: hidden;
+        background-image: $primary;
     }
+    //navbar
 
     .navbar-nav {
         flex-direction: row;
     }
 
-    #app:after {
-        content: " ";
-        height: 300px;
-        position: absolute;
+    .navbar-mobile {
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        z-index: 999;
         width: 100%;
+        .navbar {
+            display: block;
+            padding: 0;
+            .navbar-nav {
+                display: grid;
+                grid-auto-columns: 1fr;
+                grid-gap: 10px;
+                padding: 5px 20px;
+                height: 56px;
+                background: $white;
+                border-radius: 30px;
+                box-shadow: 2px 2px 5px #ebebeb, -2px -2px 5px #ececec;
+                .nav-item {
+                    grid-area: 1;
+                    justify-content: center;
+                    display: flex;
+                    position: relative;
+                    .nav-link {
+                        .nav-icon {
+                            width: 20px;
+                            height: 20px;
+                            font-size: 20px;
+                            transition: all 0.5s;
+                        }
+                    }
+                    &:has(> .router-link-exact-active) {
+                        transition-duration: 500ms;
+                        ::before {
+                            content: "";
+                            position: absolute;
+                            bottom: -10px;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            width: 50%;
+                            height: 5px;
+                            border-radius: 5px;
+                            background-color: $primary;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //hero
+    .hero-banner {
+        .hero-container {
+            height: 30vh;
+            position: relative;
+            .features {
+                top: 10%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                grid-column-gap: 15px;
+                position: absolute;
+                left: 10%;
+                transform: rotate3d(10, 30, 0, 45deg);
+                .car-feature-hero {
+                    .car-feature-icon-hero {
+                        height: 30px;
+                        width: auto;
+                    }
+                    .car-feature-value-hero {
+                    }
+                }
+            }
+            .card-img {
+                animation: float 6s ease-in-out infinite;
+            }
+            .hero-title {
+                font-size: 3rem;
+                position: absolute;
+                top: 57%;
+                left: 30px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                color: black;
+                width: 100vw;
+                font-weight: bold;
+            }
+            .hero-price {
+                color: $accent;
+                font-size: 1rem;
+                position: absolute;
+                top: 57%;
+                left: 42px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                width: 100vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    //bookables page
+    .bookables-page {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+        .bookables-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 20px;
+            .bookable-card {
+                .card {
+                    border: unset;
+                    padding-top: 80px;
+                    margin-top: 40px;
+                    border-radius: 10px;
+                    box-shadow: 0px 20px 17px -20px,
+                        0px -15px 20px 0px #0000000f;
+                    .card-body {
+                        padding: 0;
+                        .car-details {
+                            .img-box {
+                                position: absolute;
+                                top: -55px;
+                                left: -20px;
+                                .card-img {
+                                    height: 140px;
+                                    width: auto;
+                                }
+                            }
+                            .car-title {
+                                font-size: 2rem;
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                margin: 20px;
+                                .car-name {
+                                    font-family: $font-family-sans-serif;
+                                    font-weight: bold;
+                                    font-size: 1.5rem;
+                                    margin-bottom: 0;
+                                }
+                                .car-year {
+                                    font-size: 1rem;
+                                    color: $gray-600;
+                                    text-align: right;
+                                }
+                            }
+                        }
+                        .car-features {
+                            display: flex;
+                            justify-content: space-around;
+                            border-top: 1px solid #e6e6e6;
+                            border-bottom: 1px solid #e6e6e6;
+                            .car-feature {
+                                display: flex;
+                                align-items: center;
+                                .car-feature-icon {
+                                    max-height: 30px;
+                                    padding: 2px;
+                                    height: 30px;
+                                    width: auto;
+                                }
+                                .car-feature-value {
+                                    font-size: 1rem;
+                                    margin-left: 5px;
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                        .car-cta {
+                            display: flex;
+                            justify-content: space-between;
+                            .car-price {
+                                font-family: $font-family-sans-serif;
+                                font-size: 1.5rem;
+                                color: $accent;
+                                margin-left: 20px;
+                                margin-top: 20px;
+                                span {
+                                    color: grey;
+                                    font-size: 1rem;
+                                    margin-left: 5px;
+                                }
+                            }
+                            .car-button {
+                                font-weight: bold;
+                                text-transform: uppercase;
+                                width: 40%;
+                                text-align: center;
+                                margin-top: 20px;
+                                border-top-right-radius: 0;
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px;
+                                border-bottom-left-radius: 0px;
+                                background: $primary;
+                                padding: 10px;
+                                color: $white;
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //feature cards
+    .feature-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        padding: 10px;
+        .feature-card {
+            background-size: 150%;
+            box-shadow: 0px 25px 15px -25px $secondary;
+            animation: border 6s ease-in-out infinite;
+            align-items: center;
+            background: linear-gradient(337deg, $secondary 0%, $primary 70%);
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+            .feature-card-header {
+                display: flex;
+                align-items: center;
+                i {
+                    margin-right: 10px;
+                }
+                h3 {
+                    font-size: 1.2rem;
+                    margin-bottom: 0px;
+                }
+            }
+            .feature-card-content {
+                margin-top: 10px;
+                .feature-card-description {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    //stock simple
+    .stock-simple {
+        .title-search {
+            font-size: 1.2rem;
+            text-align: left;
+            color: $secondary;
+            margin-left: 10px;
+        }
+        .booking_selector {
+            border-radius: $radius;
+            box-shadow: 0px 25px 15px -25px #000000;
+            padding: $padding-box;
+            input {
+                box-shadow: unset;
+                border: 1px #c5c5c5 solid;
+                color: $secondary;
+                font-family: $font-family-sans-serif;
+            }
+            .mx-icon-calendar {
+                color: $secondary;
+            }
+        }
+        .search-button {
+            position: relative;
+            transform: translateY(-50px);
+            transition: all 0.5s;
+            z-index: 0;
+            margin-bottom: 10px;
+            button {
+                padding-top: 30px;
+                padding-bottom: 10px;
+                border-radius: 0px 0px $radius $radius;
+            }
+            &.active {
+                transform: translateY(-20px);
+                button {
+                    box-shadow: 0px 11px 15px -10px #000000;
+                }
+            }
+        }
+    }
+
+    //feature icon title
+    .feature-icon-title {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        .feature-card {
+            border-radius: 7px;
+            box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171b;
+            padding: 5px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            img {
+                max-height: 120%;
+                position: absolute;
+                right: -10px;
+                color: $primary;
+                opacity: 0.3;
+                bottom: 0;
+            }
+        }
+        h3 {
+            font-size: 0.8rem;
+            margin-bottom: 0px;
+        }
+    }
+
+    //calendar
+    .mx-datepicker-popup {
+        width: 90%;
+        padding: 10px;
+        margin: auto;
+        right: 0;
+        left: 0;
+        border-radius: $radius;
+        box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171b;
+        .mx-calendar {
+            width: 100%;
+            padding: 0;
+            .mx-calendar-content {
+                .cell {
+                    &.active {
+                        background: $primary;
+                        color: white;
+                        border-radius: $radius-small;
+                        font-weight: bold;
+                        &:hover {
+                            background: $primary;
+                            color: white;
+                        }
+                    }
+                    &.today {
+                        color: $primary;
+                    }
+                }
+
+                thead {
+                    font-family: $font-family-sans-serif;
+                    font-weight: bold;
+                }
+            }
+        }
+        .mx-time {
+            width: 100%;
+            .mx-time-option {
+                &.active {
+                    color: $primary;
+                }
+            }
+        }
+    }
+
+    //faq box
+    .faq-box {
+        section {
+            padding: 0 !important;
+            .faq-wrapper {
+                .faq__nav {
+                    background: $white;
+                    border: unset;
+                    border-radius: $radius;
+                    box-shadow: $box-shadow-complex;
+                    .faq__nav-item {
+                        padding: calc($padding-small / 4);
+                        height: auto;
+                        border: unset;
+                        margin: $radius-small;
+                        border-radius: $radius;
+                        font-weight: bold;
+                        color: $secondary;
+                        text-transform: uppercase;
+                        &.faq__nav-item_active {
+                            background: $primary;
+                        }
+                    }
+                }
+                .accordion {
+                    border: unset;
+                    padding: 0 $padding-box;
+                    background-color: $white;
+                    box-shadow: $box-shadow-complex;
+                    border-radius: $radius;
+                    .accordion__item {
+                        border-bottom: 1px solid #e2e2e2;
+                        .accordion__title {
+                            font-weight: bold;
+                            padding: $padding-box;
+                            color: $secondary;
+                            &.accordion__title_active {
+                                color: $primary;
+                                .accordion__toggle-button_active {
+                                    &::after,
+                                    &::before {
+                                        background: $primary;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //cta phone
+    .cta-phone {
+        background-color: $primary;
+        padding: $padding-box $padding;
+        .cta-phone-box {
+            .cta-phone-title {
+                text-align: center;
+                margin-bottom: $margin;
+            }
+            .cta-phone-buttons {
+                display: flex;
+                justify-content: space-evenly;
+                .cta-phone-element {
+                    background-color: $white;
+                    display: flex;
+                    padding: $padding-extra-small $padding-box;
+                    border-radius: $radius;
+                    text-align: center;
+                    font-weight: bold;
+                    color: $secondary;
+                    align-items: center;
+                    box-shadow: $box-shadow;
+                    i {
+                        margin-right: 5px;
+                        line-height: inherit;
+                    }
+                }
+            }
+        }
+    }
+
+    //filters-box
+    .filters-box {
+        position: fixed;
         top: 0;
-        z-index: -1;
-        border-bottom-right-radius: 25%;
-        border-bottom-left-radius: 25%;
-        overflow: hidden;
-        background-image: linear-gradient(to right, #4451ff, #00a1ff);
+        left: 0;
+        width: 100%;
+    }
+
+    //search form
+    .search-form {
+    }
+
+    //animations
+    @keyframes float {
+        0% {
+            transform: translatey(0px);
+        }
+        50% {
+            transform: translatey(-10px);
+        }
+        100% {
+            transform: translatey(0px);
+        }
+    }
+
+    @keyframes border {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
 }

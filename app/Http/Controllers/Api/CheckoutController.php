@@ -39,9 +39,10 @@ class CheckoutController extends Controller
         $data = array_merge($data, $request->validate([
             'bookings.*' => ['required', function ($attribute, $value, $fail) {
                 $bookable = Bookable::findOrFail($value['bookable_id']);
-
-                if (!$bookable->stockFor($value['from'], $value['to'])) {
-                    $fail("The object is not available in given dates!");
+                if($bookable->is_restricted_by_one) {
+                    if (!$bookable->stockFor($value['from'], $value['to'])) {
+                        $fail("The object is not available in given dates!");
+                    }
                 }
             }]
         ]));

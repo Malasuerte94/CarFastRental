@@ -28,6 +28,13 @@ class Booking extends Model
         return $this->belongsTo(Address::class);
     }
 
+    public function scopeWhereIsRestricted(Builder $query)
+    {
+        return $query->whereHas('bookable', function ($query) {
+            $query->where('is_restricted_by_one', true);
+        });
+    }
+
     public function scopeBetweenDates(Builder $query, $from, $to)
     {
         return $query->where('to', '>=', $from)

@@ -21,11 +21,16 @@ class BookablePriceController extends Controller
         $bookable = Bookable::findOrFail($id);
 
         $data = $request->validate([
-            'from' => 'required|date_format:Y-m-d H:i:s',
-            'to' => 'required|date_format:Y-m-d H:i:s|after_or_equal:from'
+            'fromDate'   => 'required|date_format:Y-m-d|after_or_equal:fromDate',
+            'fromTime' => 'required|date_format:H:i:s|after_or_equal:fromTime',
+            'toDate'   => 'required|date_format:Y-m-d|after_or_equal:fromDate',
+            'toTime'   => 'required|date_format:H:i:s|after_or_equal:fromTime',
         ]);
 
-        $bookingPriceService = new BookingPriceService($bookable, $data['from'], $data['to']);
+        $from = $data['fromDate'].' '.$data['fromTime'];
+        $to = $data['toDate'].' '.$data['toTime'];
+
+        $bookingPriceService = new BookingPriceService($bookable, $from, $to);
         $priceList = $bookingPriceService->calculatePrice();
 
         return response()->json([

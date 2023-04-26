@@ -1,33 +1,28 @@
 <template>
-    <div>
-        <div v-if="loading">
-            <h1>Data is loading ... </h1>
-        </div>
-        <div v-else>
-            <div class="row" v-for="row in rows" :key="'row' + row">
-                <div class="col d-flex align-items-stretch p-1" v-for="(bookable, column) in bookablesInRow(row)" :key="'row' + row + column">
-                    <bookable-list-item v-bind="bookable"></bookable-list-item>
-                </div>
-                <div class="col p-1" v-for="p in placehodersInRow(row)" :key="'placeholder' + p + row"></div>
+    <div class="container bookables-page" v-if="!loading">
+        <Filters />
+        <div class="bookables-grid" v-for="row in rows" :key="'row' + row">
+            <div class="bookable-card" v-for="(bookable, column) in bookablesInRow(row)" :key="'row' + row + column">
+                <bookable-list-item v-bind="bookable"></bookable-list-item>
             </div>
+            <div class="col p-1" v-for="p in placehodersInRow(row)" :key="'placeholder' + p + row"></div>
         </div>
     </div>
 </template>
 
-
-
-
 <script>
 import BookableListItem  from './BookableListItem'
+import Filters from './Filters'
 
 export default {
     components: {
-        BookableListItem
+        BookableListItem,
+        Filters,
     },
     data() {
         return {
             bookables: null,
-            loading: false,
+            loading: true,
             columns: 3,
         };
     },
@@ -44,10 +39,15 @@ export default {
             return this.columns - this.bookablesInRow(row).length;
         }
     },
-    created(){
-        this.loading = true;
-        const request = axios
-        .get("/api/bookables")
+    created() {
+        let url = "/api/bookables"
+
+        if (this.$route.query) {
+            url = "/api/bookables/search"
+        }
+
+        axios
+        .get(url, this.$route.query)
         .then(response => {
             this.bookables = response.data.data;
             this.loading = false;

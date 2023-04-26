@@ -32,8 +32,13 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
+        "@splidejs/vue-splide": "^0.3.5",
+        "lottie-web-vue": "^1.2.1",
         "moment": "^2.29.1",
+        "vue-faq-accordion": "^1.6.2",
+        "vue-mobile-detection": "^1.0.0",
         "vue-router": "^3.5.2",
+        "vue-whatsapp-widget": "^1.0.0",
         "vue2-datepicker": "^3.10.2",
         "vuex": "^3.6.2"
     }

@@ -5,12 +5,16 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BookableResource\Pages;
 use App\Filament\Resources\BookableResource\RelationManagers\BookingsRelationManager;
 use App\Models\Bookable;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -27,32 +31,67 @@ class BookableResource extends Resource
 
     public static function form(Form $form): Form
     {
+
         return $form
             ->schema([
-                TextInput::make('title')
-                    ->required()
-                    ->maxLength(191)->columnSpanFull(),
-                RichEditor::make('description')
-                    ->required()
-                    ->maxLength(65535)->columnSpanFull(),
-                //TextInput::make('main_image'),
-                FileUpload::make('main_image')
-                ->preserveFilenames()
-                ->image()
-                ->imagePreviewHeight('250')
-                ->loadingIndicatorPosition('left')
-                ->uploadButtonPosition('left')
-                ->uploadProgressIndicatorPosition('left')
-                ->directory('uploads/product-images'),
-                TextInput::make('price')
-                    ->required(),
-                Repeater::make('bookableAdjective')
-                ->relationship()
-                ->schema([
-                    TextInput::make('value')->required(),
-                    Select::make('adjective_id')->relationship('adjective', 'name')->required(),
-                ])
-                ->columns(2)->createItemButtonLabel('Add New')
+                Tabs::make('Heading')
+                    ->tabs([
+                        Tab::make('General')
+                            ->icon('heroicon-o-bell')
+                            ->schema([
+
+                                Fieldset::make('General Information')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->required()
+                                            ->maxLength(191)->columns(3),
+
+                                        TextInput::make('price')
+                                            ->required()->columns(3),
+
+                                        Toggle::make('is_restricted_by_one')->columns(3),
+
+                                    ])->columns(3),
+
+
+                                            FileUpload::make('main_image')
+                                    ->preserveFilenames()
+                                    ->image()
+                                    ->imagePreviewHeight('250')
+                                    ->loadingIndicatorPosition('left')
+                                    ->uploadButtonPosition('left')
+                                    ->uploadProgressIndicatorPosition('left')
+                                    ->directory('uploads/product-images'),
+                                RichEditor::make('description')
+                                    ->required()
+                                    ->maxLength(65535)->columnSpanFull(),
+
+                                TextInput::make('year')
+                                    ->required(),
+                            ]),
+                        Tab::make('Properties')
+                            ->icon('heroicon-o-bell')
+                            ->schema([
+                                Repeater::make('bookableAdjective')
+                                    ->relationship()
+                                    ->schema([
+                                        Select::make('adjective_id')->relationship('adjective', 'name')->required(),
+                                        TextInput::make('value')->required(),
+                                    ])
+                                    ->columns(2)->createItemButtonLabel('Add New'),
+                            ]),
+                        Tab::make('Features')
+                            ->icon('heroicon-o-bell')
+                            ->schema([
+                                Repeater::make('bookableFeatures')
+                                    ->relationship()
+                                    ->schema([
+                                        Select::make('feature_id')->relationship('feature', 'name')->required(),
+                                        TextInput::make('value'),
+                                    ])
+                                    ->columns(2)->createItemButtonLabel('Add New')
+                            ]),
+                    ])->columnSpan('full'),
             ]);
     }
 
@@ -90,10 +129,10 @@ class BookableResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookables::route('/'),
+            'index'  => Pages\ListBookables::route('/'),
             'create' => Pages\CreateBookable::route('/create'),
-            'edit' => Pages\EditBookable::route('/{record}/edit'),
-            'view' => Pages\ViewBookable::route('/{record}'),
+            'edit'   => Pages\EditBookable::route('/{record}/edit'),
+            'view'   => Pages\ViewBookable::route('/{record}'),
         ];
     }
 }

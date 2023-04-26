@@ -1,71 +1,62 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand-lg bg-white border-bottom navbar-light">
-      <router-link class="navbar-brand mr-auto" :to="{ name: 'home' }"
-        >LaravelBnb</router-link
-      >
-
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'basket' }">
-            Basket
-            <span v-if="itemsInBasket" class="badge badge-secondary">{{
-              itemsInBasket
-            }}</span>
-          </router-link>
-        </li>
-
-        <li class="nav-item" v-if="!isLoggedIn">
-          <router-link :to="{ name: 'register' }" class="nav-link"
-            >Register</router-link
-          >
-        </li>
-
-        <li class="nav-item" v-if="!isLoggedIn">
-          <router-link :to="{ name: 'login' }" class="nav-link"
-            >Sign-in</router-link
-          >
-        </li>
-
-        <li class="nav-item" v-if="isLoggedIn">
-          <a class="nav-link" href="#" @click.prevent="logout">Logout</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="container mt-4 mb-4 pr-4 pl-4">
-      <router-view></router-view>
+    <div class="page">
+        <NavMobile
+            :itemsInBasket="itemsInBasket"
+            :isLoggedIn="isLoggedIn"
+            v-if="$isMobile()"
+        />
+        <NavDesktop v-else />
+        <router-view v-slot="{ Component }">
+            <transition name="slide" mode="out-in">
+                <component :is="Component" />
+            </transition>
+        </router-view>
     </div>
-  </div>
 </template>
 
 <script>
+import NavDesktop from "./desktop/layout/navigation/NavDesktop.vue";
+import NavMobile from "./mobile/layout/navigation/NavMobile.vue";
+import settingsService from "./services/settingsService";
 import { mapState, mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      lastSearch: this.$store.state.lastSearch,
-    };
-  },
-  computed: {
-    ...mapState({
-      lastSearchComputed: "lastSearch",
-      isLoggedIn: "isLoggedIn",
-    }),
-    ...mapGetters({
-      itemsInBasket: "itemsInBasket",
-    }),
-  },
-  methods: {
-    async logout() {
-      try {
-        axios.post("/logout");
-        this.$store.dispatch("logout");
-      } catch (error) {
-        this.$store.dispatch("logout");
-      }
+    components: { NavDesktop, NavMobile },
+    data() {
+        return {
+            lastSearch: this.$store.state.lastSearch,
+        };
     },
-  },
+    computed: {
+        ...mapState({
+            isLoggedIn: "isLoggedIn",
+        }),
+        ...mapGetters({
+            itemsInBasket: "itemsInBasket",
+        }),
+    },
+    mounted() {
+        this.getSettings();
+    },
+    methods: {
+        async getSettings() {
+            try {
+                let extracted = await settingsService.getSettings();
+                this.$store.dispatch("setSettings", {
+                    settings: extracted.data.data,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async logout() {
+            try {
+                axios.post("/logout");
+                this.$store.dispatch("logout");
+            } catch (error) {
+                this.$store.dispatch("logout");
+            }
+        },
+    },
 };
 </script>
