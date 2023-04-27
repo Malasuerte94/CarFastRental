@@ -18,7 +18,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            {{ review.created_at | fromNow }}
+            {{ $formatDate(review.created_at)}}
           </div>
         </div>
         <div class="row pb-4 pt-4">

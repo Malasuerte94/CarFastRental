@@ -14,6 +14,7 @@ import DatePicker from 'vue-datepicker-next'
 import Vue3MobileDetection from "vue3-mobile-detection";
 import Spacer from './shared/components/Spacer';
 import ApiService from './services/apiService';
+import Fallback from './shared/components/Fallback';
 
 const app = createApp({
   components: {
@@ -25,11 +26,9 @@ const app = createApp({
   },
 });
 
-app.config.globalProperties.$filters = {
-  fromNow: (value) => moment(value).fromNow(),
+app.config.globalProperties.$formatDate = (date) => {
+  return moment(date).format('DD-MM-YYYY');
 };
-
-app.config.globalProperties.$dateformating = (value) => moment(value).format('DD-MM-YYYY');
 
 app.use(router);
 app.use(DatePicker);
@@ -43,6 +42,7 @@ app.component('fatal-error', FatalError);
 app.component('success', Success);
 app.component('v-errors', ValidationErrors);
 app.component('Spacer', Spacer);
+app.component('fallback', Fallback);
 
 app.mount('#app');
 

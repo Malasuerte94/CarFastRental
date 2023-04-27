@@ -27,16 +27,6 @@ export default {
     data() {
         return {
             settings: this.$store.state.settings,
-            contactData: [
-                {
-                    icon: '',
-                    phone: 'Trebuie sa aveti cel putin 21 de ani pentru a inchiria un autoturism si sa aveti permisul de conducere de cel putin un an.',
-                },
-                {
-                    icon: 'Care este vârstă minima pentru a putea închiria un autoturism?',
-                    phone: 'Trebuie sa aveti cel putin 21 de ani pentru a inchiria un autoturism si sa aveti permisul de conducere de cel putin un an.',
-                },
-            ]
         }
     }
 }

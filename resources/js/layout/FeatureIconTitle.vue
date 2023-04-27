@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!loading" class="container feature-icon-title">
+    <div class="container feature-icon-title">
         <div class="feature-card" v-for="featureCard in featureCardIcons" :key="featureCard.id">
             <div class="feature-card-header">
                 <img :src="featureCard.icon"/>

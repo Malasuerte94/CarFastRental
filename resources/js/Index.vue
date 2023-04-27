@@ -7,8 +7,8 @@
         />
         <NavDesktop v-else />
         <router-view v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
-                <component :is="Component" />
+            <transition name="page-slide" mode="out-in">
+                <component :is="Component" v-cloak />
             </transition>
         </router-view>
     </div>

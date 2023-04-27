@@ -8,9 +8,9 @@
                 <span class="icon_collapse"><i class="fa fa-calendar-alt"></i></span>
             </div>
             <div class="booking_form_actions">
-                De la <span class="data_pickup">{{ from | dateformating }}</span> până
+                De la <span class="data_pickup">{{ from | dateformatting }}</span> până
                 la
-                <span class="data_pickup">{{ to | dateformating }}</span>
+                <span class="data_pickup">{{ to | dateformatting }}</span>
             </div>
             <div class="booking_form_dropdown">
                 <span @click="

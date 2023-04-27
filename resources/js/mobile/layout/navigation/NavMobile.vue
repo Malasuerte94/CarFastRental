@@ -1,57 +1,58 @@
 <template>
-    <nav class="navbar-mobile">
-        <div class="navbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'home' }">
-                    <img class="nav-icon"
-                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-home-7.png" />
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'products' }">
-                    <img class="nav-icon"
-                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2016/240/iconmonstr-car-2.png" />
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'register' }">
-                    <img class="nav-icon"
-                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-magnifier-6.png" />
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'basket' }">
-                         <img class="nav-icon"
-                                src="https://cdns.iconmonstr.com/wp-content/releases/preview/2013/240/iconmonstr-shopping-cart-2.png" />
-                        <span v-if="itemsInBasket" class="badge badge-secondary">{{
-                            itemsInBasket
-                        }}</span>
-                    </router-link>
-                </li>
-
-                <li class="nav-item" v-if="!isLoggedIn">
-                    <router-link :to="{ name: 'login' }" class="nav-link">
-                        <img class="nav-icon"
-                            src="https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-user-6.png" />
-                    </router-link>
-                </li>
-
-                <li class="nav-item" v-if="isLoggedIn">
-                    <a class="nav-link" href="#" @click.prevent="logout">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <SwipeBottomNavigation class="navbar-mobile" :options="menu" v-model="selected">
+        <template #icon="{ props }">
+            <i :class="props.icon"></i>
+        </template>
+        <template #title="{ props }">
+            <b>{{ props.title }}</b>
+        </template>
+    </SwipeBottomNavigation>
 </template>
 
-
 <script>
+import { SwipeBottomNavigation } from "bottom-navigation-vue";
+import "bottom-navigation-vue/dist/style.css";
 export default {
-    name: 'NavMobile',
+    name: "NavMobile",
+    components: {
+        SwipeBottomNavigation,
+    },
     data() {
         return {
-        }
+            selected: null,
+            menu: [
+                {
+                    id: 1,
+                    icon: "fas fa-home",
+                    title: "Home",
+                    path: { name: "home" },
+                },
+                {
+                    id: 2,
+                    icon: "fas fa-car",
+                    title: "Products",
+                    path: { name: "products" },
+                },
+                {
+                    id: 3,
+                    icon: "fas fa-search",
+                    title: "Search",
+                    path: { name: "register" },
+                },
+                {
+                    id: 4,
+                    icon: "fas fa-shopping-cart",
+                    title: "Basket",
+                    path: { name: "basket" },
+                },
+                {
+                    id: 5,
+                    icon: "fas fa-user",
+                    title: "Login",
+                    path: { name: "login" },
+                },
+            ],
+        };
     },
     props: {
         itemsInBasket: {
@@ -63,5 +64,5 @@ export default {
             default: false,
         },
     },
-}
+};
 </script>

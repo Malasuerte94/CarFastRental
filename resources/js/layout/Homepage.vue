@@ -3,7 +3,7 @@
         <Suspense>
            <HeroBanner />
            <template #fallback>
-                <Fallback :height="230" />
+                <fallback :height="230" />
            </template>
         </Suspense>
 
@@ -16,7 +16,7 @@
         <Suspense>
            <FeatureIconTitle />
            <template #fallback>
-                <Fallback :height="90" />
+                <fallback :height="90" />
            </template>
         </Suspense>
 
@@ -29,16 +29,29 @@
                 {{ settings.settings.home_faq_title.value }}
             </h4>
         </div>
-        <Faq />
+
+        <Suspense>
+           <Faq />
+           <template #fallback>
+                <fallback :height="390" />
+           </template>
+        </Suspense>
+
         <Spacer/>
-        <CtaPhone />
+
+        <Suspense>
+           <CtaPhone />
+           <template #fallback>
+                <fallback :height="390" />
+           </template>
+        </Suspense>
+
     </div>
 </template>
 
 <script>
 import FeatureCards from "./FeatureCards";
 import HeroBanner from "./HeroBanner";
-import Fallback from "./Fallback/Fallback";
 import SearchFrom from "./SearchFrom";
 import FeatureIconTitle from "./FeatureIconTitle";
 import CtaPhone from "./CtaPhone";
@@ -46,7 +59,7 @@ import Faq from "./Faq";
 
 export default {
     name: "Homepage",
-    components: { HeroBanner, Fallback, FeatureCards, SearchFrom, FeatureIconTitle, CtaPhone, Faq},
+    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, CtaPhone, Faq},
     data() {
         return {
             loading: false,

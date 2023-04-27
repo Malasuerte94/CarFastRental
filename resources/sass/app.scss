@@ -260,3 +260,28 @@ h2, h6, h4 {
   position: absolute;
   left: 0;
 }
+
+
+//page-slide animation router
+.page-slide-enter-from,
+.page-slide-leave-to {
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.page-slide-enter-active,
+.page-slide-leave-active {
+transition: 400ms ease all;
+}
+
+
+//transition list
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}

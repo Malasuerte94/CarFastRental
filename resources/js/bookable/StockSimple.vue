@@ -3,10 +3,10 @@
         <h4 v-if="searchOnly" class="pt-6">
             {{ settings.settings.home_search_title.value }}
         </h4>
-        <h6 v-else class="font-weigh-bolder pt-6">
+        <h4 v-else>
             Perioadă închiriere
-        </h6>
-        <transition name="fadeHeight">
+        </h4>
+        <transition name="list">
             <div class="booking_selector" :class="[{'search-only' : searchOnly}]">
                 <div v-if="!searchOnly" class="booking_icon_actions">
                     <span class="icon_collapse"><i class="fa fa-calendar-alt"></i></span>
@@ -49,26 +49,26 @@
 
         <template v-if="!searchOnly">
 
-            <h6 class="text-uppercase text-secondary font-weigh-bolder pt-3">
+            <h4 class="mt-2">
                 Ridicare & Returnare
-            </h6>
+            </h4>
 
             <transition name="fadeHeight">
-                <div class="booking_selector rounded p-2">
+                <div class="booking_selector">
                     <div class="booking_icon_actions">
                         <span class="icon_collapse"><i class="fa fa-map-pin"></i></span>
                     </div>
                     <div>
-                        <label for="pickup">Ridicare la Data și Ora</label>
-                        <select name="pickup" class="form-control" v-model="pickup">
+                        <label for="pickup">Punct Ridicare</label>
+                        <select name="pickup" v-model="pickup">
                             <option v-for="option in pickupAndReturnPoints" :value="option.id" :key="option.id">
                                 {{ option.name }}
                             </option>
                         </select>
                     </div>
                     <div>
-                        <label for="retour">Returnare la Data și Ora</label>
-                        <select name="retour" class="form-control" v-model="retour">
+                        <label for="retour">Punct Returnare</label>
+                        <select name="retour" v-model="retour">
                             <option v-for="option in pickupAndReturnPoints" :value="option.id" :key="option.id">
                                 {{ option.name }}
                             </option>
@@ -79,9 +79,9 @@
 
             <div class="booking_details mt-2">
                 <div class="">
-                    De la <span class="data_pickup">{{ from | dateformating }}</span> până
+                    De la <span class="data_pickup">{{ $formatDate(from) }}</span> până
                     la
-                    <span class="data_pickup">{{ to | dateformating }}</span>
+                    <span class="data_pickup">{{ $formatDate(to) }}</span>
                 </div>
                 <div class="booking_form_actions">
                     De la:
@@ -146,8 +146,8 @@ export default {
         },
     },
     async setup(props) {
-        const { data } = await BookableService.getPickupAndReturnOptions();
-        const pickupAndReturnPoints = data.data;
+        const response = await BookableService.getPickupAndReturnOptions();
+        const pickupAndReturnPoints = response.data.data;
         return {
             pickupAndReturnPoints,
         };
@@ -164,7 +164,6 @@ export default {
             loading: false,
             loadingData: true,
             status: null,
-            pickupAndReturnPoints: null,
         };
     },
     methods: {

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!loading" class="container faq-box">
+    <div class="container faq-box">
     <div class="accordion">
         <div
             v-for="(question, index) in faqs"
@@ -39,25 +39,17 @@ export default {
     components: {
         Collapse,
     },
-    data() {
-        return {
-            loading: true,
-            faqs: null,
-        };
-    },
-    async created() {
-        let extracted = await settingsService.getFaqs();
-        extracted = extracted.data.data;
-
-        this.faqs = reactive(
-            extracted.map(({ category, id, order, title, value }, index) => ({
+    async setup() {
+        const faqs = reactive([]);
+        const extracted = await settingsService.getFaqs();
+        extracted.data.data.forEach(({ category, id, order, title, value }) => {
+            faqs.push({
                 title: title,
                 answer: value,
-                isExpanded: index === 2, // Initial values, display expanded on mount
-            }))
-        );
-
-        this.loading = false;
+                isExpanded: false,
+            });
+        });
+        return { faqs };
     },
     methods: {
         handleAccordion(selectedIndex) {
@@ -68,11 +60,6 @@ export default {
                         : false;
             });
         },
-    },
-    watch: {
-        faqs: function (newVal, oldVal) {
-            this.$emit("loaded");
-        },
-    },
+    }
 };
 </script>

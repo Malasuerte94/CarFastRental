@@ -1,6 +1,5 @@
 <template>
-    <div v-if="loading">Loading...</div>
-    <div v-else class="adjectives-row">
+    <div v-cloak class="adjectives-row">
         <div
             class="adjective-single text-center"
             v-for="(adjective, index) in adjectives"
