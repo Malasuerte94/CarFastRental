@@ -1,24 +1,51 @@
 <template>
     <div class="container p-0">
-        <loader v-if="loading" />
-        <HeroBanner />
+        <Suspense>
+           <HeroBanner />
+           <template #fallback>
+                <fallback :height="230" />
+           </template>
+        </Suspense>
+
         <div class="title-no-container">
             <h4>
                 {{ settings.settings.feature_icons_title.value }}
             </h4>
         </div>
-        <FeatureIconTitle />
+
+        <Suspense>
+           <FeatureIconTitle />
+           <template #fallback>
+                <fallback :height="90" />
+           </template>
+        </Suspense>
+
         <Spacer/>
+
         <SearchFrom />
+
         <div class="title-no-container">
             <h4>
                 {{ settings.settings.home_faq_title.value }}
             </h4>
         </div>
-        <Faq />
+
+        <Suspense>
+           <Faq />
+           <template #fallback>
+                <fallback :height="390" />
+           </template>
+        </Suspense>
+
         <Spacer/>
-        <CtaPhone />
-        <vue-whatsapp-widget phoneNumber="+40746464272"/>
+
+        <Suspense>
+           <CtaPhone />
+           <template #fallback>
+                <fallback :height="390" />
+           </template>
+        </Suspense>
+
     </div>
 </template>
 
@@ -27,16 +54,15 @@ import FeatureCards from "./FeatureCards";
 import HeroBanner from "./HeroBanner";
 import SearchFrom from "./SearchFrom";
 import FeatureIconTitle from "./FeatureIconTitle";
-import VueWhatsappWidget from 'vue-whatsapp-widget'
 import CtaPhone from "./CtaPhone";
 import Faq from "./Faq";
 
 export default {
     name: "Homepage",
-    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, VueWhatsappWidget, Faq, CtaPhone},
+    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, CtaPhone, Faq},
     data() {
         return {
-            loading: true,
+            loading: false,
             settings: this.$store.state.settings,
         };
     },

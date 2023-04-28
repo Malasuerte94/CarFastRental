@@ -68,7 +68,7 @@
 <script>
 import { is404, is422 } from "./../shared/utils/response";
 import validationErrors from "./../shared/mixins/validationErrors";
-
+import ReviewService from '../services/reviewService';
 export default {
   mixins: [validationErrors],
   data() {
@@ -91,15 +91,11 @@ export default {
     this.loading = true;
 
     try {
-      this.existingReview = (
-        await axios.get(`/api/reviews/${this.review.id}`)
-      ).data.data;
+      this.existingReview = (await ReviewService.getReview(this.review.id).data.data);
     } catch (err) {
       if (is404(err)) {
         try {
-          this.booking = (
-            await axios.get(`/api/booking-by-review/${this.review.id}`)
-          ).data.data;
+          this.booking = (await ReviewService.getBookableReview(this.review.id).data.data);
         } catch (err) {
           this.error = !is404(err);
         }
@@ -133,8 +129,7 @@ export default {
       this.errors = null;
       this.success =false;
 
-      axios
-        .post(`/api/reviews`, this.review)
+      ReviewService.postBookableReview(this.review)
         .then((response) => {
             this.success = 201 === response.status;
         })

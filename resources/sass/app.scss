@@ -10,12 +10,18 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
-@import "@splidejs/splide/dist/css/splide.min.css";
-@import 'vue2-datepicker/index.css';
+//@import "@splidejs/vue-splide/css/core";
+@import '@splidejs/vue-splide/css';
+@import 'vue-datepicker-next/index.css';
 
 @import "desktop";
 @import "mobile";
 
+
+[v-cloak] > * {
+    background-color: red;
+    opacity: 0.5;
+}
 
 h2, h6, h4 {
     font-family: $font-family-sans-serif;
@@ -253,4 +259,29 @@ h2, h6, h4 {
 .slide-leave-from {
   position: absolute;
   left: 0;
+}
+
+
+//page-slide animation router
+.page-slide-enter-from,
+.page-slide-leave-to {
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.page-slide-enter-active,
+.page-slide-leave-active {
+transition: 400ms ease all;
+}
+
+
+//transition list
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }

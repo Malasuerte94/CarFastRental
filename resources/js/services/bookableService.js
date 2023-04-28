@@ -8,8 +8,16 @@ class BookableService {
         return ApiService.withoutAuth().get(`/bookables/${bookableId}/stock?fromDate=${fromDate}&fromTime=${fromTime}&toDate=${toDate}&toTime=${toTime}`);
     }
     async getPrice(bookableId, fromDate, fromTime, toDate, toTime) {
-        console.log(bookableId, fromDate, fromTime, toDate, toTime)
         return ApiService.withoutAuth().get(`/bookables/${bookableId}/price?fromDate=${fromDate}&fromTime=${fromTime}&toDate=${toDate}&toTime=${toTime}`);
+    }
+    async getBookables(payload) {
+        return ApiService.withoutAuth().get("/bookables", {payload});
+    }
+    async getBookable(bookableId) {
+        return ApiService.withoutAuth().get(`/bookables/${bookableId}`);
+    }
+    async getBookableAdjectives(bookableId) {
+        return ApiService.withoutAuth().get(`/bookables/${bookableId}/adjectives`);
     }
 }
 

@@ -1,22 +1,22 @@
 <template>
-    <div class="stock-simple" v-if="!loadingData">
+    <div class="stock-simple">
         <h4 v-if="searchOnly" class="pt-6">
             {{ settings.settings.home_search_title.value }}
         </h4>
-        <h6 v-else class="font-weigh-bolder pt-6">
+        <h4 v-else>
             Perioadă închiriere
-        </h6>
-        <transition name="fadeHeight">
+        </h4>
+        <transition name="list">
             <div class="booking_selector" :class="[{'search-only' : searchOnly}]">
                 <div v-if="!searchOnly" class="booking_icon_actions">
                     <span class="icon_collapse"><i class="fa fa-calendar-alt"></i></span>
                 </div>
                 <div>
                     <label for="fromDate">Ridicare la Data și Ora</label>
-                    <date-picker placeholder="..." name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model="fromDate"
+                    <date-picker placeholder="..." name="fromDate" class="custom-date-time-picker mb-2" width="300" v-model:value="fromDate"
                         type="date" valueType="format" time-title-format="DD-MM-YYYY" @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('fromDate') }]" :disabled-date="notBeforeToday"></date-picker>
-                    <date-picker :show-second="false" placeholder="..." name="fromTime" class="custom-date-time-picker" v-model="fromTime" type="time"
+                    <date-picker :show-second="false" placeholder="..." name="fromTime" class="custom-date-time-picker" v-model:value="fromTime" type="time"
                         valueType="HH:mm:ss" :time-picker-options="{
                             start: '00:00',
                             step: '00:30',
@@ -27,11 +27,11 @@
                 </div>
                 <div>
                     <label for="to">Returnare la Data și Ora</label>
-                    <date-picker placeholder="..." name="to" class="custom-date-time-picker mb-2" v-model="toDate" type="date"
+                    <date-picker placeholder="..." name="to" class="custom-date-time-picker mb-2" v-model:value="toDate" type="date"
                         valueType="format" time-title-format="DD-MM-YYYY" :disabled-date="notBeforeDayBooked"
                         holder="End Date" @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('toDate') }]"></date-picker>
-                    <date-picker valueType="HH:mm:ss" placeholder="..." name="to" class="custom-date-time-picker" v-model="toTime" type="time"
+                    <date-picker valueType="HH:mm:ss" placeholder="..." name="to" class="custom-date-time-picker" v-model:value="toTime" type="time"
                         :time-picker-options="{
                             start: '00:00',
                             step: '00:30',
@@ -49,27 +49,27 @@
 
         <template v-if="!searchOnly">
 
-            <h6 class="text-uppercase text-secondary font-weigh-bolder pt-3">
+            <h4 class="mt-2">
                 Ridicare & Returnare
-            </h6>
+            </h4>
 
             <transition name="fadeHeight">
-                <div class="booking_selector rounded p-2">
+                <div class="booking_selector">
                     <div class="booking_icon_actions">
                         <span class="icon_collapse"><i class="fa fa-map-pin"></i></span>
                     </div>
                     <div>
-                        <label for="pickup">Ridicare la Data și Ora</label>
-                        <select name="pickup" class="form-control" v-model="pickup">
-                            <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
+                        <label for="pickup">Punct Ridicare</label>
+                        <select name="pickup" v-model="pickup">
+                            <option v-for="option in pickupAndReturnPoints" :value="option.id" :key="option.id">
                                 {{ option.name }}
                             </option>
                         </select>
                     </div>
                     <div>
-                        <label for="retour">Returnare la Data și Ora</label>
-                        <select name="retour" class="form-control" v-model="retour">
-                            <option v-for="option in pickupAndReturnPoints" v-bind:value="option.id" :key="option.id">
+                        <label for="retour">Punct Returnare</label>
+                        <select name="retour" v-model="retour">
+                            <option v-for="option in pickupAndReturnPoints" :value="option.id" :key="option.id">
                                 {{ option.name }}
                             </option>
                         </select>
@@ -79,9 +79,9 @@
 
             <div class="booking_details mt-2">
                 <div class="">
-                    De la <span class="data_pickup">{{ from | dateformating }}</span> până
+                    De la <span class="data_pickup">{{ $formatDate(from) }}</span> până
                     la
-                    <span class="data_pickup">{{ to | dateformating }}</span>
+                    <span class="data_pickup">{{ $formatDate(to) }}</span>
                 </div>
                 <div class="booking_form_actions">
                     De la:
@@ -145,6 +145,13 @@ export default {
             default: false,
         },
     },
+    async setup(props) {
+        const response = await BookableService.getPickupAndReturnOptions();
+        const pickupAndReturnPoints = response.data.data;
+        return {
+            pickupAndReturnPoints,
+        };
+    },
     data() {
         return {
             fromDate: this.$store.state.lastSearch.fromDate || null,
@@ -157,12 +164,7 @@ export default {
             loading: false,
             loadingData: true,
             status: null,
-            pickupAndReturnPoints: null,
         };
-    },
-    created() {
-        this.loadingData = true;
-        BookableService.getPickupAndReturnOptions().then((response) => (this.pickupAndReturnPoints = response.data.data)).then(() => (this.loadingData = false));
     },
     methods: {
         async check() {
