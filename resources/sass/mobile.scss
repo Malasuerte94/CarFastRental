@@ -143,8 +143,7 @@
                     padding-top: 80px;
                     margin-top: 40px;
                     border-radius: 10px;
-                    box-shadow: 0px 20px 17px -20px,
-                        0px -15px 20px 0px #0000000f;
+                    @include shadow(high);
                     .card-body {
                         padding: 0;
                         .car-details {
@@ -171,7 +170,7 @@
                                 }
                                 .car-year {
                                     font-size: 1rem;
-                                    color: $gray-600;
+                                    color: $cyan;
                                     text-align: right;
                                 }
                             }
@@ -242,7 +241,7 @@
         padding: 10px;
         .feature-card {
             background-size: 150%;
-            box-shadow: 0px 25px 15px -25px $secondary;
+            @include shadow(high);
             animation: border 6s ease-in-out infinite;
             align-items: center;
             background: linear-gradient(337deg, $secondary 0%, $primary 70%);
@@ -281,7 +280,7 @@
         }
         .booking_selector {
             border-radius: $radius;
-            box-shadow: 0px 25px 15px -25px #000000;
+            @include shadow(high);
             padding: $padding-box;
             input, select {
                 box-shadow: unset;
@@ -291,6 +290,9 @@
             }
             .mx-icon-calendar {
                 color: $secondary;
+            }
+            &.places {
+
             }
         }
         .search-button {
@@ -307,7 +309,7 @@
             &.active {
                 transform: translateY(-20px);
                 button {
-                    box-shadow: 0px 11px 15px -10px #000000;
+                    @include shadow(high);
                 }
             }
         }
@@ -322,7 +324,7 @@
         grid-row-gap: 10px;
         .feature-card {
             border-radius: 7px;
-            box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171b;
+            @include shadow(high);
             padding: 5px;
             background: white;
             position: relative;
@@ -350,7 +352,7 @@
         right: 0;
         left: 0;
         border-radius: $radius;
-        box-shadow: -1px 1px 4px 0px #0000001a, 0px 25px 15px -22px #16171b;
+        @include shadow(high);
         .mx-calendar {
             width: 100%;
             padding: 0;
@@ -393,7 +395,7 @@
             border: unset;
             padding: 0 $padding-box;
             background-color: $white;
-            box-shadow: $box-shadow-complex;
+            @include shadow(high);
             border-radius: $radius;
             .accordion__item {
                 display: flex;
@@ -434,7 +436,7 @@
                     font-weight: bold;
                     color: $secondary;
                     align-items: center;
-                    box-shadow: $box-shadow;
+                    @include shadow(high);
                     i {
                         margin-right: 5px;
                         line-height: inherit;
@@ -442,6 +444,25 @@
                 }
             }
         }
+    }
+
+    //checkout
+    .checkout {
+        padding: $padding-page;
+    }
+
+    .auth {
+        border-radius: $radius;
+        position: fixed;
+        bottom: 12vh;
+        background-color: $body-bg;
+        padding: $padding-box;
+        @include shadow(high);
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 80vw;
+        z-index: 100;
     }
 
     //filters-box
@@ -463,6 +484,17 @@
         opacity: 0.2;
         border-radius: 5px;
         margin: 1rem;
+    }
+
+    //PAGE OVERLAY
+    .overlay {
+        background-color: $secondary;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        z-index: 10;
     }
 
     //animations

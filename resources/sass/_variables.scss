@@ -1,18 +1,18 @@
 // Body
-$body-bg: #F3F5F7;
+$body-bg: #f3f5f7;
 
 // Typography
-$font-family-base: 'Source Sans Pro', sans-serif;
-$font-family-sans-serif: 'Oswald', sans-serif;
+$font-family-base: "Source Sans Pro", sans-serif;
+$font-family-sans-serif: "Oswald", sans-serif;
 
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
-$primary: #F4B755;
-$secondary: #16171B;
-$accent: #F4B755;
-$secconday_muted: #696969;
+$primary: #f4b755;
+$secondary: #16171b;
+$accent: #f4b755;
+$seconday_muted: #696969;
 
 $radius: 18px;
 $radius-small: 5px;
@@ -29,9 +29,6 @@ $padding-box: 20px;
 
 $selectors-radius: 0.7rem;
 
-$box-shadow-complex: -1px 1px 4px 0px rgba(0, 0, 0, 0.1019607843), 0px 25px 15px -22px #16171b;
-
-
 $blue: #3490dc;
 $indigo: #6574cd;
 $purple: #9561e2;
@@ -44,5 +41,34 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $white: #ffffff;
 
-
 $breakpoint-mobile: 768px;
+
+:root {
+  --shadow-color: 210deg 6% 68%;
+  --shadow-elevation-low:
+    0px 0px 0px hsl(var(--shadow-color) / 0.06),
+    0px 0.1px 0.1px -0.3px hsl(var(--shadow-color) / 0.2),
+    0.1px 0.2px 0.3px -0.6px hsl(var(--shadow-color) / 0.34);
+  --shadow-elevation-medium:
+    0px 0px 0px hsl(var(--shadow-color) / 0.05),
+    0.1px 0.1px 0.2px -0.1px hsl(var(--shadow-color) / 0.12),
+    0.1px 0.3px 0.4px -0.3px hsl(var(--shadow-color) / 0.19),
+    0.2px 0.4px 0.6px -0.4px hsl(var(--shadow-color) / 0.26),
+    0.3px 0.8px 1.2px -0.6px hsl(var(--shadow-color) / 0.33);
+  --shadow-elevation-high:
+    0px 0px 0px hsl(var(--shadow-color) / 0.05),
+    0.1px 0.3px 0.4px -0.1px hsl(var(--shadow-color) / 0.08),
+    0.2px 0.5px 0.8px -0.1px hsl(var(--shadow-color) / 0.11),
+    0.2px 0.7px 1px -0.2px hsl(var(--shadow-color) / 0.15),
+    0.3px 0.9px 1.3px -0.3px hsl(var(--shadow-color) / 0.18),
+    0.4px 1.2px 1.8px -0.3px hsl(var(--shadow-color) / 0.21),
+    0.5px 1.5px 2.2px -0.4px hsl(var(--shadow-color) / 0.24),
+    0.7px 2px 3px -0.5px hsl(var(--shadow-color) / 0.27),
+    0.9px 2.6px 3.9px -0.5px hsl(var(--shadow-color) / 0.31),
+    1.2px 3.4px 5.1px -0.6px hsl(var(--shadow-color) / 0.34);
+}
+
+@mixin shadow($elevation) {
+  box-shadow: var(--shadow-elevation-#{$elevation}),
+              0px 0px 0px hsl(var(--shadow-color) / 0.05);
+}

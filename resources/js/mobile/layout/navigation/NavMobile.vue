@@ -1,5 +1,10 @@
 <template>
-    <SwipeBottomNavigation class="navbar-mobile" :options="menu" v-model="selected">
+    <SwipeBottomNavigation
+        @modalOpen="openModal($event)"
+        class="navbar-mobile"
+        :options="menu"
+        v-model="selected"
+    >
         <template #icon="{ props }">
             <i :class="props.icon"></i>
         </template>
@@ -7,19 +12,28 @@
             <b>{{ props.title }}</b>
         </template>
     </SwipeBottomNavigation>
+    <transition v-if="openedModal" name="fade">
+        <div class="overlay"></div>
+    </transition>
+    <transition name="page-slide">
+        <Login v-if="openedModal == 'login'" />
+    </transition>
 </template>
 
 <script>
-import { SwipeBottomNavigation } from "bottom-navigation-vue";
-import "bottom-navigation-vue/dist/style.css";
+import { SwipeBottomNavigation } from "vue-navigation-advanced";
+import Login from "C:/wamp64/www/bookcar/resources/js/auth/Login";
+import "vue-navigation-advanced/dist/style.css";
 export default {
     name: "NavMobile",
     components: {
         SwipeBottomNavigation,
+        Login,
     },
     data() {
         return {
             selected: null,
+            modalOpen: null,
             menu: [
                 {
                     id: 1,
@@ -50,6 +64,8 @@ export default {
                     icon: "fas fa-user",
                     title: "Login",
                     path: { name: "login" },
+                    modal: true,
+                    modalName: "login",
                 },
             ],
         };
@@ -64,5 +80,34 @@ export default {
             default: false,
         },
     },
+    methods: {
+        openModal(modalName) {
+            if(!modalName) {
+                this.modalOpen = null
+                return
+            }
+            if(!this.menu.find((item) => item.modalName === modalName)) {
+                throw new Error(`Modal with name ${modalName} not found`)
+            }
+            if(modalName == this.openedModal) {
+                this.openedModal = this.selected = null
+                return
+            }
+            this.modalOpen = modalName
+        },
+    },
+    computed: {
+        openedModal: {
+            get() {
+                return this.modalOpen
+                    ? this.menu.find((item) => item.modalName === this.modalOpen)
+                        ?.modalName
+                    : null;
+            },
+            set(value) {
+                this.modalOpen = Boolean(value);
+            },
+        },
+    }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="checkout container">
     <success v-if="success">Congratulations on your purchase!</success>
-    <div class="row" v-else>
+    <div v-else>
       <div class="col-md-8" v-if="itemsInBasket">
         <div class="row">
           <div class="col-md-6 form-group">

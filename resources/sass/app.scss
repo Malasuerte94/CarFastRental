@@ -2,14 +2,13 @@
 @import url("https://fonts.googleapis.com/css?family=Oswald&family=Source+Sans+Pro");
 // Variables
 @import "variables";
-
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
+@import 'vuetify/dist/vuetify.css';
 
 // Font awesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
+
 //@import "@splidejs/vue-splide/css/core";
 @import '@splidejs/vue-splide/css';
 @import 'vue-datepicker-next/index.css';
@@ -224,7 +223,6 @@ h2, h6, h4 {
 
 
 //fade - animation router
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -240,22 +238,18 @@ h2, h6, h4 {
 .slide-leave-active {
   transition: all 0.75s ease-out;
 }
-
 .slide-enter-to {
   position: absolute;
   right: 0;
 }
-
 .slide-enter-from {
   position: absolute;
   right: -100%;
 }
-
 .slide-leave-to {
   position: absolute;
   left: -100%;
 }
-
 .slide-leave-from {
   position: absolute;
   left: 0;

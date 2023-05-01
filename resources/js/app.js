@@ -16,6 +16,16 @@ import Spacer from './shared/components/Spacer';
 import ApiService from './services/apiService';
 import Fallback from './shared/components/Fallback';
 
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
 const app = createApp({
   components: {
     Index,
@@ -34,6 +44,7 @@ app.use(router);
 app.use(DatePicker);
 app.use(Vue3MobileDetection);
 app.use(ApiService);
+app.use(vuetify);
 app.use(createStore(storeDefinition));
 
 app.component('star-rating', StarRating);
