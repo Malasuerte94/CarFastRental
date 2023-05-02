@@ -1,15 +1,14 @@
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Oswald&family=Source+Sans+Pro");
 // Variables
 @import "variables";
-@import 'vuetify/dist/vuetify.css';
 
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Oswald&family=Source+Sans+Pro");
 // Font awesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 
-//@import "@splidejs/vue-splide/css/core";
+@import 'vuetify/dist/vuetify.css';
 @import '@splidejs/vue-splide/css';
 @import 'vue-datepicker-next/index.css';
 
