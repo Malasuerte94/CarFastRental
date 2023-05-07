@@ -1,5 +1,5 @@
 <template>
-    <div class="container p-0">
+    <div class="homepage">
         <Suspense>
            <HeroBanner />
            <template #fallback>

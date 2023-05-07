@@ -1,5 +1,5 @@
 <template>
-    <div class="container p-0">
+    <div class="products">
         <loader v-if="loading" />
         <Bookables />
     </div>

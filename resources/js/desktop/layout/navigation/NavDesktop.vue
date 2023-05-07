@@ -1,29 +1,13 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-white border-bottom navbar-light">
-        <router-link class="navbar-brand mr-auto" :to="{ name: 'home' }">Bookings</router-link>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'basket' }">
-                    Basket
-                    <span v-if="itemsInBasket" class="badge badge-secondary">{{
-                        itemsInBasket
-                    }}</span>
-                </router-link>
-            </li>
-
-            <li class="nav-item" v-if="!isLoggedIn">
-                <router-link :to="{ name: 'register' }" class="nav-link">Register</router-link>
-            </li>
-
-            <li class="nav-item" v-if="!isLoggedIn">
-                <router-link :to="{ name: 'login' }" class="nav-link">Sign-in</router-link>
-            </li>
-
-            <li class="nav-item" v-if="isLoggedIn">
-                <a class="nav-link" href="#" @click.prevent="logout">Logout</a>
-            </li>
-        </ul>
-    </nav>
+    <v-container
+      class="bg-surface-variant mb-6"
+    >
+     <v-row class="navbar">
+            <v-col class="nav-item" v-for="(item, index) in menu" :key="index">
+                <router-link :to="{ name: item.path.name }" class="nav-link">{{ item.title }}</router-link>
+            </v-col>
+    </v-row>
+    </v-container>
 </template>
 
 
@@ -32,7 +16,43 @@ export default {
     name: 'NavDesktop',
     data() {
         return {
-        }
+            selected: null,
+            modalOpen: null,
+            menu: [
+                {
+                    id: 1,
+                    icon: "mdi mdi-home",
+                    title: "Home",
+                    path: { name: "home" },
+                },
+                {
+                    id: 2,
+                    icon: "mdi mdi-car-select",
+                    title: "Products",
+                    path: { name: "products" },
+                },
+                {
+                    id: 3,
+                    icon: "mdi mdi-magnify",
+                    title: "Search",
+                    path: { name: "register" },
+                },
+                {
+                    id: 4,
+                    icon: "mdi mdi-cart-outline",
+                    title: "Basket",
+                    path: { name: "basket" },
+                },
+                {
+                    id: 5,
+                    icon: "mdi mdi-account-arrow-right-outline",
+                    title: "Login",
+                    path: { name: "login" },
+                    modal: true,
+                    modalName: "login",
+                },
+            ],
+        };
     },
     props: {
         itemsInBasket: {

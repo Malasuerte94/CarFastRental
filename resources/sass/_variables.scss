@@ -4,42 +4,37 @@ $body-bg: #f3f5f7;
 // Typography
 $font-family-base: "Source Sans Pro", sans-serif;
 $font-family-sans-serif: "Oswald", sans-serif;
-
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
-$primary: #f4b755;
-$secondary: #16171b;
-$accent: #f4b755;
-$seconday_muted: #696969;
+$primary: #FB8C00;
+$primary_muted: #965200;
 
+$secondary: #16171b;
+$secondary-muted: #373a42;
+
+//font-colors
+$font-white: #ffffff;
+
+//bg-colors
+$bg-white: #ffffff;
+
+//radius
 $radius: 18px;
 $radius-small: 5px;
+$selectors-radius: 0.7rem;
 
+//margin
 $margin-small: 10px;
 $margin: 20px;
 
-$padding-page: 15px;
-
+//paddings
+$padding-extra-small: 5px;
 $padding: 10px;
 $padding-small: 10px;
-$padding-extra-small: 5px;
+$padding-page: 15px;
 $padding-box: 20px;
-
-$selectors-radius: 0.7rem;
-
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
-$white: #ffffff;
 
 $breakpoint-mobile: 768px;
 
@@ -72,3 +67,7 @@ $breakpoint-mobile: 768px;
   box-shadow: var(--shadow-elevation-#{$elevation}),
               0px 0px 0px hsl(var(--shadow-color) / 0.05);
 }
+
+
+//vuetify
+$v-theme-primary: $primary;

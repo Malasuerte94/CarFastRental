@@ -1,19 +1,16 @@
 <template>
     <div class="stock-simple">
+
         <h4 v-if="searchOnly" class="pt-6">
             {{ settings.settings.home_search_title.value }}
         </h4>
         <h4 v-else>Perioadă închiriere</h4>
         <transition name="list">
+            <v-card>
             <div
                 class="booking_selector"
                 :class="[{ 'search-only': searchOnly }]"
             >
-                <div v-if="!searchOnly" class="booking_icon_actions">
-                    <span class="icon_collapse"
-                        ><i class="fa fa-calendar-alt"></i
-                    ></span>
-                </div>
                 <div>
                     <label for="fromDate">Ridicare la Data și Ora</label>
                     <date-picker
@@ -85,6 +82,7 @@
                     />
                 </div>
             </div>
+            </v-card>
         </transition>
         <v-errors class="text-center" :errors="errorFor('fromDate')" />
         <v-errors class="text-center" :errors="errorFor('fromTime')" />
@@ -95,37 +93,32 @@
             <h4 class="mt-2">Ridicare & Returnare</h4>
 
             <transition name="fadeHeight">
+                <v-card>
                 <div class="booking_selector places">
-                    <div class="booking_icon_actions">
-                        <span class="icon_collapse"
-                            ><i class="fa fa-map-pin"></i
-                        ></span>
+                    <div>
+                        <v-select
+                            v-model="pickup"
+                            :items="pickupAndReturnPoints"
+                            :rules="[v => !!v || 'Item is required']"
+                            :item-value="v => v.id"
+                            :item-title="v => v.name"
+                            label="Punct Ridicare"
+                            required
+                        />
                     </div>
                     <div>
-                        <label for="pickup">Punct Ridicare</label>
-                        <select class="mx-input" name="pickup" v-model="pickup">
-                            <option
-                                v-for="option in pickupAndReturnPoints"
-                                :value="option.id"
-                                :key="option.id"
-                            >
-                                {{ option.name }}
-                            </option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="retour">Punct Returnare</label>
-                        <select class="mx-input" name="retour" v-model="retour">
-                            <option
-                                v-for="option in pickupAndReturnPoints"
-                                :value="option.id"
-                                :key="option.id"
-                            >
-                                {{ option.name }}
-                            </option>
-                        </select>
+                        <v-select
+                            v-model="retour"
+                            :items="pickupAndReturnPoints"
+                            :rules="[v => !!v || 'Item is required']"
+                            :item-value="v => v.id"
+                            :item-title="v => v.name"
+                            label="Punct Returnare"
+                            required
+                        />
                     </div>
                 </div>
+                </v-card>
             </transition>
 
             <div class="booking_details mt-2">
@@ -178,17 +171,13 @@
         </template>
         <template v-else>
             <div class="search-button" :class="[{ active: showSearchButton }]">
-                <button
-                    @click="check"
-                    class="btn btn-secondary btn-block"
-                    :disabled="loading || !showSearchButton"
-                >
-                    <span v-if="!loading">Caută...</span>
-                    <span v-if="loading"
-                        ><i class="fas fa-circle-notch fa-spin"></i>
-                        Verificăm...</span
-                    >
-                </button>
+                <v-btn class="special-search" @click="check" block :disabled="loading || !showSearchButton">
+                        <span v-if="!loading">Caută...</span>
+                        <span v-if="loading"
+                            ><i class="fas fa-circle-notch fa-spin"></i>
+                            Verificăm...</span
+                        >
+                </v-btn>
             </div>
         </template>
     </div>

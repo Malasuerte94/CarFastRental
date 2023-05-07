@@ -31,10 +31,10 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.0",
+        "@mdi/font": "^7.2.96",
         "@splidejs/vue-splide": "^0.6.12",
         "bottom-navigation-vue": "^3.3.2",
         "moment": "^2.29.1",
-        "vue-collapsed": "^1.1.2",
         "vue-datepicker-next": "^1.0.3",
         "vue-faq-accordion": "^1.6.2",
         "vue-navigation-advanced": "^1.0.6",

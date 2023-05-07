@@ -1,5 +1,74 @@
 @media (min-width: $breakpoint-mobile) {
+    html {
+        background-color: $secondary;
+    }
     .adjectives-row {
         grid-template-columns: repeat(5, 1fr);
+    }
+    .main-page {
+        max-height: 90vh;
+        max-width: 90vw;
+        overflow: hidden;
+        margin: auto;
+        margin-top: 5vh;
+        @include shadow(high);
+        padding: 20px;
+        border-radius: $radius;
+        background-color: $bg-white;
+    }
+    .homepage {
+            //hero
+    .hero-banner {
+        .hero-container {
+            height: 30vh;
+            position: relative;
+            .features {
+                top: 10%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                grid-column-gap: 15px;
+                position: absolute;
+                left: 10%;
+                transform: rotate3d(10, 30, 0, 45deg);
+                .car-feature-hero {
+                    .car-feature-icon-hero {
+                        height: 30px;
+                        width: auto;
+                    }
+                    .car-feature-value-hero {
+                    }
+                }
+            }
+            .card-img {
+                animation: float 6s ease-in-out infinite;
+                max-width: 100%;
+            }
+            .hero-title {
+                font-size: 3rem;
+                position: absolute;
+                top: 57%;
+                left: 30px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                color: black;
+                width: 100vw;
+                font-weight: bold;
+            }
+            .hero-price {
+                color: $primary;
+                font-size: 1rem;
+                position: absolute;
+                top: 57%;
+                left: 42px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                width: 100vw;
+                font-weight: bold;
+            }
+        }
+    }
     }
 }

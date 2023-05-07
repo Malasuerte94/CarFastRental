@@ -37,31 +37,31 @@ export default {
             menu: [
                 {
                     id: 1,
-                    icon: "fas fa-home",
+                    icon: "mdi mdi-home",
                     title: "Home",
                     path: { name: "home" },
                 },
                 {
                     id: 2,
-                    icon: "fas fa-car",
+                    icon: "mdi mdi-car-select",
                     title: "Products",
                     path: { name: "products" },
                 },
                 {
                     id: 3,
-                    icon: "fas fa-search",
+                    icon: "mdi mdi-magnify",
                     title: "Search",
                     path: { name: "register" },
                 },
                 {
                     id: 4,
-                    icon: "fas fa-shopping-cart",
+                    icon: "mdi mdi-cart-outline",
                     title: "Basket",
                     path: { name: "basket" },
                 },
                 {
                     id: 5,
-                    icon: "fas fa-user",
+                    icon: "mdi mdi-account-arrow-right-outline",
                     title: "Login",
                     path: { name: "login" },
                     modal: true,

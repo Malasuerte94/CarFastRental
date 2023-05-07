@@ -6,7 +6,7 @@
             v-if="$isMobile()"
         />
         <NavDesktop v-else />
-        <router-view v-slot="{ Component }">
+        <router-view class="main-page" v-slot="{ Component }">
             <transition name="page-slide" mode="out-in">
                 <component :is="Component" v-cloak />
             </transition>

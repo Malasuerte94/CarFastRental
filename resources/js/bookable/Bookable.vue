@@ -1,5 +1,5 @@
 <template>
-    <div class="product-page container">
+    <div class="product-page">
         <div class="col-lg-12 p-0">
             <div class="row">
                 <div class="col-md-8 p-0">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 pb-4 pt-4">
+                <div class="container col-md-4 pb-4 pt-4">
                     <Suspense>
                         <stock-simple
                             :bookable-id="this.$route.params.id"

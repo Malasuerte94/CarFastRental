@@ -2,6 +2,9 @@
     ::-webkit-scrollbar {
         -webkit-appearance: none;
     }
+    .container {
+        padding: 0px $padding-page;
+    }
 
     h2 {
         font-weight: bold;
@@ -12,6 +15,7 @@
         text-align: left;
         color: $secondary;
         margin-left: 10px;
+        margin-bottom: 0.5rem;
     }
 
     .title-no-container {
@@ -24,19 +28,26 @@
     .page {
         padding-bottom: 100px;
     }
-    .product-page {
 
-    .car-bg {
-            background-image: linear-gradient(180deg, rgba(255,0,0,0) 50%, rgb(243 245 247) 100%), url(/storage/assets/car_background.png);
+    .product-page {
+        .car-bg {
+            img {
+                width: 100%;
+            }
+            background-image: linear-gradient(
+                    180deg,
+                    rgba(255, 0, 0, 0) 50%,
+                    rgb(243 245 247) 100%
+                ),
+                url(/storage/assets/car_background.png);
             background-size: contain;
             background-repeat: no-repeat;
             background-size: cover;
             background-position-y: 130%;
-    }
-    .product-content {
-        padding: 0px $padding-page;
-    }
-
+        }
+        .product-content {
+            padding: 0px $padding-page;
+        }
     }
 
     .adjectives-row {
@@ -63,16 +74,13 @@
         .sm-btn-icon {
             color: $secondary;
         }
-        .border-swiper
-         {
+        .border-swiper {
             background-color: $primary !important;
         }
         .sm-btn-icon-active,
-        .sm-btn-title-active
-        {
-                        color: $primary !important;
+        .sm-btn-title-active {
+            color: $primary !important;
         }
-
     }
 
     //hero
@@ -100,6 +108,7 @@
             }
             .card-img {
                 animation: float 6s ease-in-out infinite;
+                max-width: 100%;
             }
             .hero-title {
                 font-size: 3rem;
@@ -114,7 +123,7 @@
                 font-weight: bold;
             }
             .hero-price {
-                color: $accent;
+                color: $primary;
                 font-size: 1rem;
                 position: absolute;
                 top: 57%;
@@ -138,94 +147,89 @@
             grid-template-columns: repeat(1, 1fr);
             grid-gap: 20px;
             .bookable-card {
-                .card {
-                    border: unset;
-                    padding-top: 80px;
-                    margin-top: 40px;
-                    border-radius: 10px;
-                    @include shadow(high);
-                    .card-body {
-                        padding: 0;
-                        .car-details {
-                            .img-box {
-                                position: absolute;
-                                top: -55px;
-                                left: -20px;
-                                .card-img {
-                                    height: 140px;
-                                    width: auto;
-                                }
-                            }
-                            .car-title {
-                                font-size: 2rem;
-                                position: absolute;
-                                top: 0;
-                                right: 0;
-                                margin: 20px;
-                                .car-name {
-                                    font-family: $font-family-sans-serif;
-                                    font-weight: bold;
-                                    font-size: 1.5rem;
-                                    margin-bottom: 0;
-                                }
-                                .car-year {
-                                    font-size: 1rem;
-                                    color: $cyan;
-                                    text-align: right;
-                                }
+                margin-top: 40px;
+                .v-card {
+                    padding-top: 90px;
+                    overflow: visible;
+                    .car-details {
+                        .img-box {
+                            position: absolute;
+                            top: -55px;
+                            left: -20px;
+                            .card-img {
+                                height: 140px;
+                                width: auto;
                             }
                         }
-                        .car-features {
-                            display: flex;
-                            justify-content: space-around;
-                            border-top: 1px solid #e6e6e6;
-                            border-bottom: 1px solid #e6e6e6;
-                            .car-feature {
-                                display: flex;
-                                align-items: center;
-                                .car-feature-icon {
-                                    max-height: 30px;
-                                    padding: 2px;
-                                    height: 30px;
-                                    width: auto;
-                                }
-                                .car-feature-value {
-                                    font-size: 1rem;
-                                    margin-left: 5px;
-                                    font-weight: bold;
-                                }
-                            }
-                        }
-                        .car-cta {
-                            display: flex;
-                            justify-content: space-between;
-                            .car-price {
+                        .car-title {
+                            font-size: 2rem;
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            margin: 20px;
+                            .car-name {
                                 font-family: $font-family-sans-serif;
-                                font-size: 1.5rem;
-                                color: $accent;
-                                margin-left: 20px;
-                                margin-top: 20px;
-                                span {
-                                    color: grey;
-                                    font-size: 1rem;
-                                    margin-left: 5px;
-                                }
-                            }
-                            .car-button {
                                 font-weight: bold;
-                                text-transform: uppercase;
-                                width: 40%;
-                                text-align: center;
-                                margin-top: 20px;
-                                border-top-right-radius: 0;
-                                border-bottom-right-radius: 10px;
-                                border-top-left-radius: 10px;
-                                border-bottom-left-radius: 0px;
-                                background: $primary;
-                                padding: 10px;
-                                color: $white;
-                                font-size: 1rem;
+                                font-size: 1.5rem;
+                                margin-bottom: 0;
                             }
+                            .car-year {
+                                font-size: 1rem;
+                                color: blue;
+                                text-align: right;
+                            }
+                        }
+                    }
+                    .car-features {
+                        display: flex;
+                        justify-content: space-around;
+                        border-top: 1px solid #e6e6e6;
+                        border-bottom: 1px solid #e6e6e6;
+                        .car-feature {
+                            display: flex;
+                            align-items: center;
+                            .car-feature-icon {
+                                max-height: 30px;
+                                padding: 2px;
+                                height: 30px;
+                                width: auto;
+                            }
+                            .car-feature-value {
+                                font-size: 1rem;
+                                margin-left: 5px;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                    .car-cta {
+                        display: flex;
+                        justify-content: space-between;
+                        .car-price {
+                            font-family: $font-family-sans-serif;
+                            font-size: 1.5rem;
+                            color: $primary;
+                            margin-left: 20px;
+                            margin-top: 20px;
+                            span {
+                                color: grey;
+                                font-size: 1rem;
+                                margin-left: 5px;
+                            }
+                        }
+                        .car-button {
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            width: 40%;
+                            text-align: center;
+                            margin-top: 20px;
+                            border-top-right-radius: 0;
+                            border-bottom-right-radius: 10px;
+                            border-top-left-radius: 10px;
+                            border-bottom-left-radius: 0px;
+                            background: $primary;
+                            padding: 10px;
+                            color: $font-white;
+                            font-size: 1rem;
                         }
                     }
                 }
@@ -279,10 +283,9 @@
             margin-left: 10px;
         }
         .booking_selector {
-            border-radius: $radius;
-            @include shadow(high);
             padding: $padding-box;
-            input, select {
+            input,
+            select {
                 box-shadow: unset;
                 border: 1px #c5c5c5 solid;
                 color: $secondary;
@@ -291,26 +294,16 @@
             .mx-icon-calendar {
                 color: $secondary;
             }
-            &.places {
-
-            }
         }
         .search-button {
             position: relative;
-            transform: translateY(-50px);
+            transform: translateY(-30px);
             transition: all 0.5s;
-            z-index: 0;
+            z-index: -1;
             margin-bottom: 10px;
-            button {
-                padding-top: 30px;
-                padding-bottom: 10px;
-                border-radius: 0px 0px $radius $radius;
-            }
             &.active {
-                transform: translateY(-20px);
-                button {
-                    @include shadow(high);
-                }
+                z-index: 1;
+                transform: translateY(-10px);
             }
         }
     }
@@ -392,24 +385,11 @@
     //faq box
     .faq-box {
         .accordion {
-            border: unset;
-            padding: 0 $padding-box;
-            background-color: $white;
-            @include shadow(high);
-            border-radius: $radius;
-            .accordion__item {
-                display: flex;
-                border-bottom: 1px solid #e2e2e2;
-                .accordion__title {
-                    font-weight: bold;
-                    padding: $padding-box;
-                    color: $secondary;
-                    &.active {
-                        color: $primary;
-                    }
-                }
-                p {
-                    padding: $padding;
+            .v-expansion-panel-title {
+                font-family: $font-family-sans-serif;
+                &--active {
+                    color: $font-white;
+                    background-color: $primary;
                 }
             }
         }
@@ -421,6 +401,7 @@
         padding: $padding-box $padding;
         .cta-phone-box {
             .cta-phone-title {
+                color: $font-white;
                 text-align: center;
                 margin-bottom: $margin;
             }
@@ -428,7 +409,7 @@
                 display: flex;
                 justify-content: space-evenly;
                 .cta-phone-element {
-                    background-color: $white;
+                    background-color: $font-white;
                     display: flex;
                     padding: $padding-extra-small $padding-box;
                     border-radius: $radius;
@@ -523,14 +504,14 @@
     }
 
     @keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
 }

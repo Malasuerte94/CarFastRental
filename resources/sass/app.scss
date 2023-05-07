@@ -3,11 +3,8 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Oswald&family=Source+Sans+Pro");
-// Font awesome
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
-@import "~@fortawesome/fontawesome-free/scss/regular";
-@import "~@fortawesome/fontawesome-free/scss/solid";
 
+@import '@mdi/font/css/materialdesignicons.css';
 @import 'vuetify/dist/vuetify.css';
 @import '@splidejs/vue-splide/css';
 @import 'vue-datepicker-next/index.css';
@@ -21,6 +18,15 @@
     opacity: 0.5;
 }
 
+body {
+    font-family: $font-family-base;
+}
+
+a {
+    text-decoration: none;
+    color: $primary;
+}
+
 h2, h6, h4 {
     font-family: $font-family-sans-serif;
 }
@@ -29,32 +35,10 @@ h2, h6, h4 {
     height: 40px;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to
-
-/* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-}
-
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 0.4s;
-}
-
-.v-enter,
-.v-leave-to
-
-/* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-}
-
-.data_pickup {
-    color: $blue;
+.v-btn {
+    color: $font-white !important;
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
 }
 
 .booking_selector {
@@ -63,7 +47,7 @@ h2, h6, h4 {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 0.5rem;
     z-index: 1;
-    background-color: $white;
+    background-color: $bg-white;
     align-items: center;
     box-shadow: #00000052 0 0 10px 0px;
 
@@ -99,7 +83,7 @@ h2, h6, h4 {
     height: 50px;
     font-size: 30px;
     line-height: 30px;
-    color: $white;
+    color: $font-white;
     box-shadow: #00000052 0 0 10px 0px;
     transition: 0.5s;
 
@@ -148,7 +132,7 @@ h2, h6, h4 {
     .button_collapse_adjectives {
         box-shadow: #0000002e 0px 5px 4px 0px;
         z-index: 2;
-        background-color: $white;
+        background-color: $bg-white;
         display: block;
         text-align: center;
         vertical-align: middle;
@@ -161,10 +145,6 @@ h2, h6, h4 {
         transition: all 0.5s;
         position: absolute;
         bottom: -45px;
-
-        i {
-            color: $blue;
-        }
     }
 }
 
@@ -277,4 +257,18 @@ transition: 400ms ease all;
 .list-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+
+
+//venter
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.4s;
+}
+
+.v-enter,
+.v-leave-to
+
+/* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
 }
