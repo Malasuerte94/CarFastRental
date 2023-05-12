@@ -5,17 +5,27 @@
     .adjectives-row {
         grid-template-columns: repeat(5, 1fr);
     }
+
     .main-page {
-        max-height: 90vh;
+        max-height: 80vh;
         max-width: 90vw;
         overflow: hidden;
         margin: auto;
-        margin-top: 5vh;
+        margin-bottom: 5vh;
         @include shadow(high);
         padding: 20px;
         border-radius: $radius;
         background-color: $bg-white;
     }
+    .nav-bar {
+        margin-top: 5vh;
+        height: 5vh;
+        margin-bottom: 20px;
+        .nav-item {
+            text-align: center;
+        }
+    }
+
     .homepage {
             //hero
     .hero-banner {

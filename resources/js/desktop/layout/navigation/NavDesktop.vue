@@ -1,7 +1,5 @@
 <template>
-    <v-container
-      class="bg-surface-variant mb-6"
-    >
+    <v-container class="nav-bar">
      <v-row class="navbar">
             <v-col class="nav-item" v-for="(item, index) in menu" :key="index">
                 <router-link :to="{ name: item.path.name }" class="nav-link">{{ item.title }}</router-link>
