@@ -2,7 +2,7 @@
     <Transition name="fade">
     <div class="loader">
         <Vue3Lottie class="spinner" ref="anim" :loop="true"
-            :animationData="require('/storage/uploads/car_loading.json')" />
+            :animationData="require('/storage/uploads/loading.json')" />
     </div>
     </Transition>
 </template>

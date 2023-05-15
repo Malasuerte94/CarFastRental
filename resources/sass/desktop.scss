@@ -7,19 +7,14 @@
     }
 
     .main-page {
-        max-height: 80vh;
-        max-width: 90vw;
-        overflow: hidden;
-        margin: auto;
-        margin-bottom: 5vh;
-        @include shadow(high);
+        margin: 10px;
         padding: 20px;
         border-radius: $radius;
         background-color: $bg-white;
     }
     .nav-bar {
-        margin-top: 5vh;
-        height: 5vh;
+        margin-top: 20px;
+        height: 80px;
         margin-bottom: 20px;
         .nav-item {
             text-align: center;

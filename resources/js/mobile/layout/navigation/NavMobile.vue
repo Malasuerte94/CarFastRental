@@ -22,7 +22,7 @@
 
 <script>
 import { SwipeBottomNavigation } from "vue-navigation-advanced";
-import Login from "C:/wamp64/www/bookcar/resources/js/auth/Login";
+import Login from '../../../auth/Login.vue'
 import "vue-navigation-advanced/dist/style.css";
 export default {
     name: "NavMobile",

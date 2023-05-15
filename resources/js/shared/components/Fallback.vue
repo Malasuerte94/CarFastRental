@@ -1,7 +1,7 @@
 <template>
     <div class="fallback-loading" :style="{ height: height + 'px' }">
         <Vue3Lottie class="spinner" ref="anim" :loop="true"
-            :animationData="require('/storage/uploads/car_loading.json')" />
+            :animationData="require('/storage/uploads/loading.json')" />
     </div>
 </template>
 
