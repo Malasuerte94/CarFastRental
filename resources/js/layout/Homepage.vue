@@ -1,51 +1,36 @@
 <template>
     <div class="homepage">
-        <Suspense>
-           <HeroBanner />
-           <template #fallback>
-                <fallback :height="230" />
-           </template>
-        </Suspense>
-
-        <div class="title-no-container">
-            <h4>
-                {{ settings.settings.feature_icons_title.value }}
-            </h4>
+        <div class="homepage-hero">
+            <Suspense>
+                <HeroBanner />
+                <template #fallback>
+                    <fallback :height="230" />
+                </template>
+            </Suspense>
+            <div>
+            <Suspense>
+                <FeatureIconTitle />
+                <template #fallback>
+                    <fallback :height="90" />
+                </template>
+            </Suspense>
+            <Spacer />
+            <SearchFrom />
+            </div>
         </div>
-
         <Suspense>
-           <FeatureIconTitle />
-           <template #fallback>
-                <fallback :height="90" />
-           </template>
-        </Suspense>
-
-        <Spacer/>
-
-        <SearchFrom />
-
-        <div class="title-no-container">
-            <h4>
-                {{ settings.settings.home_faq_title.value }}
-            </h4>
-        </div>
-
-        <Suspense>
-           <Faq />
-           <template #fallback>
+            <Faq />
+            <template #fallback>
                 <fallback :height="390" />
-           </template>
+            </template>
         </Suspense>
-
-        <Spacer/>
-
+        <Spacer />
         <Suspense>
-           <CtaPhone />
-           <template #fallback>
+            <CtaPhone />
+            <template #fallback>
                 <fallback :height="390" />
-           </template>
+            </template>
         </Suspense>
-
     </div>
 </template>
 
@@ -59,11 +44,17 @@ import Faq from "./Faq";
 
 export default {
     name: "Homepage",
-    components: { HeroBanner, FeatureCards, SearchFrom, FeatureIconTitle, CtaPhone, Faq},
+    components: {
+        HeroBanner,
+        FeatureCards,
+        SearchFrom,
+        FeatureIconTitle,
+        CtaPhone,
+        Faq,
+    },
     data() {
         return {
             loading: false,
-            settings: this.$store.state.settings,
         };
     },
     mounted() {

@@ -19,7 +19,6 @@ import NavDesktop from "./desktop/layout/navigation/NavDesktop.vue";
 import NavMobile from "./mobile/layout/navigation/NavMobile.vue";
 import settingsService from "./services/settingsService";
 import { mapState, mapGetters } from "vuex";
-import axios from 'axios';
 
 export default {
     name: "Index",
@@ -53,7 +52,6 @@ export default {
         },
         async logout() {
             try {
-                axios.post("/logout");
                 this.$store.dispatch("logout");
             } catch (error) {
                 this.$store.dispatch("logout");

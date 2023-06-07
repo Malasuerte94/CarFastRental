@@ -1,0 +1,486 @@
+    .container {
+        padding: 0px $padding-page;
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+        text-align: left;
+        color: $primary;
+        margin-left: 10px;
+        margin-bottom: 0.5rem;
+    }
+
+    .title-no-container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .page {
+        padding-bottom: 100px;
+    }
+    .homepage {
+        .homepage-hero {
+            display: flex;
+            gap: $margin;
+            align-items: center;
+        }
+    }
+
+    .product-page {
+        .car-bg {
+            img {
+                width: 100%;
+            }
+            background-image: linear-gradient(
+                    180deg,
+                    rgba(255, 0, 0, 0) 50%,
+                    rgb(243 245 247) 100%
+                ),
+                url(/storage/assets/car_background.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-y: 130%;
+        }
+        .product-content {
+            padding: 0px $padding-page;
+        }
+    }
+
+    .adjectives-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #app:after {
+        content: " ";
+        height: 180px;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        z-index: -1;
+        overflow: hidden;
+        background-image: $primary;
+    }
+    //navbar
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .navbar-mobile {
+        .sm-btn-icon {
+            color: $secondary;
+        }
+        .border-swiper {
+            background-color: $primary !important;
+        }
+        .sm-btn-icon-active,
+        .sm-btn-title-active {
+            color: $primary !important;
+        }
+    }
+
+    //hero
+    .hero-banner {
+        width: 100%;
+        .hero-container {
+            height: auto;
+            position: relative;
+            .features {
+                top: 10%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                grid-column-gap: 15px;
+                position: absolute;
+                left: 10%;
+                transform: rotate3d(10, 30, 0, 45deg);
+                .car-feature-hero {
+                    .car-feature-icon-hero {
+                        height: 30px;
+                        width: auto;
+                    }
+                    .car-feature-value-hero {
+                    }
+                }
+            }
+            .card-img {
+                animation: float 6s ease-in-out infinite;
+                max-width: 100%;
+            }
+            .hero-title {
+                font-size: 3rem;
+                position: absolute;
+                top: 57%;
+                left: 30px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                color: black;
+                width: 100vw;
+                font-weight: bold;
+            }
+            .hero-price {
+                color: $primary;
+                font-size: 1rem;
+                position: absolute;
+                top: 57%;
+                left: 42px;
+                margin: auto;
+                text-align: center;
+                display: block;
+                width: 100vw;
+                font-weight: bold;
+            }
+        }
+    }
+
+    //bookables page
+    .bookables-page {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+        .bookables-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 20px;
+            .bookable-card {
+                margin-top: 40px;
+                .v-card {
+                    padding-top: 90px;
+                    overflow: visible;
+                    .car-details {
+                        .img-box {
+                            position: absolute;
+                            top: -55px;
+                            left: -20px;
+                            .card-img {
+                                height: 140px;
+                                width: auto;
+                            }
+                        }
+                        .car-title {
+                            font-size: 2rem;
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            margin: 20px;
+                            .car-name {
+                                font-family: $font-family-sans-serif;
+                                font-weight: bold;
+                                font-size: 1.5rem;
+                                margin-bottom: 0;
+                            }
+                            .car-year {
+                                font-size: 1rem;
+                                color: blue;
+                                text-align: right;
+                            }
+                        }
+                    }
+                    .car-features {
+                        display: flex;
+                        justify-content: space-around;
+                        border-top: 1px solid #e6e6e6;
+                        border-bottom: 1px solid #e6e6e6;
+                        .car-feature {
+                            display: flex;
+                            align-items: center;
+                            .car-feature-icon {
+                                max-height: 30px;
+                                padding: 2px;
+                                height: 30px;
+                                width: auto;
+                            }
+                            .car-feature-value {
+                                font-size: 1rem;
+                                margin-left: 5px;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                    .car-cta {
+                        display: flex;
+                        justify-content: space-between;
+                        .car-price {
+                            font-family: $font-family-sans-serif;
+                            font-size: 1.5rem;
+                            color: $primary;
+                            margin-left: 20px;
+                            margin-top: 20px;
+                            span {
+                                color: grey;
+                                font-size: 1rem;
+                                margin-left: 5px;
+                            }
+                        }
+                        .car-button {
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            width: 40%;
+                            text-align: center;
+                            margin-top: 20px;
+                            border-top-right-radius: 0;
+                            border-bottom-right-radius: 10px;
+                            border-top-left-radius: 10px;
+                            border-bottom-left-radius: 0px;
+                            background: $primary;
+                            padding: 10px;
+                            color: $font-white;
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //feature cards
+    .feature-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        padding: 10px;
+        .feature-card {
+            background-size: 150%;
+            @include shadow(high);
+            animation: border 6s ease-in-out infinite;
+            align-items: center;
+            background: linear-gradient(337deg, $secondary 0%, $primary 70%);
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+            .feature-card-header {
+                display: flex;
+                align-items: center;
+                i {
+                    margin-right: 10px;
+                }
+                h3 {
+                    font-size: 1.2rem;
+                    margin-bottom: 0px;
+                }
+            }
+            .feature-card-content {
+                margin-top: 10px;
+                .feature-card-description {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    //stock simple
+    .stock-simple {
+        .title-search {
+            font-size: 1.2rem;
+            text-align: left;
+            color: $secondary;
+            margin-left: 10px;
+        }
+        .booking_selector {
+            padding: $padding-box;
+            input,
+            select {
+                box-shadow: unset;
+                border: 1px #c5c5c5 solid;
+                color: $secondary;
+                font-family: $font-family-sans-serif;
+            }
+            .mx-icon-calendar {
+                color: $secondary;
+            }
+        }
+        .search-button {
+            position: relative;
+            transform: translateY(-30px);
+            transition: all 0.5s;
+            z-index: -1;
+            margin-bottom: 10px;
+            &.active {
+                z-index: 1;
+                transform: translateY(-10px);
+            }
+        }
+    }
+
+    //feature icon title
+    .feature-icon-title {
+        width: 100%;
+        .content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+            .feature-card {
+                border-radius: 7px;
+                @include shadow(high);
+                padding: 5px;
+                background: white;
+                position: relative;
+                overflow: hidden;
+                img {
+                    max-height: 120%;
+                    position: absolute;
+                    right: -10px;
+                    color: $primary;
+                    opacity: 0.3;
+                    bottom: 0;
+                }
+            }
+            h3 {
+                font-size: 0.8rem;
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    //calendar
+    .mx-datepicker-popup {
+        width: 90%;
+        padding: 10px;
+        margin: auto;
+        right: 0;
+        left: 0;
+        border-radius: $radius;
+        @include shadow(high);
+        .mx-calendar {
+            width: 100%;
+            padding: 0;
+            .mx-calendar-content {
+                .cell {
+                    &.active {
+                        background: $primary;
+                        color: white;
+                        border-radius: $radius-small;
+                        font-weight: bold;
+                        &:hover {
+                            background: $primary;
+                            color: white;
+                        }
+                    }
+                    &.today {
+                        color: $primary;
+                    }
+                }
+
+                thead {
+                    font-family: $font-family-sans-serif;
+                    font-weight: bold;
+                }
+            }
+        }
+        .mx-time {
+            width: 100%;
+            .mx-time-option {
+                &.active {
+                    color: $primary;
+                }
+            }
+        }
+    }
+
+    //faq box
+    .faq-box {
+        .accordion {
+            .v-expansion-panel-title {
+                font-family: $font-family-sans-serif;
+                &--active {
+                    color: $font-white;
+                    background-color: $primary;
+                }
+            }
+        }
+    }
+
+    //cta phone
+    .cta-phone {
+        background-color: $primary;
+        padding: $padding-box $padding;
+        .cta-phone-box {
+            .cta-phone-title {
+                color: $font-white;
+                text-align: center;
+                margin-bottom: $margin;
+            }
+            .cta-phone-buttons {
+                display: flex;
+                justify-content: space-evenly;
+                .cta-phone-element {
+                    background-color: $font-white;
+                    display: flex;
+                    padding: $padding-extra-small $padding-box;
+                    border-radius: $radius;
+                    text-align: center;
+                    font-weight: bold;
+                    color: $secondary;
+                    align-items: center;
+                    @include shadow(high);
+                    i {
+                        margin-right: 5px;
+                        line-height: inherit;
+                    }
+                }
+            }
+        }
+    }
+
+    //checkout
+    .checkout {
+        padding: $padding-page;
+    }
+
+    .auth {
+        border-radius: $radius;
+        position: fixed;
+        bottom: 12vh;
+        background-color: $body-bg;
+        padding: $padding-box;
+        @include shadow(high);
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 80vw;
+        z-index: 100;
+    }
+
+    //filters-box
+    .filters-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    //search form
+    .search-form {
+    }
+
+    .fallback-loading {
+        background: linear-gradient(90deg, rgb(213 213 213), rgb(169 169 169));
+        background-size: 200% 200%;
+        animation: gradient 2s ease-in-out infinite;
+        opacity: 0.2;
+        border-radius: 5px;
+        margin: 1rem;
+    }
+
+    //PAGE OVERLAY
+    .overlay {
+        background-color: $secondary;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        z-index: 10;
+    }

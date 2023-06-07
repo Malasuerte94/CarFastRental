@@ -9,9 +9,9 @@
 @import '@splidejs/vue-splide/css';
 @import 'vue-datepicker-next/index.css';
 
+@import "common";
 @import "desktop";
-@import "mobile";
-
+//@import "mobile";
 
 [v-cloak] > * {
     background-color: red;

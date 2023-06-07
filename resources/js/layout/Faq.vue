@@ -1,5 +1,10 @@
 <template>
     <div class="container faq-box">
+        <div>
+            <h4>
+                {{ $store.state.settings.settings.home_faq_title.value }}
+            </h4>
+        </div>
         <div class="accordion">
              <v-expansion-panels>
                 <v-expansion-panel
