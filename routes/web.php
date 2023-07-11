@@ -25,7 +25,9 @@ use Illuminate\Support\Facades\Route;
 // require __DIR__ . '/auth.php';\
 
 Route::get('/foo', function () {
-    Artisan::call('storage:link');
+    $target = '/storage/app/public';
+    $shortcut = '/public/storage';
+    symlink($target, $shortcut);
 });
 
 Auth::routes();
