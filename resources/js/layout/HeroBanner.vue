@@ -3,6 +3,7 @@
         :options="{ rewind: false, arrows: false, pagination: false, type: 'loop' }" aria-label="Hero Header">
         <SplideSlide v-for="product in products" :key="product.id">
             <div class="hero-container">
+                wa
                 <div class="features">
                     <div class="car-feature-hero" v-for="(feature, key) in product.features" :key="key">
                         <img
