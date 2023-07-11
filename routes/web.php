@@ -26,11 +26,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/foo', function () {
     dump('ok');
-    $target = storage_path('app/public');
-    $shortcut = $_SERVER['DOCUMENT_ROOT'] . '/storage';
-    dump($target, $shortcut);
-
-    symlink($target, $shortcut);
+    symlink('/home/vaperoma/car.catalin-ene.ro/storage/app/public', '/home/vaperoma/car.catalin-ene.ro/public/storage');
+    echo 'Symlink process successfully completed';
 });
 
 Auth::routes();
