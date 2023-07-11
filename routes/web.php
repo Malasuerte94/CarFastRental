@@ -25,8 +25,11 @@ use Illuminate\Support\Facades\Route;
 // require __DIR__ . '/auth.php';\
 
 Route::get('/foo', function () {
+    dump('ok');
     $target = storage_path('app/public');
     $shortcut = $_SERVER['DOCUMENT_ROOT'] . '/storage';
+    dump($target, $shortcut);
+
     symlink($target, $shortcut);
 });
 
