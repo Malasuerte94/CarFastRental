@@ -1,9 +1,7 @@
 <template>
-    <Splide class="hero-banner" v-if="products"
-        :options="{ rewind: false, arrows: false, pagination: false, type: 'loop' }" aria-label="Hero Header">
-        <SplideSlide v-for="product in products" :key="product.id">
-            <div class="hero-container">
-                wa
+    <div class="hero-banner" v-if="products" aria-label="Hero Header">
+        <div v-for="(product, index) in products" :key="product.id">
+            <div class="hero-container" v-if="banner === index">
                 <div class="features">
                     <div class="car-feature-hero" v-for="(feature, key) in product.features" :key="key">
                         <img
@@ -20,8 +18,8 @@
                     <span class="hero-price">De la {{ product.price }} LEI</span>
                 </router-link>
             </div>
-        </SplideSlide>
-    </Splide>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -30,10 +28,14 @@ import SettingsService from "./../services/settingsService";
 
 export default {
     name: 'HeroBanner',
-    components: { Splide, SplideSlide },
+    data() {
+      return {
+        banner: 1,
+      };
+    },
     async setup() {
-        let products = await SettingsService.getHeroProducts()
-        return { products: products.data.data }
+          let products = await SettingsService.getHeroProducts()
+          return { products: products.data.data }
     }
 }
 </script>

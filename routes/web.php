@@ -24,11 +24,11 @@ use Illuminate\Support\Facades\Route;
 
 // require __DIR__ . '/auth.php';\
 
-Route::get('/foo', function () {
-    dump('ok');
-    symlink('/home/vaperoma/car.catalin-ene.ro/storage/app/public', '/home/vaperoma/car.catalin-ene.ro/public/storage');
-    echo 'Symlink process successfully completed';
-});
+//Route::get('/foo', function () {
+//    dump('ok');
+//    symlink('/home/vaperoma/car.catalin-ene.ro/storage/app/public', '/home/vaperoma/car.catalin-ene.ro/public/storage');
+//    echo 'Symlink process successfully completed';
+//});
 
 Auth::routes();
 

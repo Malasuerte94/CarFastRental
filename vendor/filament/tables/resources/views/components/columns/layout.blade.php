@@ -6,7 +6,7 @@
 ])
 
 @php
-    $getHiddenClasses = function (\Filament\Tables\Columns\Column | \Filament\Tables\Columns\Layout\Component $layoutComponent): ?string {
+    $getHiddenClasses = function (Filament\Tables\Columns\Column | Filament\Tables\Columns\Layout\Component $layoutComponent): ?string {
         if ($breakpoint = $layoutComponent->getHiddenFrom()) {
             return match ($breakpoint) {
                 'sm' => 'sm:hidden',
@@ -47,10 +47,12 @@
             :lg="$layoutComponent->getColumnSpan('lg')"
             :xl="$layoutComponent->getColumnSpan('xl')"
             :twoXl="$layoutComponent->getColumnSpan('2xl')"
-            :class="\Illuminate\Support\Arr::toCssClasses([
-                'flex-1 w-full' => $layoutComponent->canGrow(),
-                $getHiddenClasses($layoutComponent),
-            ])"
+            :class="
+                \Illuminate\Support\Arr::toCssClasses([
+                    'flex-1 w-full' => $layoutComponent->canGrow(),
+                    $getHiddenClasses($layoutComponent),
+                ])
+            "
         >
             @if ($isColumn)
                 <x-tables::columns.column

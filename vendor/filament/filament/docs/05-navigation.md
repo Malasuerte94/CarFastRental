@@ -130,6 +130,19 @@ Filament::serving(function () {
 });
 ```
 
+## Conditionally hiding navigation items
+
+You can also conditionally hide a navigation item by using the `visible()` or `hidden()` methods, passing in a condition to check:
+
+```php
+use Filament\Navigation\NavigationItem;
+
+NavigationItem::make('Analytics')
+    ->visible(auth()->user()->can('view-analytics'))
+    // or
+    ->hidden(! auth()->user()->can('view-analytics')),
+```
+
 ## Disabling resource or page navigation items
 
 To prevent resources or pages from showing up in navigation, you may use:
@@ -237,7 +250,7 @@ Filament::serving(function () {
 
 ### Customizing the logout link
 
-To customize the user account link at the end of the user menu, register a new item with the `logout` array key:
+To customize the user logout link at the end of the user menu, register a new item with the `logout` array key:
 
 ```php
 use Filament\Facades\Filament;

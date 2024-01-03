@@ -13,6 +13,7 @@
   max-width: 672px;
   min-height: 48px;
   min-width: 344px;
+  overflow: hidden;
   padding: 0;
   border-radius: 4px;
 }
@@ -76,6 +77,14 @@
 .v-snackbar__actions > .v-btn {
   padding: 0 8px;
   min-width: auto;
+}
+.v-snackbar__timer {
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+.v-snackbar__timer .v-progress-linear {
+  transition: 0.2s linear;
 }
 .v-snackbar--absolute {
   position: absolute;

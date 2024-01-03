@@ -16,55 +16,83 @@
     :required="$isRequired()"
     :state-path="$getStatePath()"
 >
-    <div x-data="{
+    <div
+        x-data="{
+            areAllCheckboxesChecked: false,
 
-        areAllCheckboxesChecked: false,
+            checkboxListOptions: Array.from(
+                $root.querySelectorAll(
+                    '.filament-forms-checkbox-list-component-option-label',
+                ),
+            ),
 
-        checkboxListOptions: Array.from($root.querySelectorAll('.filament-forms-checkbox-list-component-option-label')),
+            search: '',
 
-        search: '',
+            visibleCheckboxListOptions: [],
 
-        visibleCheckboxListOptions: [],
-
-        init: function () {
-            this.updateVisibleCheckboxListOptions()
-
-            this.checkIfAllCheckboxesAreChecked()
-
-            Livewire.hook('message.processed', () => {
-                this.checkIfAllCheckboxesAreChecked()
-            })
-
-            $watch('search', () => {
+            init: function () {
                 this.updateVisibleCheckboxListOptions()
+
+                $nextTick(() => {
+                    this.checkIfAllCheckboxesAreChecked()
+                })
+
+                Livewire.hook('message.processed', () => {
+                    this.updateVisibleCheckboxListOptions()
+
+                    this.checkIfAllCheckboxesAreChecked()
+                })
+
+                $watch('search', () => {
+                    this.updateVisibleCheckboxListOptions()
+                    this.checkIfAllCheckboxesAreChecked()
+                })
+            },
+
+            checkIfAllCheckboxesAreChecked: function () {
+                this.areAllCheckboxesChecked =
+                    this.visibleCheckboxListOptions.length ===
+                    this.visibleCheckboxListOptions.filter((checkboxLabel) =>
+                        checkboxLabel.querySelector('input[type=checkbox]:checked'),
+                    ).length
+            },
+
+            toggleAllCheckboxes: function () {
+                updatedState = []
+
+                state = ! this.areAllCheckboxesChecked
+
+                this.visibleCheckboxListOptions.forEach((checkboxLabel) => {
+                    checkbox = checkboxLabel.querySelector('input[type=checkbox]')
+
+                    checkbox.checked = state
+
+                    if (state) {
+                        updatedState.push(checkbox.value)
+                    }
+                })
+
                 this.checkIfAllCheckboxesAreChecked()
-            })
-        },
 
-        checkIfAllCheckboxesAreChecked: function () {
-            this.areAllCheckboxesChecked = this.visibleCheckboxListOptions.length === this.visibleCheckboxListOptions.filter((checkboxLabel) => checkboxLabel.querySelector('input[type=checkbox]:checked')).length
-        },
+                $wire.set(@js($getStatePath()), updatedState)
 
-        toggleAllCheckboxes: function () {
-            state = ! this.areAllCheckboxesChecked
+                this.areAllCheckboxesChecked = state
+            },
 
-            this.visibleCheckboxListOptions.forEach((checkboxLabel) => {
-                checkbox = checkboxLabel.querySelector('input[type=checkbox]')
-
-                checkbox.checked = state
-                checkbox.dispatchEvent(new Event('change'))
-            })
-
-            this.areAllCheckboxesChecked = state
-        },
-
-        updateVisibleCheckboxListOptions: function () {
-            this.visibleCheckboxListOptions = this.checkboxListOptions.filter((checkboxListItem) => {
-                return checkboxListItem.querySelector('.filament-forms-checkbox-list-component-option-label-text').innerText.toLowerCase().includes(this.search.toLowerCase())
-            })
-        }
-
-    }">
+            updateVisibleCheckboxListOptions: function () {
+                this.visibleCheckboxListOptions = this.checkboxListOptions.filter(
+                    (checkboxListItem) => {
+                        return checkboxListItem
+                            .querySelector(
+                                '.filament-forms-checkbox-list-component-option-label-text',
+                            )
+                            .innerText.toLowerCase()
+                            .includes(this.search.toLowerCase())
+                    },
+                )
+            },
+        }"
+    >
         @if (! $isDisabled())
             @if ($isSearchable())
                 <input
@@ -72,8 +100,8 @@
                     type="search"
                     placeholder="{{ $getSearchPrompt() }}"
                     @class([
-                        'mb-2 block h-7 px-2 text-sm w-full rounded-lg border-gray-300 shadow-sm text-gray-700 transition duration-75 outline-none focus:border-primary-500 focus:ring-1 focus:ring-inset focus:ring-primary-500',
-                        'dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600' => config('forms.dark_mode'),
+                        'mb-2 block h-7 w-full rounded-lg border-gray-300 px-2 text-sm text-gray-700 shadow-sm outline-none transition duration-75 focus:border-primary-500 focus:ring-1 focus:ring-inset focus:ring-primary-500',
+                        'dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200' => config('forms.dark_mode'),
                     ])
                 />
             @endif
@@ -116,50 +144,63 @@
             :two-xl="$getColumns('2xl')"
             :direction="$gridDirection ?? 'column'"
             :x-show="$isSearchable() ? 'visibleCheckboxListOptions.length' : null"
-            :attributes="\Filament\Support\prepare_inherited_attributes($attributes->class([
-                'filament-forms-checkbox-list-component gap-1',
-                'space-y-2' => $gridDirection !== 'row',
-            ]))"
+            :attributes="
+                \Filament\Support\prepare_inherited_attributes($attributes->class([
+                    'filament-forms-checkbox-list-component gap-1',
+                    'space-y-2' => $gridDirection !== 'row',
+                ]))
+            "
         >
             @forelse ($getOptions() as $optionValue => $optionLabel)
-                <div wire:key="{{ $this->id }}.{{ $getStatePath() }}.{{ $field::class }}.options.{{ $optionValue }}">
+                <div
+                    wire:key="{{ $this->id }}.{{ $getStatePath() }}.{{ $field::class }}.options.{{ $optionValue }}"
+                >
                     <label
                         class="filament-forms-checkbox-list-component-option-label flex items-center space-x-3 rtl:space-x-reverse"
                         @if ($isSearchable())
-                            x-show="$el.querySelector('.filament-forms-checkbox-list-component-option-label-text').innerText.toLowerCase().includes(search.toLowerCase())"
+                            x-show="
+                                $el.querySelector('.filament-forms-checkbox-list-component-option-label-text')
+                                    .innerText.toLowerCase()
+                                    .includes(search.toLowerCase())
+                            "
                         @endif
                     >
                         <input
-                            @if ($isBulkToggleable())
-                                x-on:change="checkIfAllCheckboxesAreChecked()"
-                            @endif
                             wire:loading.attr="disabled"
                             type="checkbox"
                             value="{{ $optionValue }}"
                             dusk="filament.forms.{{ $getStatePath() }}"
                             {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}"
-                            {{ $getExtraAttributeBag()->class([
-                                'text-primary-600 transition duration-75 rounded shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 disabled:opacity-70',
-                                'dark:bg-gray-700 dark:checked:bg-primary-500' => config('forms.dark_mode'),
-                                'border-gray-300' => ! $errors->has($getStatePath()),
-                                'dark:border-gray-600' => (! $errors->has($getStatePath())) && config('forms.dark_mode'),
-                                'border-danger-300 ring-danger-500' => $errors->has($getStatePath()),
-                                'dark:border-danger-400 dark:ring-danger-400' => $errors->has($getStatePath()) && config('forms.dark_mode'),
-                            ])->merge([
-                                'disabled' => $isDisabled(),
-                            ]) }}
+                            {{
+                                $getExtraAttributeBag()
+                                    ->class([
+                                        'text-primary-600 transition duration-75 rounded shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 disabled:opacity-70',
+                                        'dark:bg-gray-700 dark:checked:bg-primary-500' => config('forms.dark_mode'),
+                                        'border-gray-300' => ! $errors->has($getStatePath()),
+                                        'dark:border-gray-600' => (! $errors->has($getStatePath())) && config('forms.dark_mode'),
+                                        'border-danger-300 ring-danger-500' => $errors->has($getStatePath()),
+                                        'dark:border-danger-400 dark:ring-danger-400' => $errors->has($getStatePath()) && config('forms.dark_mode'),
+                                    ])
+                                    ->merge([
+                                        'disabled' => $isDisabled(),
+                                    ])
+                            }}
                         />
 
-                        <span @class([
-                            'filament-forms-checkbox-list-component-option-label-text text-sm font-medium text-gray-700',
-                            'dark:text-gray-200' => config('forms.dark_mode'),
-                        ])>
+                        <span
+                            @class([
+                                'filament-forms-checkbox-list-component-option-label-text text-sm font-medium text-gray-700',
+                                'dark:text-gray-200' => config('forms.dark_mode'),
+                            ])
+                        >
                             {{ $optionLabel }}
                         </span>
                     </label>
                 </div>
             @empty
-                <div wire:key="{{ $this->id }}.{{ $getStatePath() }}.{{ $field::class }}.empty"></div>
+                <div
+                    wire:key="{{ $this->id }}.{{ $getStatePath() }}.{{ $field::class }}.empty"
+                ></div>
             @endforelse
         </x-filament-support::grid>
 

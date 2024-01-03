@@ -1,5 +1,4 @@
 @ECHO OFF
 setlocal DISABLEDELAYEDEXPANSION
-SET BIN_TARGET=%~dp0/blade-icons-generate
-SET COMPOSER_RUNTIME_BIN_DIR=%~dp0
+SET BIN_TARGET=%~dp0/../blade-ui-kit/blade-icons/bin/blade-icons-generate
 php "%BIN_TARGET%" %*

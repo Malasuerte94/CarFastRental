@@ -43,18 +43,21 @@ h2, h6, h4 {
 
 .booking_selector {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 0.5rem;
+    display: flex;
     z-index: 1;
-    background-color: $bg-white;
     align-items: center;
     box-shadow: #00000052 0 0 10px 0px;
-
+    gap: 10px;
     .row {
         width: 100%;
         margin: auto;
     }
+}
+
+.box-dates {
+    z-index:123 !important;
+    overflow: visible !important;
+    background-color: $box-bg-w !important;
 }
 
 .booking_label {
@@ -117,6 +120,43 @@ h2, h6, h4 {
 
 .custom-date-time-picker {
     width: 100% !important;
+}
+
+.mx-input-dates {
+    width: 100%;
+    position: relative;
+    .mx-label {
+        position: absolute;
+        z-index: 1;
+        top: 5px;
+        left: 12px;
+        font-size: 11px;
+        color: $font-gray;
+        text-transform: inherit;
+        font-weight: normal;
+    }
+    input,select {
+        width: 100%;
+        background-color: $bg-white;
+        height: 52px;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        font-size: 18px;
+        border-radius: 11px;
+        border-style: unset !important;
+        padding-left: 10px;
+        &:active, &:hover, &:focus, &:focus-visible {
+            border-style: unset;
+        }
+    }
+    .v-input {
+        border-radius: 11px;
+        background-color: $bg-white;
+        font-family: $font-family-sans-serif;
+    }
+    .v-field__overlay {
+        display: none;
+    }
 }
 
 .btn_parent_collapse_adjectives {

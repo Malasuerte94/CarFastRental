@@ -1,6 +1,6 @@
 <template>
     <div class="container feature-icon-title">
-        <h4>
+        <h4 class="hidden">
             {{ $store.state.settings.settings.feature_icons_title.value }}
         </h4>
         <div class="content">

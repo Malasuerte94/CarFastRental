@@ -1,4 +1,3 @@
-/** if false, disabled buttons will be greyed out */
 .v-btn-group {
   display: inline-flex;
   flex-wrap: nowrap;

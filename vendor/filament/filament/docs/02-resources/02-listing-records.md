@@ -84,6 +84,27 @@ public static function table(Table $table): Table
 }
 ```
 
+To render the filters above the table content in a collapsible panel, you may use:
+
+```php
+use Filament\Tables\Filters\Layout;
+use Filament\Resources\Table;
+
+public static function table(Table $table): Table
+{
+    return $table
+        ->columns([
+            // ...
+        ])
+        ->filters(
+            [
+                // ...
+            ],
+            layout: Layout::AboveContentCollapsible,
+        );
+}
+```
+
 ## Actions
 
 [Actions](../../tables/actions#single-actions) are buttons that are rendered at the end of table rows. They allow the user to perform a task on a record in the table. To learn how to build actions, see the [full actions documentation](../../tables/actions#single-actions).
@@ -247,6 +268,20 @@ protected function getTableQuery(): Builder
 {
     return parent::getTableQuery()->withoutGlobalScopes();
 }
+```
+
+## Customizing the query string
+
+Table search, filters, sorts and other stateful properties are stored in the URL as query strings. Since Filament uses Livewire internally, this behaviour can be modified by overriding the `$queryString` property on the List page of the resource. For instance, you can employ [query string aliases](https://laravel-livewire.com/docs/2.x/query-string#query-string-aliases) to rename some of the properties using `as`:
+
+```php
+protected $queryString = [
+    'isTableReordering' => ['except' => false],
+    'tableFilters' => ['as' => 'filters'], // `tableFilters` is now replaced with `filters` in the query string
+    'tableSortColumn' => ['except' => ''],
+    'tableSortDirection' => ['except' => ''],
+    'tableSearchQuery' => ['except' => '', 'as' => 'search'], // `tableSearchQuery` is now replaced with `search` in the query string
+];
 ```
 
 ## Custom view

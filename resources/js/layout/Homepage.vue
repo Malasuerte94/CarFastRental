@@ -1,22 +1,20 @@
 <template>
-    <div class="homepage">
-        <div class="homepage-hero">
-            <Suspense>
-                <HeroBanner />
-                <template #fallback>
-                    <fallback :height="230" />
-                </template>
-            </Suspense>
-            <div>
-            <Suspense>
-                <FeatureIconTitle />
-                <template #fallback>
-                    <fallback :height="90" />
-                </template>
-            </Suspense>
-            <Spacer />
-            <SearchFrom />
-            </div>
+    <v-container class="homepage">
+        <Suspense>
+            <SimpleBanner />
+            <template #fallback>
+                <fallback :height="230" />
+            </template>
+        </Suspense>
+        <SearchFrom />
+        <div>
+          <Suspense>
+              <FeatureIconTitle />
+              <template #fallback>
+                  <fallback :height="90" />
+              </template>
+          </Suspense>
+          <Spacer />
         </div>
         <Suspense>
             <Faq />
@@ -31,21 +29,21 @@
                 <fallback :height="390" />
             </template>
         </Suspense>
-    </div>
+    </v-container>
 </template>
 
 <script>
 import FeatureCards from "./FeatureCards";
-import HeroBanner from "./HeroBanner";
 import SearchFrom from "./SearchFrom";
 import FeatureIconTitle from "./FeatureIconTitle";
 import CtaPhone from "./CtaPhone";
 import Faq from "./Faq";
+import SimpleBanner from "./SimpleBanner.vue";
 
 export default {
     name: "Homepage",
     components: {
-        HeroBanner,
+        SimpleBanner,
         FeatureCards,
         SearchFrom,
         FeatureIconTitle,

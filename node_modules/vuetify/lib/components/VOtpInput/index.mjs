@@ -1,4 +1,2 @@
-import VOtpInput from "./VOtpInput.mjs";
-export { VOtpInput };
-export default VOtpInput;
+export { VOtpInput } from "./VOtpInput.mjs";
 //# sourceMappingURL=index.mjs.map

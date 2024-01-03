@@ -2,6 +2,7 @@
  * PUBLIC INTERFACES ONLY
  * Imports in our code should be to the composable directly, not this file
  */
+export { useDate } from "./date/index.mjs";
 export { useDefaults } from "./defaults.mjs";
 export { useDisplay } from "./display.mjs";
 export { useLayout } from "./layout.mjs";

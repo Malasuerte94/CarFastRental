@@ -1,25 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 // Body
 $body-bg: #f3f5f7;
 
 // Typography
 $font-family-base: "Source Sans Pro", sans-serif;
-$font-family-sans-serif: "Oswald", sans-serif;
+$font-family-sans-serif: "MuseoModerno", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
-$primary: #1d41fe;
-$primary_muted: #170a1c;
+$primary: #01B1E0;
+$primary_muted: #FFF6E7;
+$accent: orange;
 
-$secondary: #ffa400;
-//temp
-$secondary-muted: #DE9E36;
+$secondary: #16171B;
+$secondary-muted: #F9F9F9;
 
+$box-bg: rgba(0, 0, 0, 0.5);
+$box-bg-w: rgba(217, 217, 217, 0.5);
 //font-colors
 $font-white: #FFFFFF;
+$font-gray: #979797;
 
-//bg-colors
+  //bg-colors
 $bg-white: #FFFFFF;
+
 
 //radius
 $radius: 18px;

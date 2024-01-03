@@ -12,6 +12,7 @@ export const VCardActions = genericComponent()({
     } = _ref;
     provideDefaults({
       VBtn: {
+        slim: true,
         variant: 'text'
       }
     });

@@ -1,110 +1,149 @@
-// @ts-nocheck
-/* eslint-disable */
-
+import { mergeProps as _mergeProps, resolveDirective as _resolveDirective, createVNode as _createVNode, Fragment as _Fragment } from "vue";
 // Styles
 import "./VStepper.css";
 
-// Extensions
-import VSheet from "../VSheet/index.mjs"; // Components
-// Mixins
-import { provide as RegistrableProvide } from "../../mixins/registrable.mjs";
-import Proxyable from "../../mixins/proxyable.mjs"; // Utilities
-import mixins from "../../util/mixins.mjs";
-import { breaking } from "../../util/console.mjs"; // Types
-const baseMixins = mixins(VSheet, RegistrableProvide('stepper'), Proxyable);
-/* @vue/component */
-export default baseMixins.extend({
-  name: 'v-stepper',
-  provide() {
+// Components
+import { makeVStepperActionsProps, VStepperActions } from "./VStepperActions.mjs";
+import { VStepperHeader } from "./VStepperHeader.mjs";
+import { VStepperItem } from "./VStepperItem.mjs";
+import { VStepperWindow } from "./VStepperWindow.mjs";
+import { VStepperWindowItem } from "./VStepperWindowItem.mjs";
+import { VDivider } from "../VDivider/index.mjs";
+import { makeVSheetProps, VSheet } from "../VSheet/VSheet.mjs"; // Composables
+import { provideDefaults } from "../../composables/defaults.mjs";
+import { makeGroupProps, useGroup } from "../../composables/group.mjs"; // Utilities
+import { computed, toRefs } from 'vue';
+import { genericComponent, getPropertyFromItem, only, propsFactory, useRender } from "../../util/index.mjs"; // Types
+export const VStepperSymbol = Symbol.for('vuetify:v-stepper');
+export const makeVStepperProps = propsFactory({
+  altLabels: Boolean,
+  bgColor: String,
+  editable: Boolean,
+  hideActions: Boolean,
+  items: {
+    type: Array,
+    default: () => []
+  },
+  itemTitle: {
+    type: String,
+    default: 'title'
+  },
+  itemValue: {
+    type: String,
+    default: 'value'
+  },
+  mobile: Boolean,
+  nonLinear: Boolean,
+  flat: Boolean,
+  ...makeGroupProps({
+    mandatory: 'force',
+    selectedClass: 'v-stepper-item--selected'
+  }),
+  ...makeVSheetProps(),
+  ...only(makeVStepperActionsProps(), ['prevText', 'nextText'])
+}, 'VStepper');
+export const VStepper = genericComponent()({
+  name: 'VStepper',
+  props: makeVStepperProps(),
+  emits: {
+    'update:modelValue': v => true
+  },
+  setup(props, _ref) {
+    let {
+      slots
+    } = _ref;
+    const {
+      items: _items,
+      next,
+      prev,
+      selected
+    } = useGroup(props, VStepperSymbol);
+    const {
+      color,
+      editable,
+      prevText,
+      nextText
+    } = toRefs(props);
+    const items = computed(() => props.items.map((item, index) => {
+      const title = getPropertyFromItem(item, props.itemTitle, item);
+      const value = getPropertyFromItem(item, props.itemValue, index + 1);
+      return {
+        title,
+        value,
+        raw: item
+      };
+    }));
+    const activeIndex = computed(() => {
+      return _items.value.findIndex(item => selected.value.includes(item.id));
+    });
+    const disabled = computed(() => {
+      if (props.disabled) return props.disabled;
+      if (activeIndex.value === 0) return 'prev';
+      if (activeIndex.value === _items.value.length - 1) return 'next';
+      return false;
+    });
+    provideDefaults({
+      VStepperItem: {
+        editable,
+        prevText,
+        nextText
+      },
+      VStepperActions: {
+        color,
+        disabled,
+        prevText,
+        nextText
+      }
+    });
+    useRender(() => {
+      const sheetProps = VSheet.filterProps(props);
+      const hasHeader = !!(slots.header || props.items.length);
+      const hasWindow = props.items.length > 0;
+      const hasActions = !props.hideActions && !!(hasWindow || slots.actions);
+      return _createVNode(VSheet, _mergeProps(sheetProps, {
+        "color": props.bgColor,
+        "class": ['v-stepper', {
+          'v-stepper--alt-labels': props.altLabels,
+          'v-stepper--flat': props.flat,
+          'v-stepper--non-linear': props.nonLinear,
+          'v-stepper--mobile': props.mobile
+        }, props.class],
+        "style": props.style
+      }), {
+        default: () => [hasHeader && _createVNode(VStepperHeader, {
+          "key": "stepper-header"
+        }, {
+          default: () => [items.value.map((item, index) => _createVNode(_Fragment, null, [!!index && _createVNode(VDivider, null, null), _createVNode(VStepperItem, item, {
+            default: slots[`header-item.${item.value}`] ?? slots.header,
+            icon: slots.icon,
+            title: slots.title,
+            subtitle: slots.subtitle
+          })]))]
+        }), hasWindow && _createVNode(VStepperWindow, {
+          "key": "stepper-window"
+        }, {
+          default: () => [items.value.map(item => _createVNode(VStepperWindowItem, {
+            "value": item.value
+          }, {
+            default: () => slots[`item.${item.value}`]?.(item) ?? slots.item?.(item)
+          }))]
+        }), slots.default?.({
+          prev,
+          next
+        }), hasActions && (slots.actions?.({
+          next,
+          prev
+        }) ?? _createVNode(VStepperActions, {
+          "key": "stepper-actions",
+          "onClick:prev": prev,
+          "onClick:next": next
+        }, slots))]
+      });
+    });
     return {
-      stepClick: this.stepClick,
-      isVertical: this.vertical
+      prev,
+      next
     };
-  },
-  props: {
-    altLabels: Boolean,
-    nonLinear: Boolean,
-    flat: Boolean,
-    vertical: Boolean
-  },
-  data() {
-    const data = {
-      isBooted: false,
-      steps: [],
-      content: [],
-      isReverse: false
-    };
-    data.internalLazyValue = this.value != null ? this.value : (data[0] || {}).step || 1;
-    return data;
-  },
-  computed: {
-    classes() {
-      return {
-        'v-stepper--flat': this.flat,
-        'v-stepper--is-booted': this.isBooted,
-        'v-stepper--vertical': this.vertical,
-        'v-stepper--alt-labels': this.altLabels,
-        'v-stepper--non-linear': this.nonLinear,
-        ...VSheet.options.computed.classes.call(this)
-      };
-    },
-    styles() {
-      return {
-        ...VSheet.options.computed.styles.call(this)
-      };
-    }
-  },
-  watch: {
-    internalValue(val, oldVal) {
-      this.isReverse = Number(val) < Number(oldVal);
-      oldVal && (this.isBooted = true);
-      this.updateView();
-    }
-  },
-  created() {
-    /* istanbul ignore next */
-    if (this.$listeners.input) {
-      breaking('@input', '@change', this);
-    }
-  },
-  mounted() {
-    this.updateView();
-  },
-  methods: {
-    register(item) {
-      if (item.$options.name === 'v-stepper-step') {
-        this.steps.push(item);
-      } else if (item.$options.name === 'v-stepper-content') {
-        item.isVertical = this.vertical;
-        this.content.push(item);
-      }
-    },
-    unregister(item) {
-      if (item.$options.name === 'v-stepper-step') {
-        this.steps = this.steps.filter(i => i !== item);
-      } else if (item.$options.name === 'v-stepper-content') {
-        item.isVertical = this.vertical;
-        this.content = this.content.filter(i => i !== item);
-      }
-    },
-    stepClick(step) {
-      this.$nextTick(() => this.internalValue = step);
-    },
-    updateView() {
-      for (let index = this.steps.length; --index >= 0;) {
-        this.steps[index].toggle(this.internalValue);
-      }
-      for (let index = this.content.length; --index >= 0;) {
-        this.content[index].toggle(this.internalValue, this.isReverse);
-      }
-    }
-  },
-  render(h) {
-    return h(this.tag, {
-      staticClass: 'v-stepper',
-      class: this.classes,
-      style: this.styles
-    }, this.$slots.default);
   }
 });
 //# sourceMappingURL=VStepper.mjs.map

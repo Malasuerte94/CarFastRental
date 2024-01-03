@@ -8,6 +8,7 @@ use Filament\GlobalSearch\GlobalSearchResult;
 use Filament\Navigation\NavigationItem;
 use function Filament\Support\get_model_label;
 use function Filament\Support\locale_has_pluralization;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -63,6 +64,8 @@ class Resource
     protected static ?string $slug = null;
 
     protected static string | array $middlewares = [];
+
+    protected static string | array $withoutRouteMiddleware = [];
 
     protected static int $globalSearchResultsLimit = 50;
 
@@ -367,7 +370,7 @@ class Resource
         return static::$recordTitleAttribute;
     }
 
-    public static function getRecordTitle(?Model $record): ?string
+    public static function getRecordTitle(?Model $record): string | Htmlable | null
     {
         return $record?->getAttribute(static::getRecordTitleAttribute()) ?? static::getModelLabel();
     }
@@ -402,6 +405,7 @@ class Resource
             Route::name("{$slug}.")
                 ->prefix($slug)
                 ->middleware(static::getMiddlewares())
+                ->withoutMiddleware(static::getWithoutRouteMiddleware())
                 ->group(function () {
                     foreach (static::getPages() as $name => $page) {
                         Route::get($page['route'], $page['class'])->name($name);
@@ -413,6 +417,11 @@ class Resource
     public static function getMiddlewares(): string | array
     {
         return static::$middlewares;
+    }
+
+    public static function getWithoutRouteMiddleware(): string | array
+    {
+        return static::$withoutRouteMiddleware;
     }
 
     public static function getSlug(): string

@@ -65,7 +65,7 @@ final class IconsManifest
     /**
      * @return \Illuminate\Contracts\Filesystem\Filesystem|Filesystem
      */
-    private function filesystem(?string $disk = null)
+    private function filesystem(string $disk = null)
     {
         return $this->disks && $disk ? $this->disks->disk($disk) : $this->filesystem;
     }
@@ -78,8 +78,8 @@ final class IconsManifest
     private function format(string $pathname, string $path): string
     {
         return (string) Str::of($pathname)
-            ->after($path.'/')
-            ->replace('/', '.')
+            ->after($path.DIRECTORY_SEPARATOR)
+            ->replace(DIRECTORY_SEPARATOR, '.')
             ->basename('.svg');
     }
 

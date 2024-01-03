@@ -19,6 +19,9 @@ final class Svg implements Htmlable
     {
         $this->name = $name;
         $this->contents = $this->deferContent($contents, $attributes['defer'] ?? false);
+
+        unset($attributes['defer']);
+
         $this->attributes = $attributes;
     }
 
@@ -48,10 +51,14 @@ final class Svg implements Htmlable
         }
 
         $svgContent = strip_tags($contents, ['circle', 'ellipse', 'line', 'path', 'polygon', 'polyline', 'rect', 'g', 'mask', 'defs', 'use']);
-        $hash = 'icon-'.(is_string($defer) ? $defer : md5($svgContent));
-        $contents = str_replace($svgContent, strtr('<use href=":href"></use>', [':href' => '#'.$hash]), $contents);
-        $contents .= <<<BLADE
 
+        // Force Unix line endings for hash.
+        $hashContent = str_replace(PHP_EOL, "\n", $svgContent);
+        $hash = 'icon-'.(is_string($defer) ? $defer : md5($hashContent));
+
+        $contents = str_replace($svgContent, strtr('<use href=":href"></use>', [':href' => '#'.$hash]), $contents).PHP_EOL;
+        $svgContent = ltrim($svgContent, PHP_EOL);
+        $contents .= <<<BLADE
                 @once("{$hash}")
                     @push("bladeicons")
                         <g id="{$hash}">

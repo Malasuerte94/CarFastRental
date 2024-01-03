@@ -1,70 +1,91 @@
 <template>
-    <div class="stock-simple">
-
-        <h4 v-if="searchOnly" class="pt-6">
+    <div class="stock-simple mb-8">
+        <h4 v-if="searchOnly" class="pt-6 hidden">
             {{ settings.settings.home_search_title.value }}
         </h4>
         <h4 v-else>Perioadă închiriere</h4>
         <transition name="list">
-            <v-card>
+            <v-card class="box-dates">
             <div
                 class="booking_selector"
                 :class="[{ 'search-only': searchOnly }]"
-            >
-                <div>
-                    <label for="fromDate">Ridicare la Data și Ora</label>
-                    <date-picker
-                        placeholder="..."
-                        name="fromDate"
-                        class="custom-date-time-picker mb-2"
-                        width="300"
-                        v-model:value="fromDate"
-                        type="date"
-                        valueType="format"
-                        time-title-format="DD-MM-YYYY"
-                        @keyup.enter="check"
-                        :class="[{ 'is-invalid': errorFor('fromDate') }]"
-                        :disabled-date="notBeforeToday"
+            >     <div class="mx-input-dates" v-if="searchOnly">
+                    <v-select
+                        v-model="pickup"
+                        :items="pickupAndReturnPoints"
+                        :rules="[v => !!v || 'Item is required']"
+                        :item-value="v => v.id"
+                        :item-title="v => v.name"
+                        label="Punct Ridicare"
+                        required
                     />
+                  </div>
+                  <div class="mx-input-dates">
+                      <label class="mx-label" for="fromDate">Dată ridicare</label>
+                      <date-picker
+                          lang="ro"
+                          placeholder="..."
+                          name="fromDate"
+                          class="custom-date-time-picker"
+                          width="300"
+                          v-model:value="fromDate"
+                          type="date"
+                          valueType="format"
+                          title-format="dd, d MMM YYYY"
+                          time-title-format="dd, d MMM YYYY"
+                          @keyup.enter="check"
+                          :class="[{ 'is-invalid': errorFor('fromDate') }]"
+                          :disabled-date="notBeforeToday"
+                          :append-to-body="false"
+                      />
+                  </div>
+                  <div class="mx-input-dates">
+                      <label class="mx-label" for="fromDate">Oră ridicare</label>
+                        <date-picker
+                            :append-to-body="false"
+                            :show-second="false"
+                            placeholder="..."
+                            name="fromTime"
+                            class="custom-date-time-picker"
+                            v-model:value="fromTime"
+                            type="time"
+                            valueType="HH:mm:ss"
+                            :time-picker-options="{
+                                start: '00:00',
+                                step: '00:30',
+                                end: '23:30',
+                                format: 'HH:mm',
+                            }"
+                            format="HH:mm"
+                            time-title-format="HH:mm"
+                            @keyup.enter="check"
+                            :class="[{ 'is-invalid': errorFor('fromTime') }]"
+                        />
+                  </div>
+              <div class="mx-input-dates">
+                    <label class="mx-label" for="date-return">Dată returnare</label>
                     <date-picker
-                        :show-second="false"
+                        :append-to-body="false"
                         placeholder="..."
-                        name="fromTime"
+                        name="date-return"
                         class="custom-date-time-picker"
-                        v-model:value="fromTime"
-                        type="time"
-                        valueType="HH:mm:ss"
-                        :time-picker-options="{
-                            start: '00:00',
-                            step: '00:30',
-                            end: '23:30',
-                            format: 'HH:mm',
-                        }"
-                        format="HH:mm"
-                        time-title-format="HH:mm"
-                        @keyup.enter="check"
-                        :class="[{ 'is-invalid': errorFor('fromTime') }]"
-                    />
-                </div>
-                <div>
-                    <label for="to">Returnare la Data și Ora</label>
-                    <date-picker
-                        placeholder="..."
-                        name="to"
-                        class="custom-date-time-picker mb-2"
                         v-model:value="toDate"
                         type="date"
                         valueType="format"
-                        time-title-format="DD-MM-YYYY"
+                        time-title-format="dd, d MMM YYYY"
                         :disabled-date="notBeforeDayBooked"
                         holder="End Date"
                         @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('toDate') }]"
                     />
+              </div>
+              <div class="mx-input-dates">
+                <label class="mx-label" for="time-return">Oră returnare</label>
                     <date-picker
+                        :append-to-body="false"
                         valueType="HH:mm:ss"
                         placeholder="..."
-                        name="to"
+                        name="time-return"
                         class="custom-date-time-picker"
                         v-model:value="toTime"
                         type="time"
@@ -80,7 +101,18 @@
                         @keyup.enter="check"
                         :class="[{ 'is-invalid': errorFor('toTime') }]"
                     />
+              </div>
+              <template v-if="searchOnly">
+                <div class="search-button" :class="[{ active: showSearchButton }]">
+                  <v-btn class="special-search" @click="check" block :disabled="loading || !showSearchButton">
+                    <span v-if="!loading">Caută...</span>
+                    <span v-if="loading"
+                    ><i class="fas fa-circle-notch fa-spin"></i>
+                            Verificăm...</span
+                    >
+                  </v-btn>
                 </div>
+              </template>
             </div>
             </v-card>
         </transition>
@@ -91,7 +123,6 @@
 
         <template v-if="!searchOnly">
             <h4 class="mt-2">Ridicare & Returnare</h4>
-
             <transition name="fadeHeight">
                 <v-card>
                 <div class="booking_selector places">
@@ -168,17 +199,6 @@
                     >
                 </transition>
             </h6>
-        </template>
-        <template v-else>
-            <div class="search-button" :class="[{ active: showSearchButton }]">
-                <v-btn class="special-search" @click="check" block :disabled="loading || !showSearchButton">
-                        <span v-if="!loading">Caută...</span>
-                        <span v-if="loading"
-                            ><i class="fas fa-circle-notch fa-spin"></i>
-                            Verificăm...</span
-                        >
-                </v-btn>
-            </div>
         </template>
     </div>
 </template>

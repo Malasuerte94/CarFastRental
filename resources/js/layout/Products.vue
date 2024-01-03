@@ -1,8 +1,10 @@
 <template>
+  <v-container>
     <div class="products">
         <loader v-if="loading" />
         <Bookables />
     </div>
+  </v-container>
 </template>
 
 <script>

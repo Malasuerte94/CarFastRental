@@ -36,4 +36,16 @@ export function getOverflow(a, b) {
     }
   };
 }
+export function getTargetBox(target) {
+  if (Array.isArray(target)) {
+    return new Box({
+      x: target[0],
+      y: target[1],
+      width: 0,
+      height: 0
+    });
+  } else {
+    return target.getBoundingClientRect();
+  }
+}
 //# sourceMappingURL=box.mjs.map

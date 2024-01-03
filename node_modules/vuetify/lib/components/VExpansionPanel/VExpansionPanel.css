@@ -89,6 +89,8 @@
 .v-expansion-panel--active > .v-expansion-panel-title {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.v-expansion-panel--active > .v-expansion-panel-title:not(.v-expansion-panel-title--static) {
   min-height: 64px;
 }
 

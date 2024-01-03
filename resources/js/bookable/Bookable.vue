@@ -1,4 +1,5 @@
 <template>
+  <v-container>
     <div class="product-page">
         <div class="col-lg-12 p-0">
             <div class="row">
@@ -74,6 +75,7 @@
             :bookable-id="this.$route.params.id"
         ></review-list>
     </div>
+  </v-container>
 </template>
 
 <script>

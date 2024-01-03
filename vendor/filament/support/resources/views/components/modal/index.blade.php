@@ -13,6 +13,7 @@
     'hrComponent' => 'filament-support::hr',
     'id' => null,
     'openEventName' => 'open-modal',
+    'scrollableContent' => false,
     'slideOver' => false,
     'subheading' => null,
     'subheadingComponent' => 'filament-support::modal.subheading',
@@ -23,7 +24,6 @@
 
 <div
     x-data="{
-
         isOpen: false,
 
         livewire: null,
@@ -31,15 +31,18 @@
         close: function () {
             this.isOpen = false
 
-            this.$refs.modalContainer.dispatchEvent(new CustomEvent('modal-closed', { id: '{{ $id }}' }))
+            this.$refs.modalContainer.dispatchEvent(
+                new CustomEvent('modal-closed', { id: '{{ $id }}' }),
+            )
         },
 
         open: function () {
             this.isOpen = true
 
-            this.$refs.modalContainer.dispatchEvent(new CustomEvent('modal-opened', { id: '{{ $id }}' }))
+            this.$refs.modalContainer.dispatchEvent(
+                new CustomEvent('modal-opened', { id: '{{ $id }}' }),
+            )
         },
-
     }"
     x-trap.noscroll="isOpen"
     @if ($id)
@@ -77,24 +80,29 @@
             @endif
             aria-hidden="true"
             @class([
-                'filament-modal-close-overlay fixed inset-0 w-full h-full bg-black/50',
-                'cursor-pointer' => $closeByClickingAway
+                'filament-modal-close-overlay fixed inset-0 h-full w-full bg-black/50',
+                'cursor-pointer' => $closeByClickingAway,
             ])
         ></div>
 
         <div
             x-ref="modalContainer"
-            {{ $attributes->class([
-                'relative w-full cursor-pointer pointer-events-none transition',
-                'my-auto p-4' => ! $slideOver,
-            ]) }}
+            {{
+                $attributes->class([
+                    'pointer-events-none relative w-full cursor-pointer transition',
+                    'my-auto p-4' => ! $slideOver,
+                    'flex max-h-screen shrink' => $scrollableContent,
+                ])
+            }}
         >
             <div
                 x-data="{ isShown: false }"
-                x-init="$nextTick(()=> {
-                    isShown = isOpen
-                    $watch('isOpen', () => isShown = isOpen)
-                })"
+                x-init="
+                    $nextTick(() => {
+                        isShown = isOpen
+                        $watch('isOpen', () => (isShown = isOpen))
+                    })
+                "
                 x-show="isShown"
                 x-cloak
                 @if (filled($id))
@@ -116,11 +124,11 @@
                     x-transition:leave-end="translate-y-8"
                 @endif
                 @class([
-                    'filament-modal-window w-full py-2 bg-white cursor-default pointer-events-auto',
+                    'filament-modal-window pointer-events-auto w-full cursor-default bg-white py-2',
                     'dark:bg-gray-800' => $darkMode,
                     'relative' => $width !== 'screen',
-                    'h-screen overflow-y-auto ml-auto mr-0 rtl:mr-auto rtl:ml-0' => $slideOver,
-                    'rounded-xl mx-auto' => ! ($slideOver || ($width === 'screen')),
+                    'ml-auto mr-0 h-screen overflow-y-auto rtl:ml-0 rtl:mr-auto' => $slideOver,
+                    'mx-auto rounded-xl' => ! ($slideOver || ($width === 'screen')),
                     'hidden' => ! $visible,
                     'max-w-xs' => $width === 'xs',
                     'max-w-sm' => $width === 'sm',
@@ -140,7 +148,7 @@
                     <button
                         tabindex="-1"
                         type="button"
-                        class="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+                        class="absolute right-2 top-2 rtl:left-2 rtl:right-auto"
                         @if (filled($id))
                             x-on:click="$dispatch('{{ $closeEventName }}', { id: '{{ $id }}' })"
                         @else
@@ -161,7 +169,7 @@
 
                 <div
                     @class([
-                        'flex flex-col h-full' => ($width === 'screen') || $slideOver,
+                        'flex h-full flex-col' => ($width === 'screen') || $slideOver || $scrollableContent,
                     ])
                 >
                     <div class="space-y-2">
@@ -172,22 +180,28 @@
                         @endif
 
                         @if ($header && ($actions || $heading || $slot->isNotEmpty() || $subheading))
-                            <x-dynamic-component :component="$hrComponent" class="px-2" />
+                            <x-dynamic-component
+                                :component="$hrComponent"
+                                :dark-mode="$darkMode"
+                                class="px-2"
+                            />
                         @endif
                     </div>
 
                     <div
                         @class([
                             'filament-modal-content space-y-2 p-2',
-                            'flex-1 overflow-y-auto' => ($width === 'screen') || $slideOver,
+                            'flex-1 overflow-y-auto' => ($width === 'screen') || $slideOver || $scrollableContent,
                         ])
                     >
                         @if ($heading || $subheading)
-                            <div @class([
-                                'p-4 space-y-2',
-                                'text-center' => ! $slideOver,
-                                'dark:text-white' => $darkMode,
-                            ])>
+                            <div
+                                @class([
+                                    'space-y-2 p-4',
+                                    'text-center' => ! $slideOver,
+                                    'dark:text-white' => $darkMode,
+                                ])
+                            >
                                 @if ($heading)
                                     <x-dynamic-component
                                         :component="$headingComponent"
@@ -198,7 +212,9 @@
                                 @endif
 
                                 @if ($subheading)
-                                    <x-dynamic-component :component="$subheadingComponent">
+                                    <x-dynamic-component
+                                        :component="$subheadingComponent"
+                                    >
                                         {{ $subheading }}
                                     </x-dynamic-component>
                                 @endif
@@ -206,7 +222,7 @@
                         @endif
 
                         @if ($slot->isNotEmpty())
-                            <div class="px-4 py-2 space-y-4">
+                            <div class="space-y-4 px-4 py-2">
                                 {{ $slot }}
                             </div>
                         @endif
@@ -216,7 +232,11 @@
 
                     <div class="space-y-2">
                         @if ($footer && ($actions || $heading || $slot->isNotEmpty() || $subheading))
-                            <x-dynamic-component :component="$hrComponent" class="px-2" />
+                            <x-dynamic-component
+                                :component="$hrComponent"
+                                :dark-mode="$darkMode"
+                                class="px-2"
+                            />
                         @endif
 
                         @if ($footer)

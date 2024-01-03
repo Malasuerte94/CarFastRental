@@ -58,6 +58,7 @@ const AnimationItem = function () {
   this.onSetupError = this.onSetupError.bind(this);
   this.onSegmentComplete = this.onSegmentComplete.bind(this);
   this.drawnFrameEvent = new BMEnterFrameEvent('drawnFrame', 0, 0, 0);
+  this.expressionsPlugin = getExpressionsPlugin();
 };
 
 extendPrototype([BaseEvent], AnimationItem);
@@ -381,6 +382,9 @@ AnimationItem.prototype.renderFrame = function () {
     return;
   }
   try {
+    if (this.expressionsPlugin) {
+      this.expressionsPlugin.resetFrame();
+    }
     this.renderer.renderFrame(this.currentFrame + this.firstFrame);
   } catch (error) {
     this.triggerRenderFrameError(error);
@@ -393,7 +397,7 @@ AnimationItem.prototype.play = function (name) {
   }
   if (this.isPaused === true) {
     this.isPaused = false;
-    this.trigger('_pause');
+    this.trigger('_play');
     this.audioController.resume();
     if (this._idle) {
       this._idle = false;
@@ -408,7 +412,7 @@ AnimationItem.prototype.pause = function (name) {
   }
   if (this.isPaused === false) {
     this.isPaused = true;
-    this.trigger('_play');
+    this.trigger('_pause');
     this._idle = true;
     this.trigger('_idle');
     this.audioController.pause();
@@ -630,7 +634,7 @@ AnimationItem.prototype.destroy = function (name) {
   this.onSegmentStart = null;
   this.onDestroy = null;
   this.renderer = null;
-  this.renderer = null;
+  this.expressionsPlugin = null;
   this.imagePreloader = null;
   this.projectInterface = null;
 };
