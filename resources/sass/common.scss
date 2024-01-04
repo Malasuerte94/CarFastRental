@@ -38,16 +38,6 @@
             img {
                 width: 100%;
             }
-            background-image: linear-gradient(
-                    180deg,
-                    rgba(255, 0, 0, 0) 50%,
-                    rgb(243 245 247) 100%
-                ),
-                url(/storage/assets/car_background.png);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position-y: 130%;
         }
         .product-content {
             padding: 0px $padding-page;

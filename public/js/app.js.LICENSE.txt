@@ -1,15 +1,8 @@
 /*!
-  * vue-router v4.0.13
-  * (c) 2022 Eduardo San Martin Morote
+  * vue-router v4.2.5
+  * (c) 2023 Eduardo San Martin Morote
   * @license MIT
   */
-
-/*!
- * Splide.js
- * Version  : 4.1.3
- * License  : MIT
- * Copyright: 2022 Naotoshi Fujita
- */
 
 /*!
  * The buffer module from node.js, for the browser.
@@ -24,15 +17,11 @@
  * @license MIT
  */
 
+/*! #__NO_SIDE_EFFECTS__ */
+
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
-
-/**
- * WCAG 3.0 APCA perceptual contrast algorithm from https://github.com/Myndex/SAPC-APCA
- * @licence https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
- * @see https://www.w3.org/WAI/GL/task-forces/silver/wiki/Visual_Contrast_of_Text_Subgroup
- */
 
 //! moment.js
 

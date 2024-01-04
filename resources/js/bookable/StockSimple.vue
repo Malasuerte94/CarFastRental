@@ -8,8 +8,8 @@
             <v-card class="box-dates">
             <div
                 class="booking_selector"
-                :class="[{ 'search-only': searchOnly }]"
-            >     <div class="mx-input-dates" v-if="searchOnly">
+                :class="[{ 'search-only': searchOnly, 'flex-col': !searchOnly }]"
+            >     <div class="mx-input-dates">
                     <v-select
                         v-model="pickup"
                         :items="pickupAndReturnPoints"
@@ -72,7 +72,7 @@
                         v-model:value="toDate"
                         type="date"
                         valueType="format"
-                        time-title-format="dd, d MMM YYYY"
+                        time-title-format="DD-MM-YY"
                         :disabled-date="notBeforeDayBooked"
                         holder="End Date"
                         @keyup.enter="check"
@@ -102,6 +102,17 @@
                         :class="[{ 'is-invalid': errorFor('toTime') }]"
                     />
               </div>
+              <div class="mx-input-dates">
+                <v-select
+                    v-model="retour"
+                    :items="pickupAndReturnPoints"
+                    :rules="[v => !!v || 'Item is required']"
+                    :item-value="v => v.id"
+                    :item-title="v => v.name"
+                    label="Punct Returnare"
+                    required
+                />
+              </div>
               <template v-if="searchOnly">
                 <div class="search-button" :class="[{ active: showSearchButton }]">
                   <v-btn class="special-search" @click="check" block :disabled="loading || !showSearchButton">
@@ -122,36 +133,6 @@
         <v-errors class="text-center" :errors="errorFor('toTime')" />
 
         <template v-if="!searchOnly">
-            <h4 class="mt-2">Ridicare & Returnare</h4>
-            <transition name="fadeHeight">
-                <v-card>
-                <div class="booking_selector places">
-                    <div>
-                        <v-select
-                            v-model="pickup"
-                            :items="pickupAndReturnPoints"
-                            :rules="[v => !!v || 'Item is required']"
-                            :item-value="v => v.id"
-                            :item-title="v => v.name"
-                            label="Punct Ridicare"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <v-select
-                            v-model="retour"
-                            :items="pickupAndReturnPoints"
-                            :rules="[v => !!v || 'Item is required']"
-                            :item-value="v => v.id"
-                            :item-title="v => v.name"
-                            label="Punct Returnare"
-                            required
-                        />
-                    </div>
-                </div>
-                </v-card>
-            </transition>
-
             <div class="booking_details mt-2">
                 <div class="">
                     De la
@@ -174,7 +155,7 @@
             <div class="mt-4">
                 <button
                     @click="check"
-                    class="btn btn-secondary btn-block"
+                    class="btn btn-secondary btn-block main-check-button"
                     :disabled="loading"
                 >
                     <span v-if="!loading">Check</span>
